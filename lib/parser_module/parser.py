@@ -16,12 +16,26 @@ class Parser:
 
     def parse_template(self):
         input_lines = self.input_obj.read_lines()  # Assuming read_lines() reads lines from the input file
+        input_keywords = self.input_obj.extract_keywords()  # Extract keywords from input file
         template_lines = self.template_obj.read_lines()
 
         # Use metadata title as the HTML title
         title = self.metadata['title']
 
-        keywords = ', '.join(set(self.config['keywords']) | set(self.metadata['keywords']))
+        # Assuming self.config and self.metadata are dictionaries
+        if 'keywords' in self.config and 'keywords' in self.metadata:
+          keywords = ', '.join(set(self.config['keywords']) | set(self.metadata['keywords']) | set(input_keywords))
+        else:
+          # Handle the case where either self.config['keywords'] or self.metadata['keywords'] is missing
+          keywords = ', '.join(set(input_keywords))
+
+#        keywords = ', '.join(set(self.config['keywords']) | set(self.metadata['keywords']) | set(input_keywords))
+#        keywords = keywords.sort()
+
+        keywords = ', '.join(set(self.config['keywords']) | set(self.metadata['keywords']) | set(input_keywords))
+        keywords_list = keywords.split(', ')
+        keywords_list.sort()
+        keywords = ', '.join(keywords_list)
 
 
         # Get CSS links from metadata YAML

@@ -17,7 +17,7 @@ def main():
     args = parser.parse_args()
 
     metadata_obj = Metadata(args.input_filename)
-    input_obj = Input(args.input_filename)
+    input_obj = Input(args.input_filename, args.config_filename)
     template_obj = Template(args.template_filename)
     output_filename = metadata_obj.generate_output_filename(args.output_dir)
     output_obj = Output(output_filename)

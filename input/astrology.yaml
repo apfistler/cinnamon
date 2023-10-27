@@ -1,6 +1,8 @@
 name: astrology 
 category: astrology 
 title: "Insights into Astrology"
+css:
+    - "/css/astrology/astrology.css"
 keywords:
   - astrology 
   - "birth chart" 
