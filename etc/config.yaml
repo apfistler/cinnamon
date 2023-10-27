@@ -1,0 +1,48 @@
+title: 'Adam Fistler Services'
+name: 'Adam Fistler'
+address:
+  street: 'New Office Comming Soon'
+  city: 'South Jersey or Philadelphia?'
+  state: 'NJ'
+  zip: '08000' 
+phone: '<a href="tel:(856) 209-3350">(856) 209-3350</a>'
+email: '<a href="mailto:afistler.services@gmail.com">afistler.services@gmail.com</a>'
+footer:
+  - 'Copyright © 20223Adam Fistler - Camden, NJ.  All Rights Reserved.'
+  - 'Adam Fistler &nbsp; New Office in South Jersey or Philadelphia Coming Soon  (609) 200-00230'
+  - 'Server South Jersey and Philadelphia with the latest in hypnosis, addiction alternatives, astrology, graphology, and technology.'
+  - 'South Jerseys Choice for Holistic Healing.'
+menu:
+  Home: /html/home.html
+  GoFundMe: /html/go_fund_me.html
+  Hypnosis:
+    About Hypnosis: /html/hypnosis/about_hypnosis.html
+    Hypnosis Services: /html//hypnosis/hypnosis_services.html
+    Testimonials: /html/hypnosis/testimonials.html
+    Anger: /html/hypnosis/anger.html
+    Weight Loss: /html/hypnosis/weight_loss.html
+    Smoking Cessation: /html/hypnosis/smoking_cessation.html
+  Addiction Services: /html/addiction/addiction_services.html
+  Astrology: /html/astrology/astrology.html
+  Handwriting Analysis: /html/graphology/graphology.html
+  Technology:
+    Resume: /html/technology/resume.html
+  Upcoming Events: /html/upcoming_events.html
+  Articles: /html/articles/articles.html
+  Contact Us: /html/contact_us.html
+  Site Map: /html/site_map.html
+keywords:
+  - Addiction
+  - "Substance Abuse"
+  - Astrology
+  - "Handwriting Analysis"
+  - Technology
+  - Hypnosis
+  - Hypnotism
+  - Hypnotist
+  - Zodiac
+  - "Natal Chart" 
+  - "Birth Chart"
+  - "Birth Chart Reading"
+  - "Natal Chart Reading"
+

@@ -1,0 +1,24 @@
+name: resume 
+category: technology 
+title: "Adam Fistler Resume"
+css:
+  - "/css/resume/technology.css"
+keywords:
+  - resume
+  - python
+  - ruby
+  - bash
+  - perl
+  - "c#"
+  - ".net"
+  - powershell
+  - "Power Shell"
+  - linux
+  - redhat
+  - "Red Hat"
+  - rhel
+  - "Red Hat Enterprise Linux"
+  - centos
+  - ubuntu
+  - script
+  - devops
