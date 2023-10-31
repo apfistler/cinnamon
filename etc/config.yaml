@@ -13,8 +13,8 @@ footer:
   - 'Server South Jersey and Philadelphia with the latest in hypnosis, addiction alternatives, astrology, graphology, and technology.'
   - 'South Jerseys Choice for Holistic Healing.'
 menu:
-  Home: /html/home.html
-  GoFundMe: /html/go_fund_me.html
+  Home: /html/main/home.html
+  GoFundMe: /html/main/go_fund_me.html
   Hypnosis:
     About Hypnosis: /html/hypnosis/about_hypnosis.html
     Hypnosis Services: /html//hypnosis/hypnosis_services.html
@@ -31,6 +31,71 @@ menu:
   Articles: /html/articles/articles.html
   Contact Us: /html/contact_us.html
   Site Map: /html/site_map.html
+hypnosis:
+  issue_columns: 4 
+  issues:
+    - Addiction
+    - Adderall Abuse
+    - Substance Abuse
+    - Heroin Abuse
+    - Opiate / Opioid Abuse
+    - Oxycodone (Percocet) Abuse
+    - Oxycodine Abuse
+    - Hydrocodone (Vicodin) Abuse 
+    - Alcohol Abuse
+    - Alcoholism
+    - Anger
+    - Anxiety
+    - Bad Habits
+    - Benzodiazepine Abuse
+    - Xanax Abuse
+    - Klonopin Abuse
+    - Bruxism (Teeth Grinding)
+    - Cocaine Abuse
+    - Crack Abuse
+    - Confidence
+    - Diabetes
+    - Emotional Eating
+    - Exercise Habits
+    - Fatigue
+    - Fear of Failure
+    - Focus
+    - Forgiveness
+    - Grief Issues
+    - Guilt
+    - Headaches
+    - Heroin Addiction
+    - Hopelessness
+    - Irrational Fears (Phobias)
+    - Irritability
+    - Laziness
+    - Methamphetamine Abuse
+    - Migraine Headaches
+    - Mood Swings
+    - Nail Biting
+    - Nose Picking
+    - Pain Control / Pain Management
+    - Panic Attacks
+    - Procrastination
+    - Relationship Issues
+    - Relaxation
+    - Road Rage
+    - Self Discipline
+    - Self Esteem
+    - Self Image
+    - Self Sabotage
+    - Skin Problems
+    - Smoking Cessation
+    - Social Anxiety (Shyness)
+    - Stress
+    - Stuttering
+    - Tension
+    - Test Anxiety
+    - Tiredness
+    - Trust Issues
+    - Weight Loss
+    - Worry
+    - Worthlessness
 keywords:
   - Addiction
   - "Substance Abuse"

@@ -2,7 +2,7 @@ name: resume
 category: technology 
 title: "Adam Fistler Resume"
 css:
-  - "/css/resume/technology.css"
+  - "/css/technology/resume.css"
 keywords:
   - resume
   - python

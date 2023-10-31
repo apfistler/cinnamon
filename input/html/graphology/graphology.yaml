@@ -1,6 +1,8 @@
 name: graphology 
 category: graphology 
 title: Discovery Handwriting Analysis 
+css:
+  - "/css/graphology/graphology.css"
 keywords:
   - "handwriting analysis" 
   - "brain writing"
