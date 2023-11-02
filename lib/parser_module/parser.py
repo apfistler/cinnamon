@@ -88,13 +88,27 @@ class Parser:
         return '\n'.join(menu_html)
 
     def get_input(self, padding, input_lines):
+
         processed_lines = []
         for line in input_lines:
             # Replace specific hard-coded placeholder
             if '<!-- HYPNOSIS_ISSUES -->' in line:
                 hypnosis_list_html = self.generate_hypnosis_list()
                 line = line.replace('<!-- HYPNOSIS_ISSUES -->', hypnosis_list_html)
-
+            # Handle table data replacement
+            elif '<!-- DISPLAY_TABLE name=' in line:
+                table_directive = re.search(r'<!-- DISPLAY_TABLE name=["\'](.*?)["\'] -->', line)
+                if table_directive:
+                    table_name = table_directive.group(1)
+                    table_data = self.metadata.get('display_table', {}).get(table_name, [])
+ 
+                    if table_data:
+                        table_html = self.construct_table_from_data(table_data)
+                        processed_lines.append(table_html)
+                        continue  # Skip processing the current line further
+                    else:
+                        processed_lines.append('<!-- Invalid table name: {} -->'.format(table_name))
+                        continue  # Skip processing the current line further 
             # Find and replace all other placeholders dynamically from the config
             placeholders = re.findall(r'<!-- (.*?) -->', line)
 
@@ -119,6 +133,54 @@ class Parser:
 
         return '\n'.join(processed_lines)
 
+    def construct_table_from_data(self, table_data):
+        table_html = '<table class="display-table">'
+        num_columns = 2  # Number of columns in the table
+    
+        for i in range(0, len(table_data), num_columns):
+            item1 = table_data[i]
+            item2 = table_data[i + 1] if i + 1 < len(table_data) else None
+    
+            table_html += '<tr>'
+            table_html += self.construct_table_cell(item1)
+            if item2:
+                table_html += self.construct_table_cell(item2)
+            table_html += '</tr>'
+    
+        table_html += '</table>'
+        return table_html
+    
+    def construct_table_cell(self, item):
+        image_url = item.get('image', '')
+        caption = item.get('caption', '')
+        title = item.get('title', '')
+        content = item.get('content', '')
+        link = item.get('link', '')  # Check for the link field in metadata
+    
+        if link:
+            # Wrap the image with <a> tag if link field exists
+            image_tag = f'<a href="{link}"><img src="{image_url}" alt="{caption}" /></a>'
+            title_tag = f'<span class="highlight"><a href="{link}">{title}</a></span>'
+        else:
+            image_tag = f'<img src="{image_url}" alt="{caption}" />'
+            title_tag = f'<span class="highlight">{title}</span>'
+    
+        cell_html = f'<td>' \
+                    f'<div class="display-table">' \
+                    f'<div class="display-table left">' \
+                    f'<figure class="content-img caption left">' \
+                    f'{image_tag}' \
+                    f'<figcaption>{caption}</figcaption>' \
+                    f'</figure>' \
+                    f'</div>' \
+                    f'<div class="display-table right">' \
+                    f'{title_tag}{content}' \
+                    f'</div>' \
+                    f'</div>' \
+                    f'</td>'
+    
+        return cell_html
+ 
     def generate_hypnosis_list(self):
         hypnosis_issues = self.config.get('hypnosis', {}).get('issues', [])
         num_columns = self.config.get('hypnosis', {}).get('issue_columns', 1)

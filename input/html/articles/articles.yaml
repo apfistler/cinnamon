@@ -4,3 +4,104 @@ title: "Articles"
 abstract: "This page is the container for articles."
 keywords:
   - hypnosis
+display_table:
+  hypnosis_articles:
+    - 
+      id: "10_things_choosing_a_hypnotist"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/10_things_choosing_a_hypnotist.html"
+      title: "10 Things to Consider When Choosing a Hypnotist"
+      caption: "10 Things to Consider When Choosing a Hypnotist"
+      content: >
+        Choosing a reliable and effective hypnotist can be a daunting task, considering the varied skills and qualities practitioners possess...
+    
+    - 
+      id: "10_things_weight_loss"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/10_things_weight_loss.html"
+      title: "10 Ways Hypnosis Can Help You Lose Weight"
+      caption: "10 Ways Hypnosis Can Help You Lose Weight"
+      content: >
+        In this insightful article by Adam Fistler, BCH, readers are taken on a profound exploration of the ways hypnosis can revolutionize the process of losing weight...
+    
+    - 
+      id: "attract_your_ideal_partner"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/attract_your_ideal_partner.html"
+      title: "Attract Your Ideal Partner by Focusing Your Mind"
+      caption: "Attract Your Ideal Partner by Focusing Your Mind"
+      content: >
+        In the pursuit of finding an ideal partner, understanding one's desires and intentions is paramount. This article provides a structured approach to clarify personal preferences and attract the right relationship...
+    
+    - 
+      id: "chronic_pain"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/chronic_pain.html"
+      title: "5 Ways Hypnosis Can Help Relieve Chronic Pain"
+      caption: "5 Ways Hypnosis Can Help Relieve Chronic Pain"
+      content: >
+        Chronic pain, a pervasive issue often stemming from physical injuries and emotional distress, affects numerous individuals, hindering their quality of life. Traditional approaches, such as medications and physical therapies, often fall short in providing lasting relief...
+    
+    - 
+      id: "eoc"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/eoc.html"
+      title: "The Essence of Change: Empowering Transformation Through Hypnosis"
+      caption: "The Essence of Change: Empowering Transformation Through Hypnosis"
+      content: >
+        Change, often perceived as a daunting challenge, holds the key to personal evolution and empowerment. In this article, the author explores the profound concept of change through the lens of hypnosis and Neuro Linguistic Programming (NLP)...
+    
+    - 
+      id: "evolution_of_hypnosis"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/evolution_of_hypnosis.html"
+      title: "Beyond Mesmerism: Navigating the Evolution of Hypnosis and Empowering Self-Transformation in the Modern Era"
+      caption: "Beyond Mesmerism: Navigating the Evolution of Hypnosis and Empowering Self-Transformation in the Modern Era"
+      content: >
+        Dive into the captivating journey of hypnosis, tracing its evolution from the enigmatic practices of Franz Mesmer to the sophisticated techniques employed by contemporary hypnotists...
+    
+    - 
+      id: "how_long_does_hypnosis_last"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/how_long_does_hypnosis_last.html"
+      title: "How Long Does Hypnosis Last"
+      caption: "How Long Does Hypnosis Last"
+      content: >
+        Hypnosis, a powerful tool for personal transformation, offers enduring change when coupled with understanding, commitment, and expertise...
+    
+    - 
+      id: "hrlrwl"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/hrlrwl.html"
+      title: "Should You Use Hypnosis to Lose Weight?"
+      caption: "Should You Use Hypnosis to Lose Weight?"
+      content: >
+        In the battle against excess weight, the decision to use hypnosis can be transformative...
+    
+    - 
+      id: "hrlrss"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/hrlrss.html"
+      title: "Should You Use Hypnosis to Stop Smoking?"
+      caption: "Should You Use Hypnosis to Stop Smoking?"
+      content: >
+        This compelling article by Adam P. Fistler, BCH, presents a powerful narrative that delves into the profound choice individuals face...
+    
+    - 
+      id: "nice_guy"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/nice_guy.html"
+      title: "Breaking Free: The Nice Guy's Journey to Authenticity"
+      caption: "Breaking Free: The Nice Guy's Journey to Authenticity"
+      content: >
+        In the captivating narrative titled 'Breaking Free: The Nice Guy's Journey to Authenticity,' the author delves into the intricate dynamics of relationships...
+    
+    - 
+      id: "winning_the_battle_within"
+      image: "/img/articles/articles/hypnosis.png"
+      link: "/html/articles/hypnosis/winning_the_battle_within.html"
+      title: "Winning the Battle Within: Overcoming the Urge"
+      caption: "Winning the Battle Within: Overcoming the Urge"
+      content: >
+        The battle against overpowering urges and destructive habits often feels insurmountable...
+
