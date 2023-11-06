@@ -47,7 +47,7 @@ display_table:
     -
       id: "jean_martin_charcot"
       title: "Jean-Martin Charcot (1825 - 1893)"
-      cpation: "Jean-Martin Charcot (1825 - 1893)" 
+      caption: "Jean-Martin Charcot (1825 - 1893)" 
       image: "/img/articles/hypnosis/evolution_of_hypnosis/jean_martin_charcot.png"
       content: |
         Jean-Martin Charcot was a French neurologist who conducted research on hypnosis and its

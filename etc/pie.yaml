@@ -1,0 +1,31 @@
+title: 'People In Effect'
+name: 'People In Effect'
+address:
+  street: 'PIE Street Addresss'
+  city: 'Camden, NJ'
+  state: 'NJ'
+  zip: '08104' 
+phone: 'PIE PHONE NUMBER'
+email: 'PIE EMAIL ADDRESS'
+footer:
+  - 'Copyright © 2023 People In Effect - Camden, NJ.  All Rights Reserved.'
+  - 'People In Effect &nbsp; - Camden, NJ  (PIE PHONE NUMBER)'
+  - 'Compassionate Community Outreach'
+menu:
+  Home: /pie/html/main/home.html
+  About PIE: /pie/html/about_pie/about_pie.html
+  Resources: /pie/html/resources/resources.html
+  Community: /pie/html/community/community.html
+  Donations: /pie/html/donations/donations.html
+  Voluenteer: /pie/html/voluenteer/voluenteer.html
+  News: /pie/news/news.html
+  Menu Header:
+    Child Item 1: /pie/html/child_item/1.html
+    Child Item 2: /pie/html/child_item/2.html
+    Child Item 3: /pie/html/child_item/3.html
+keywords:
+  - "Community Outreach" 
+  - "Volunteerism"
+  - "Camden, NJ" 
+  - "Donations"
+  - "Homelessness Help In New Jersey"

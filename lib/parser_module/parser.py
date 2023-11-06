@@ -156,31 +156,39 @@ class Parser:
         title = item.get('title', '')
         content = item.get('content', '')
         link = item.get('link', '')  # Check for the link field in metadata
-    
+ 
         if link:
             # Wrap the image with <a> tag if link field exists
-            image_tag = f'<a href="{link}"><img src="{image_url}" alt="{caption}" /></a>'
+            #image_tag = f'<a href="{link}"><img src="{image_url}" alt="{caption}" /></a>'
+            image_tag = f'<img src="{image_url}" alt="{caption}" />'
             title_tag = f'<span class="highlight"><a href="{link}">{title}</a></span>'
+            figure_class = f'<a href="{link}">' \
+                           f'<figure class="content-img caption left link">' \
+                           f'{image_tag}' \
+                           f'<figcaption>{caption}</figcaption>' \
+                           f'</figure>' \
+                           f'</a>'
         else:
             image_tag = f'<img src="{image_url}" alt="{caption}" />'
             title_tag = f'<span class="highlight">{title}</span>'
-    
+            figure_class = f'<figure class="content-img caption left">' \
+                           f'{image_tag}' \
+                           f'<figcaption>{caption}</figcaption>' \
+                           f'</figure>'
+ 
         cell_html = f'<td>' \
                     f'<div class="display-table">' \
                     f'<div class="display-table left">' \
-                    f'<figure class="content-img caption left">' \
-                    f'{image_tag}' \
-                    f'<figcaption>{caption}</figcaption>' \
-                    f'</figure>' \
+                    f'{figure_class}' \
                     f'</div>' \
                     f'<div class="display-table right">' \
                     f'{title_tag}{content}' \
                     f'</div>' \
                     f'</div>' \
                     f'</td>'
-    
-        return cell_html
  
+        return cell_html
+  
     def generate_hypnosis_list(self):
         hypnosis_issues = self.config.get('hypnosis', {}).get('issues', [])
         num_columns = self.config.get('hypnosis', {}).get('issue_columns', 1)

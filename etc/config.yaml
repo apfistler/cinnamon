@@ -16,6 +16,7 @@ menu:
   Home: /html/main/home.html
   GoFundMe: /html/main/go_fund_me.html
   Hypnosis:
+    Professional Experience: /html/articles/hypnosis/bhc.html
     About Hypnosis: /html/hypnosis/about_hypnosis.html
     Hypnosis Services: /html//hypnosis/hypnosis_services.html
     Testimonials: /html/hypnosis/testimonials.html
