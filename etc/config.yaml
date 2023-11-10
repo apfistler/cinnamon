@@ -28,10 +28,9 @@ menu:
   Handwriting Analysis: /html/graphology/graphology.html
   Technology:
     Resume: /html/technology/resume.html
-  Upcoming Events: /html/upcoming_events.html
+  Upcoming Events: /html/main/upcoming_events.html
   Articles: /html/articles/articles.html
-  Contact Us: /html/contact_us.html
-  Site Map: /html/site_map.html
+  Contact Us: /html/main/contact_us.html
 hypnosis:
   issue_columns: 4 
   issues:
