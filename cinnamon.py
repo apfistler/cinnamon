@@ -2,11 +2,11 @@
 
 import os
 import argparse
-from lib.input_module.input import Input
-from lib.output_module.output import Output
-from lib.template_module.template import Template
-from lib.parser_module.parser import Parser
-from lib.metadata_module.metadata import Metadata  # Assuming the Metadata class is in a file named metadata.py
+from lib.input import Input
+from lib.output import Output
+from lib.template import Template
+from lib.parser import Parser
+from lib.metadata import Metadata  # Assuming the Metadata class is in a file named metadata.py
 
 def main():
     parser = argparse.ArgumentParser(description='Generates HTML for Adam Fistler Website based on Template and Input File')
