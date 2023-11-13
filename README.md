@@ -1,6 +1,7 @@
 # Cinnamon Static Web Site Generator
 
 Cinnamon is a simple static web site generator that started as a basic script designed to replace strings in a page with data from various sources. Over time, the script has evolved to meet specific needs and has grown into a snippet of Python code.
+This is the script I used to maintain my website at https://www.afistler.us.to
 
 ## Usage
 
