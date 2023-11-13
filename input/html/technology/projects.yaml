@@ -1,0 +1,47 @@
+name: projects 
+category: technology 
+title: "Adam Fistler's Projects"
+css:
+  - "/css/technology/projects.css"
+keywords:
+  - projects
+  - python
+  - ruby
+  - bash
+  - perl
+  - "c#"
+  - ".net"
+  - powershell
+  - "Power Shell"
+  - linux
+  - redhat
+  - "Red Hat"
+  - rhel
+  - "Red Hat Enterprise Linux"
+  - centos
+  - ubuntu
+  - script
+  - devops
+display_table:
+  projects:
+    -
+      id: "html"
+      image: "/img/technology/projects/github_logo_100.png"
+      link: "https://www.github.com/apfistler/html"
+      title: "Adam Fistler Services HTML Pages"
+      content: >
+        This is the repo for the compiled HTML, CSS, and JavaScript files from Adam Fistler Services Website. These files were generated using Cinnamon GitHub - apfistler/cinnamon.
+    -
+      id: "cinnamon"
+      image: "/img/technology/projects/github_logo_100.png"
+      link: "https://www.github.com/apfistler/cinnamon"
+      title: "Cinnamon - Static Website Generator"
+      content: >
+        Cinnamon is a simple static web site generator that started as a basic script designed to replace strings in a page with data from various sources. Over time, the script has evolved to meet specific needs and has grown into a snippet of Python code. This is the script I used to maintain my website at https://www.afistler.us.to
+    -
+      id: "txfx"
+      image: "/img/technology/projects/github_logo_100.png"
+      link: "https://www.github.com/apfistler/txfx"
+      title: "TxFx - Public Environment Configuration Script"
+      content: >
+        This PowerShell script is a simple tool designed for setting up development environments on public computers, such as those available in libraries. The script facilitates the installation of local copies of essential tools like Python, Git, and Paint.NET, allowing you to work on projects even when you don't have access to a private computer.

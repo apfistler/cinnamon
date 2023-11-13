@@ -67,7 +67,7 @@ class Parser:
             else:
                 html_lines.append(template_line)
 
-        html = '\n'.join(html_lines)
+        html = ''.join(html_lines)
         self.output_obj.write(html)
 
     def generate_menu(self, indent):
@@ -131,7 +131,8 @@ class Parser:
             processed_line = f'{padding}{line}'
             processed_lines.append(processed_line)
 
-        return '\n'.join(processed_lines)
+        #return '\n'.join(processed_lines)
+        return ''.join(processed_lines)
 
     def construct_table_from_data(self, table_data):
         table_html = '<table class="display-table">'

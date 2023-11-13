@@ -8,8 +8,8 @@ address:
 phone: '<a href="tel:(856) 209-3350">(856) 209-3350</a>'
 email: '<a href="mailto:afistler.services@gmail.com">afistler.services@gmail.com</a>'
 footer:
-  - 'Copyright © 20223Adam Fistler - Camden, NJ.  All Rights Reserved.'
-  - 'Adam Fistler &nbsp; New Office in South Jersey or Philadelphia Coming Soon  (609) 200-00230'
+  - 'Copyright © 2023 - Adam Fistler Services - Camden, NJ.  All Rights Reserved.'
+  - 'Adam Fistler &nbsp; New Office Coming Soon <!-- PHONE -->'
   - 'Server South Jersey and Philadelphia with the latest in hypnosis, addiction alternatives, astrology, graphology, and technology.'
   - 'South Jerseys Choice for Holistic Healing.'
 menu:
@@ -27,6 +27,8 @@ menu:
   Astrology: /html/astrology/astrology.html
   Handwriting Analysis: /html/graphology/graphology.html
   Technology:
+    Projects: /html/technology/projects.html
+    Artwork: /html/technology/artwork.html
     Resume: /html/technology/resume.html
   Upcoming Events: /html/main/upcoming_events.html
   Articles: /html/articles/articles.html
