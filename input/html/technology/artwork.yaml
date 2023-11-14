@@ -1,4 +1,4 @@
-name: arkwork 
+name: artwork 
 category: technology 
 title: "Adam Fistler's Digital Artwork"
 css:
@@ -7,25 +7,160 @@ keywords:
   - "paint.net" 
   - "digital artwork"
 display_table:
-  projects:
+  artwork:
     -
-      id: "html"
-      image: "/img/technology/projects/github_logo_100.png"
-      link: "https://www.github.com/apfistler/html"
-      title: "Adam Fistler Services HTML Pages"
+      id: "snapped_pencil_original"
+      image: "/img/technology/artwork/snapped_pencil_original.png"
+      title: "Original Image for Snapped Pencil"
       content: >
-        This is the repo for the compiled HTML, CSS, and JavaScript files from Adam Fistler Services Website. These files were generated using Cinnamon GitHub - apfistler/cinnamon.
+        In the initial depiction of a hand snapping a pencil, I recognized the opportunity to enhance its resonance with the theme of anger on my website. A simple yet impactful modification involved changing the color of the pencil from blue to red, a hue that more effectively communicates the emotion of anger. This adjustment, while relatively straightforward, marked one of the early instances where I transformed an image to better align with the intended emotional context.
     -
-      id: "cinnamon"
-      image: "/img/technology/projects/github_logo_100.png"
-      link: "https://www.github.com/apfistler/cinnamon"
-      title: "Cinnamon - Static Website Generator"
+      id: "snapped_pencil_finished"
+      image: "/img/technology/artwork/snapped_pencil_finished.png"
+      title: "Finished Image for Snapped Pencil"
       content: >
-        Cinnamon is a simple static web site generator that started as a basic script designed to replace strings in a page with data from various sources. Over time, the script has evolved to meet specific needs and has grown into a snippet of Python code. This is the script I used to maintain my website at https://www.afistler.us.to
+        In the completed rendition of the hand snapping a pencil, the simple yet impactful change of the pencil's color to red significantly enhances its portrayal of anger. This image finds its place on the hypnosis page, where it serves to address internal anger issues. Despite the straightforward nature of this transformation, I opted to retain shading on the pencil rather than opting for a solid red tone. This particular image represents the early stages of my journey toward mastery in using Paint.NET.
     -
-      id: "txfx"
-      image: "/img/technology/projects/github_logo_100.png"
-      link: "https://www.github.com/apfistler/txfx"
-      title: "TxFx - Public Environment Configuration Script"
+      id: "success_original"
+      image: "/img/technology/artwork/success_original.png"
+      title: "Original Image for Success"
       content: >
-        This PowerShell script is a simple tool designed for setting up development environments on public computers, such as those available in libraries. The script facilitates the installation of local copies of essential tools like Python, Git, and Paint.NET, allowing you to work on projects even when you don't have access to a private computer.
+        In my quest for an image that embodies success and achievement, I stumbled upon a compelling black-and-white picture. However, recognizing its potential impact, I felt it lacked vibrancy and excitement.
+    -
+      id: "success_finished"
+      image: "/img/technology/artwork/success_finished.png"
+      title: "Finished Image for Success"
+      content: >
+        In the finalized rendition of this image, I breathed life into the original monochromatic scene. The once bland black-and-white depiction has been transformed, with one figure now sporting a vibrant blue hue and the other radiating an energetic orange. The lightning streak above them crackles in a lively yellow, adding a burst of color to enhance the overall vibrancy of the image.
+    -
+      id: "rewire_subconcious_original"
+      image: "/img/technology/artwork/rewire_subconcious_original.png"
+      title: "Original Image for Rewire the Subconcious"
+      content: >
+        In the original image, the depiction of rewiring the subconscious mind featured an awkward green color for the brain. Not satisfied with the visual harmony, I decided to make a change in the final image. 
+    -
+      id: "rewire_subconcious_finished"
+      image: "/img/technology/artwork/rewire_subconcious_finished.png"
+      title: "Finished Image for Rewire the Subconcious"
+      content: >
+        In the final image, I revamped the awkward green hue of the brain to a more traditional pink shade, enhancing its visual appeal. Additionally, I introduced a lighter pink tone to the interior of the brain, creating a more aesthetically pleasing representation. The transformed image now effectively conveys the intricate process of rewiring the subconscious mind, particularly within the context of hypnosis.
+    -
+      id: "high_road_low_road_original"
+      image: "/img/technology/artwork/high_road_low_road_original.png"
+      title: "Original Image for High Road / Low Road"
+      content: >
+        In the initial rendition of the high road and low road concept, I found certain elements detracting from the intended message. The presence of the figure next to the pole seemed distracting, prompting me to remove him for a cleaner composition. Additionally, the original color scheme, where the high road was depicted in red and the low road in black, didn't align with the emotional nuances I wished to convey. These aspects led to transformative changes in the final version.
+    -
+      id: "high_road_low_road_finished"
+      image: "/img/technology/artwork/high_road_low_road_finished.png"
+      title: "Finished Image for High Road / Low Road"
+      content: >
+        In the completed rendition of the image, I further emphasized the emotional nuances of the high road and low road concept by adjusting the shading on the signs. The High Road, symbolizing the journey to success, is now adorned with a calming green shade, transitioning from the original red. Conversely, the Low Road, representing the path to failure and frustration, now features an intense red shading, a departure from its initial black depiction. These changes contribute to a more impactful visual narrative.
+    -
+      id: "victory_original"
+      image: "/img/technology/artwork/victory_original.png"
+      title: "Original Image for Victory"
+      content: >
+        In the original image for victory, my initial intention was to create a transparent background. However, during the process, I found myself compelled to modify the colors of the original image. The goal was to enhance visibility and infuse the image with a vibrant energy that aligns with the themes of the web pages where I intended to feature this victorious depiction.
+    -
+      id: "victory_finished"
+      image: "/img/technology/artwork/victory_finished.png"
+      title: "Finished Image for Victory"
+      content: >
+        In the finished version of this image, my quest for a representation of victory led to several enhancements. The color transformation of the shirt, from a muted blue to a vibrant yellow, was a deliberate choice to convey a sense of excitement and triumph. Additionally, I opted for a background makeover, shifting from subdued tones to a more vibrant palette, amplifying the overall energy and celebratory mood of the image.
+    -
+      id: "journey_original"
+      image: "/img/technology/artwork/journey_original.png"
+      title: "Original Image for Journey"
+      content: >
+        In my quest for an image to symbolize a journey, I stumbled upon this drawing featuring a forest setting intersected by a highway road. While it captured elements of what I was seeking, I envisioned a forest scene with a hiking path instead of a road for cars. Hence, I employed this image as a foundation, transforming it to better depict the essence of a journey on foot.
+    -
+      id: "journey_finished"
+      image: "/img/technology/artwork/journey_finished.png"
+      title: "Finished Image for Journey"
+      content: >
+        In the final rendition, I eliminated the highway road from the original picture and replaced it with a brown color to simulate a dirt trail. To enhance the natural feel, I added texture to the trail by introducing a layer and employing the cloud generation tool. After achieving the desired trail texture, I incorporated rocks into the scene. Utilizing a rocky texture sourced from the internet, I introduced a new layer and applied it to create a textured appearance for the rocks, resulting in the completed image.
+    -
+      id: "hypnotist_original"
+      image: "/img/technology/artwork/hypnotist_original.png"
+      title: "Original Image for Hypnotist"
+      content: >
+        In the initial artwork discovery for a hypnotist, my focus shifted to refining a pocket watch element after removing the background. The process, involving meticulous restoration using the paintbrush tool, ultimately yielded satisfying results.
+    -
+      id: "hypnotist_finished"
+      image: "/img/technology/artwork/hypnotist_finished.png"
+      title: "Finished Image for Hypnosis Session"
+      content: >
+        Presenting the final image of the hypnotist, featuring a pocket watch that underwent restoration. While there might be slight distortions and imperfections around the pocket watch, considering this as one of my initial attempts, the result stands as a commendable achievement.
+    -
+      id: "uphill_battle_original"
+      image: "/img/technology/artwork/uphill_battle_original.png"
+      title: "Original Image for Uphill Battle"
+      content: >
+        In the initial image portraying a man in a business suit pushing a boulder uphill, the concept of an uphill battle was almost ideal. However, the representation of a businessman in a suit didn't entirely resonate with the universal theme of the struggle. To align more with the idea of an everyman facing this challenge, I utilized this as a foundation for the final product.
+    -
+      id: "uphill_battle_finished"
+      image: "/img/technology/artwork/uphill_battle_finished.png"
+      title: "Finished Image for Uphill Battle"
+      content: >
+        In the final image, the businessman undergoes a wardrobe change, showcasing a more relatable weekend warrior look in casual hiking attire. The business suit is replaced with blue jeans and a green polo shirt, complemented by a brown belt. I transformed the long-sleeved shirt into a short-sleeved one, adding flesh tone to the arms and enhancing their muscular appearance. The suit's tail was removed, and the shirt and pants were smoothed for a seamless transition. I also widened the shoes, transforming them into hiking boots. These changes aim to present a more average and relatable individual facing the uphill battle.
+    -
+      id: "hypnosis_session_original"
+      image: "/img/technology/artwork/hypnosis_session_original.png"
+      title: "Original Image for Hypnosis Session" 
+      content: >
+        The initial artwork for the hypnosis session captured my attention, but I found the depiction of the hypnotist as a doctor inaccurate. This stemmed from the realization that most doctors aren't hypnotists and lack any training in hypnosis. Hypnosis constitutes its own distinct field, demanding specialized training and a unique skill set that significantly differs from that of doctors. In refining this artwork, a pivotal change was made by discarding the hypnotist's lab coat and offering a significant wardrobe transformation. This alteration aimed to align the depiction with the accurate and nuanced representation of hypnotists, distinct from the conventional imagery associated with doctors.
+    -
+      id: "hypnosis_session_finished"
+      image: "/img/technology/artwork/hypnosis_session_finished.png"
+      title: "Finished Image for Hypnosis Session"
+      content: >
+        In the final rendition, I opted to eliminate the hypnotist's lab coat, substituting it with a crisp dress shirt and tailored pants. Not only did this adjustment contribute to a more accurate representation of a hypnotist's attire, but I also undertook a color enhancement process. The original image exhibited faded colors, prompting me to revitalize them. The background underwent a transformation from a light blue hue to a more vibrant purple, ensuring the image stands out. Additionally, I refined the details in the background images, enhancing their clarity and overall visual impact.
+    -
+      id: "hypnosis_office_original"
+      image: "/img/technology/artwork/hypnosis_office_original.png"
+      title: "Original Image for Hypnosis Office"
+      content: >
+        In the original image portraying the hypnosis office, I embarked on one of my most ambitious undertakings. While appreciating the artistic rendition of the hypnosis office, a significant challenge emerged – the depicted hypnotist was female. Given that the website revolves around me, a male, I aimed to convey a more accurate representation. In this ambitious endeavor, I delved into a transformative process, opting to perform a symbolic "sex change" operation on the image. The goal was to seamlessly replace the female hypnotist with a male counterpart, ensuring alignment with the focus and identity of the website.
+    -
+      id: "hypnosis_office_finished"
+      image: "/img/technology/artwork/hypnosis_office_finished.png"
+      title: "Finished Image for Hypnosis Office"
+      content: >
+        In the final image, I successfully transformed the original depiction of a female hypnotist into a male hypnotist. The male figure is clad in a dress shirt and brown dress pants. While the proportions of the legs may appear taller in relation to the body, overall, I was satisfied with the outcome. Achieving this transformation required extensive work, involving meticulous erasing and redrawing of the chair's background to accommodate the changes. The process entailed completely removing the female hypnotist, reconstructing the background, introducing the male hypnotist on a separate layer, and finally, merging the layers to produce the finished image.
+    -
+      id: "brain_pain_signals_original"
+      image: "/img/technology/artwork/brain_pain_signals_original.png"
+      title: "Original Image for Brain Pain Siginals"
+      content: >
+        In this transformation, the original picture features a brain surrounded by various images. With meticulous effort, patience, and the paintbrush tool, I transformed the initial image into the detailed drawing of the brain showcased in the final result. The process involved dedicated time and attention to achieve the desired outcome, and I am genuinely pleased with the impressive transformation.
+    -
+      id: "brain_pain_signals_finished"
+      image: "/img/technology/artwork/brain_pain_signals_finished.png"
+      title: "Finished Image for Brain Pain Signals"
+      content: >
+        Building upon the transformation from the original image to the detailed drawing of the brain, I further enhanced the depiction by adding lightning bolts. These bolts symbolize the disruption of brain signals associated with chronic pain. The lightning bolts were meticulously created by hand, employing the paintbrush tool with a vibrant blue color and adjusting brush widths to achieve a striking and symbolic effect. This image serves as an illustration of the transformative process from one image form to a completely different representation.
+    -
+      id: "dissociate_from_pain_original"
+      image: "/img/technology/artwork/dissociate_from_pain_original.png"
+      title: "Original Image for Dissociate From Pain"
+      content: >
+        In the initial image, a man is depicted in a pushing motion, providing a suitable foundation for the creation of an illustration for my chronic pain article. The focus was on illustrating dissociation as a technique to alleviate chronic pain.
+    -
+      id: "dissociate_from_pain_finished"
+      image: "/img/technology/artwork/dissociate_from_pain_finished.png"
+      title: "Finished Image for Dissociate From Pain"
+      content: >
+        After flipping the image and adjusting the orientation of the guy, I incorporated various layers into the composition. I duplicated the guy and transformed him into red, symbolizing the experience of pain. Employing the blur tool on each layer, I created varying blur effects to simulate the impression that he was pushing the red version, representing the pain outside of his body. Following the desired blur effects, I added lightning bolts above the red version to enhance the depiction of pain. To complete the image, I introduced a final layer using the cloud generation tool for the background effect. Utilizing the hue transformation, I added a colored background to evoke a dissociative atmosphere.
+    -
+      id: "magic_pen_original"
+      image: "/img/technology/artwork/magic_pen_original.png"
+      title: "Original Image for Magic Pen"
+      content: >
+        In the original image, a blue fountain pen with a cap served as the foundation for illustrating the magic of handwriting analysis. My ultimate goal was to convey the idea of a pen as a magic wand, symbolizing the transformative power of skilled handwriting analysis. This image provided a solid starting point for that vision.
+    -
+      id: "magic_pen_finished"
+      image: "/img/technology/artwork/magic_pen_finished.png"
+      title: "Finished Image for Magic Pen"
+      content: >
+        To achieve the desired result, I began by editing out the cap of the pen and rotating the image to a preferred angle. Next, I added an extra layer to incorporate a magical effect at the end of the pen, resulting in a fountain pen magic wand that illustrates the enchanting and enjoyable nature of handwriting analysis.
