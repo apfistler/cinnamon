@@ -63,7 +63,7 @@ display_table:
       link: "/img/technology/artwork/high_road_low_road_finished.png"
       title: "Finished Image for High Road / Low Road"
       content: >
-        In the completed rendition of the image, I further emphasized the emotional nuances of the high road and low road concept by adjusting the shading on the signs. The High Road, symbolizing the journey to success, is now adorned with a calming green shade, transitioning from the original red. Conversely, the Low Road, representing the path to failure and frustration, now features an intense red shading, a departure from its initial black depiction. These changes contribute to a more impactful visual narrative.
+        In the completed rendition of the image, I further emphasized the emotional nuances of the high road and low road concept by adjusting the shading on the signs. The High Road, symbolizing the journey to success, is now adorned with a calming green shade, transitioning from the original red. Conversely, the Low Road, representing the path to failure and frustration, now features an intense red shading, a departure from its initial black depiction. These changes contribute to a more impactful visual narrative.  As an update, I am no longer using this image and I am not very satisfied with.  I have created an new image to replace this one.
     -
       id: "victory_original"
       image: "/img/technology/artwork/victory_original.png"
@@ -105,7 +105,7 @@ display_table:
       link: "/img/technology/artwork/hypnotist_finished.png"
       title: "Finished Image for Hypnosis Session"
       content: >
-        Presenting the final image of the hypnotist, featuring a pocket watch that underwent restoration. While there might be slight distortions and imperfections around the pocket watch, considering this as one of my initial attempts, the result stands as a commendable achievement.
+        Presenting the final image of the hypnotist, featuring a pocket watch that underwent restoration. While there might be slight distortions and imperfections around the pocket watch, considering this as one of my initial attempts, the result stands as a commendable achievement.Upon futher reivew I wasn't as satisfied with this image as I once was, as such this image has been depricated and replaced witmy origional drawing of a male hypnotist.
     -
       id: "uphill_battle_original"
       image: "/img/technology/artwork/uphill_battle_original.png"
@@ -246,3 +246,40 @@ display_table:
         The blanket, textured to perfection with inspiration drawn from the rich tapestry of the internet, gracefully envelops Cathy, adding a tactile dimension to the visual narrative. As the final strokes were applied, the carpet, initially a grey blob, transformed into a textured surface, grounding the hypnotic scene in a comforting and familiar reality.
 
         This composition is more than an artwork; it's an invitation to experience the symbiosis of art and hypnosis, where the lines between the imagined and the real blur, and serenity becomes a tangible presence.
+    -
+      id: "laura"
+      image: "/img/technology/artwork/laura.png"
+      link: "/img/technology/artwork/laura.png"
+      title: "Laura - Drawing a Person from the Side"
+      content: >
+        In my continuous journey of capturing the essence of individuals through art, I proudly present "Luara." This piece marks my initial venture into the captivating challenge of portraying a person from a side perspective. As I navigate the intricacies of facial profiles and expressions, the evolving results hold a special place in my artistic growth.
+
+        While the journey is ongoing, I find joy in every stroke and discovery. Using tools like paint.net, I am honing my skills, learning, and refining my ability to bring characters to life on the canvas. Join me in this exploration of perspectives and witness the evolving tapestry of my artistic expression.
+    -
+      id: "cathy_hypnotist"
+      image: "/img/technology/artwork/cathy_hypnotist.png"
+      link: "/img/technology/artwork/cathy_hypnotist.png"
+      title: "Cathy Green - Hypnotist"
+      content: >
+        In this artistic endeavor, I embrace the challenge of capturing a single persona through diverse lenses, portraying Cathy Green from varying perspectives. The task of rendering the same individual in different drawings has proven to be a rewarding challenge. In this particular piece, Cathy Green assumes the intriguing role of a hypnotist, weaving an enchanting narrative through the strokes of my mouse. Join me as I embrace the challenge of creating the same person twice, from a different prespective.
+    -
+      id: "male_hypnotist"
+      image: "/img/technology/artwork/male_hypnotist.png"
+      link: "/img/technology/artwork/male_hypnotist.png"
+      title: "Male Hypnotist"
+      content: >
+        This creation is of a male hypnotist.  I've endeavored to craft a new representation of a male hypnotist, replacing a previous image sourced from the web that didn't quite meet my satisfaction. Drawing upon techniques refined through experience, I've created this new depiction to replace instances where the outdated image was used on my site. This piece reflects my evolving skills and a commitment to presenting a more personally crafted and resonant visual narrative.
+    -
+      id: "hrlr"
+      image: "/img/technology/artwork/hrlr.png"
+      link: "/img/technology/artwork/hrlr.png"
+      title: "High Road / Low Road Sign"
+      content: >
+        In this image, I've designed a new high road/low road sign, symbolizing the choice between an easier but less fulfilling path and a challenging route leading to goals. This replaces a previously sourced image that fell short of my satisfaction. The creation process involved crafting sign objects and applying various texture images to enhance their visual appeal.
+    -
+      id: "jill_stressed"
+      image: "/img/technology/artwork/jill_stressed.png"
+      link: "/img/technology/artwork/jill_stressed.png"
+      title: "High Road / Low Road Sign"
+      content: >
+        In this image, I intentionally depicted Jill under stress to convey the theme of stress. I've replaced the previous image of Jill with this updated version in areas on the website where stress-related visuals are necessary. Utilizing layers in image editing facilitates modifications without the need to erase entire sections. By toggling layers on or off, adjustments can be made more efficiently, streamlining the process of implementing changes.
