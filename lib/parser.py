@@ -18,7 +18,9 @@ class Parser:
         self.output_obj = output_obj
 
         # Page name is the directory name
-        self.page_name = os.path.basename(self.input_dir)
+        self.page_name = os.path.basename(
+            self.input_dir
+        )
 
         # Page files
         self.input_filename = os.path.join(
@@ -38,7 +40,9 @@ class Parser:
         )
 
         # Global configuration
-        self.config = self.load_config(config_filename)
+        self.config = self.load_config(
+            config_filename
+        )
 
         # Page-specific metadata
         self.metadata = self.load_config(
@@ -54,8 +58,14 @@ class Parser:
 
     def load_config(self, config_filename):
 
-        with open(config_filename, 'r') as config_file:
-            config = yaml.safe_load(config_file)
+        with open(
+                config_filename,
+                'r'
+            ) as config_file:
+
+            config = yaml.safe_load(
+                config_file
+            )
 
         return config or {}
 
@@ -71,12 +81,14 @@ class Parser:
                 and isinstance(result[key], dict)
                 and isinstance(value, dict)
             ):
+
                 result[key] = self.merge_config(
                     result[key],
                     value
                 )
 
             else:
+
                 result[key] = value
 
         return result
@@ -84,7 +96,11 @@ class Parser:
 
     def read_input(self):
 
-        with open(self.input_filename, 'r') as input_file:
+        with open(
+                self.input_filename,
+                'r'
+            ) as input_file:
+
             return input_file.readlines()
 
 
@@ -118,8 +134,13 @@ class Parser:
             + input_keywords
         )
 
-        keywords = sorted(keywords)
-        keywords = ', '.join(keywords)
+        keywords = sorted(
+            keywords
+        )
+
+        keywords = ', '.join(
+            keywords
+        )
 
         css_links = self.metadata.get(
             'css',
@@ -130,7 +151,9 @@ class Parser:
 
         for template_line in template_lines:
 
-            template_line = template_line.rstrip('\n')
+            template_line = (
+                template_line.rstrip('\n')
+            )
 
             if '<!-- TITLE -->' in template_line:
 
@@ -163,7 +186,9 @@ class Parser:
                     leading_whitespace
                 )
 
-                html_lines.append(menu_html)
+                html_lines.append(
+                    menu_html
+                )
 
             elif '<!-- CSS -->' in template_line:
 
@@ -177,6 +202,7 @@ class Parser:
                 css_tags = []
 
                 for css_link in css_links:
+
                     css_tags.append(
                         f'{leading_whitespace}'
                         f'<link rel="stylesheet" '
@@ -201,15 +227,23 @@ class Parser:
                     input_lines
                 )
 
-                html_lines.append(content)
+                html_lines.append(
+                    content
+                )
 
             else:
 
-                html_lines.append(template_line)
+                html_lines.append(
+                    template_line
+                )
 
-        html = '\n'.join(html_lines)
+        html = '\n'.join(
+            html_lines
+        )
 
-        self.output_obj.write(html)
+        self.output_obj.write(
+            html
+        )
 
 
     def extract_keywords(self, input_lines):
@@ -219,12 +253,18 @@ class Parser:
         for line in input_lines:
 
             matches = re.findall(
-                r'<meta[^>]+keywords[^>]+>',
+                r'<meta[^>]+keywords\s*=\s*["\']([^"\']*)["\']',
                 line,
                 re.IGNORECASE
             )
 
-            keywords.extend(matches)
+            for match in matches:
+
+                keywords.extend(
+                    keyword.strip()
+                    for keyword in match.split(',')
+                    if keyword.strip()
+                )
 
         return keywords
 
@@ -277,11 +317,14 @@ class Parser:
                 menu_html.append(
                     f'{indent}<li>'
                     f'<a class="menu-item" '
-                    f'href="{link}">{label}</a>'
+                    f'href="{link}">'
+                    f'{label}</a>'
                     f'</li>'
                 )
 
-        return '\n'.join(menu_html)
+        return '\n'.join(
+            menu_html
+        )
 
 
     def get_input(self, padding, input_lines):
@@ -292,7 +335,61 @@ class Parser:
 
             line = line.rstrip('\n')
 
-            # Practice areas
+            # --------------------------------------------------
+            # HTML SNIPPETS
+            # --------------------------------------------------
+
+            snippet_directive = re.search(
+                r'<!--\s*SNIPPET\s+([A-Za-z0-9_-]+)\s*-->',
+                line
+            )
+
+            if snippet_directive:
+
+                snippet_name = (
+                    snippet_directive.group(1)
+                )
+
+                snippet_html = (
+                    self.load_snippet(
+                        snippet_name
+                    )
+                )
+
+                # Preserve indentation of the directive
+                line_indent = (
+                    line[
+                        :len(line)
+                        - len(line.lstrip())
+                    ]
+                )
+
+                snippet_lines = (
+                    snippet_html.splitlines()
+                )
+
+                for snippet_line in snippet_lines:
+
+                    if snippet_line.strip():
+
+                        processed_lines.append(
+                            line_indent
+                            + snippet_line
+                        )
+
+                    else:
+
+                        processed_lines.append(
+                            ''
+                        )
+
+                continue
+
+
+            # --------------------------------------------------
+            # PRACTICE AREAS
+            # --------------------------------------------------
+
             if '<!-- PRACTICE_AREAS -->' in line:
 
                 practice_html = (
@@ -310,7 +407,11 @@ class Parser:
 
                 continue
 
-            # Hypnosis issues
+
+            # --------------------------------------------------
+            # HYPNOSIS ISSUES
+            # --------------------------------------------------
+
             if '<!-- HYPNOSIS_ISSUES -->' in line:
 
                 hypnosis_list_html = (
@@ -322,7 +423,11 @@ class Parser:
                     hypnosis_list_html
                 )
 
-            # Display tables
+
+            # --------------------------------------------------
+            # DISPLAY TABLES
+            # --------------------------------------------------
+
             elif '<!-- DISPLAY_TABLE name=' in line:
 
                 table_directive = re.search(
@@ -365,7 +470,11 @@ class Parser:
 
                         continue
 
-            # Generic configuration placeholders
+
+            # --------------------------------------------------
+            # GENERIC CONFIGURATION PLACEHOLDERS
+            # --------------------------------------------------
+
             placeholders = re.findall(
                 r'<!-- (.*?) -->',
                 line
@@ -377,13 +486,19 @@ class Parser:
                     placeholder.lower()
                 )
 
-                keys = placeholder_lower.split('.')
+                keys = (
+                    placeholder_lower.split('.')
+                )
 
                 value = self.config
 
                 for key in keys:
 
-                    if not isinstance(value, dict):
+                    if not isinstance(
+                            value,
+                            dict
+                        ):
+
                         value = None
                         break
 
@@ -413,7 +528,33 @@ class Parser:
                 f'{padding}{line}'
             )
 
-        return ''.join(processed_lines)
+        return ''.join(
+            processed_lines
+        )
+
+
+    def load_snippet(self, snippet_name):
+
+        snippet_filename = os.path.join(
+            self.snippet_dir,
+            f'{snippet_name}.html'
+        )
+
+        if not os.path.isfile(
+                snippet_filename
+            ):
+
+            raise FileNotFoundError(
+                f"Snippet '{snippet_filename}' "
+                f"not found."
+            )
+
+        with open(
+                snippet_filename,
+                'r'
+            ) as snippet_file:
+
+            return snippet_file.read()
 
 
     def generate_practice_areas(self):
@@ -549,7 +690,9 @@ class Parser:
             '</section>'
         )
 
-        return '\n'.join(html)
+        return '\n'.join(
+            html
+        )
 
 
     def construct_table_from_data(self, table_data):
@@ -561,10 +704,10 @@ class Parser:
         num_columns = 2
 
         for i in range(
-            0,
-            len(table_data),
-            num_columns
-        ):
+                0,
+                len(table_data),
+                num_columns
+            ):
 
             item1 = table_data[i]
 
@@ -577,13 +720,17 @@ class Parser:
             table_html += '<tr>'
 
             table_html += (
-                self.construct_table_cell(item1)
+                self.construct_table_cell(
+                    item1
+                )
             )
 
             if item2:
 
                 table_html += (
-                    self.construct_table_cell(item2)
+                    self.construct_table_cell(
+                        item2
+                    )
                 )
 
             table_html += '</tr>'
@@ -699,7 +846,8 @@ class Parser:
         )
 
         items_per_column = max(
-            len(hypnosis_issues) // num_columns,
+            len(hypnosis_issues)
+            // num_columns,
             1
         )
 
@@ -707,7 +855,9 @@ class Parser:
             '<div class="hypnosis-list-container">'
         ]
 
-        for i in range(num_columns):
+        for i in range(
+                num_columns
+            ):
 
             start_idx = (
                 i * items_per_column
