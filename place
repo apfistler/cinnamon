@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: place <input-directory>"
+  exit 1
+fi
+
+INPUT="$1"
+
+if [[ "$INPUT" != input/* ]]; then
+  echo "Error: directory must be inside input/"
+  exit 1
+fi
+
+if [ ! -d "$INPUT" ]; then
+  echo "Error: input directory does not exist: $INPUT"
+  exit 1
+fi
+
+NAME="$(basename "$INPUT")"
+
+if [ ! -f "$INPUT/$NAME.html" ]; then
+  echo "Error: expected $INPUT/$NAME.html"
+  exit 1
+fi
+
+./cinnamon.py "$INPUT" || exit 1
+
+RELATIVE="${INPUT#input/}"
+
+DEST="/var/www/adamfistler.com/public_html/${RELATIVE}.html"
+
+mkdir -p "$(dirname "$DEST")"
+
+cp "output/${RELATIVE}.html" "$DEST"

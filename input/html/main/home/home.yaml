@@ -1,0 +1,74 @@
+name: home
+category: main
+
+title: Behavior Change Consulting South Jersey - Addiction Recovery, Hypnosis, Stress, Anger & Personal Growth
+
+keywords:
+  - behavior change
+  - behavior change consulting
+  - addiction recovery
+  - SMART Recovery
+  - recovery coaching
+  - hypnosis
+  - hypnotherapy
+  - stress management
+  - anxiety management
+  - anger management
+  - emotional regulation
+  - habit change
+  - smoking cessation
+  - weight loss
+  - mindfulness
+  - meditation
+  - personal development
+  - South Jersey
+  - Philadelphia
+  - Camden NJ
+  - recovery support
+  - motivational interviewing
+  - cognitive behavioral therapy
+  - CBT
+  - DBT
+  - NLP
+  - relaxation techniques
+
+practice_areas:
+  - id: hypnosis
+    title: "Hypnosis"
+    description: "Change begins beneath the surface."
+    link: "/hypnosis/"
+
+  - id: handwriting-analysis
+    title: "Handwriting Analysis"
+    description: "Your handwriting tells a story."
+    link: "/handwriting-analysis/"
+
+  - id: addiction-recovery
+    title: "Addiction & Recovery"
+    description: "Understanding change, choice, and recovery."
+    link: "/addiction-recovery/"
+
+  - id: mindfulness
+    title: "Mindfulness"
+    description: "Attention is where transformation begins."
+    link: "/mindfulness/"
+
+  - id: astrology
+    title: "Astrology"
+    description: "Explore yourself through a symbolic lens."
+    link: "/astrology/"
+
+  - id: groups
+    title: "Groups & Workshops"
+    description: "Learn, practice, and explore together."
+    link: "/groups/"
+
+  - id: parties-events
+    title: "Parties & Events"
+    description: "Bring handwriting analysis and astrology to your next gathering."
+    link: "/parties-events/"
+
+  - id: technology
+    title: "Technology"
+    description: "Exploring systems, software, automation, and the ideas behind technology."
+    link: "/technology/"
