@@ -591,6 +591,23 @@ class Parser:
                 ''
             )
 
+            svg_filename = os.path.join(
+                self.input_dir,
+                'svg',
+                f'{practice_id}.svg'
+            )
+
+            svg_html = ''
+
+            if os.path.isfile(svg_filename):
+
+                with open(
+                        svg_filename,
+                        'r'
+                    ) as svg_file:
+
+                    svg_html = svg_file.read()
+
             html.append(
                 f'    <button '
                 f'class="practice-card" '
@@ -602,6 +619,21 @@ class Parser:
                 '      '
                 '<div class="practice-card__content">'
             )
+
+            if svg_html:
+
+                html.append(
+                    '        '
+                    '<div class="practice-card__icon">'
+                )
+
+                html.append(
+                    f'          {svg_html}'
+                )
+
+                html.append(
+                    '        </div>'
+                )
 
             html.append(
                 f'        <h2>{title}</h2>'
@@ -690,10 +722,7 @@ class Parser:
             '</section>'
         )
 
-        return '\n'.join(
-            html
-        )
-
+        return '\n'.join(html)
 
     def construct_table_from_data(self, table_data):
 

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 80 340 340" width="100%" height="100%">
+  <style>
+    .meditation-path-tabler {
+      fill: none;
+      stroke: #1a1a1a;
+      stroke-width: 16;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+
+  <g transform="translate(0, 15)">
+    <!-- Head -->
+    <circle cx="250" cy="140" r="32" class="meditation-path-tabler" />
+
+    <!-- Torso and Left Arm with Mudra Hand -->
+    <path class="meditation-path-tabler" d="
+      M 250,172
+      C 238,190 215,205 200,220
+      C 185,235 170,265 155,290
+      C 145,306 135,315 125,315
+      C 118,315 115,310 120,302
+      C 125,294 135,295 140,290
+      C 145,285 138,278 130,282
+      C 122,286 118,298 122,308
+      C 128,322 145,322 160,312
+      C 175,302 195,270 205,240
+      C 208,230 212,230 212,250
+      L 212,300
+    " />
+
+    <!-- Right Arm with Mudra Hand -->
+    <path class="meditation-path-tabler" d="
+      M 250,172
+      C 262,190 285,205 300,220
+      C 315,235 330,265 345,290
+      C 355,306 365,315 375,315
+      C 382,315 385,310 380,302
+      C 375,294 365,295 360,290
+      C 355,285 362,278 370,282
+      C 378,286 382,298 378,308
+      C 372,322 355,322 340,312
+      C 325,302 305,270 295,240
+      C 292,230 288,230 288,250
+      L 288,300
+    " />
+
+    <!-- Crossed Legs (Lotus Base) -->
+    <path class="meditation-path-tabler" d="
+      M 212,300
+      C 212,320 200,335 170,345
+      C 140,355 130,375 160,388
+      C 190,400 310,400 340,388
+      C 370,375 360,355 330,345
+      C 300,335 288,320 288,300
+    " />
+
+    <!-- Overlapping Leg Contour -->
+    <path class="meditation-path-tabler" d="
+      M 180,340
+      C 210,325 240,320 270,335
+      C 300,350 320,360 290,375
+      C 260,390 240,370 210,360
+    " />
+  </g>
+</svg>
+

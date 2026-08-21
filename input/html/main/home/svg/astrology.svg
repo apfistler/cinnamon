@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 80 340 340" width="100%" height="100%">
+  <style>
+    .wheel-ring { fill: none; stroke: #1a1a1a; stroke-width: 10; }
+    .spoke { stroke: #1a1a1a; stroke-width: 8; stroke-linecap: round; }
+    .symbol-path { fill: none; stroke: #1a1a1a; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <g transform="translate(250, 250) scale(0.72)">
+    <!-- Main Wheel Rings -->
+    <circle r="200" class="wheel-ring" />
+    <circle r="140" class="wheel-ring" />
+    <circle r="40" class="wheel-ring" />
+
+    <!-- 12 Radial Spoke Dividers (Every 30 degrees) -->
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(0)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(30)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(60)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(90)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(120)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(150)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(180)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(210)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(240)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(270)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(300)" />
+    <line x1="0" y1="-200" x2="0" y2="-40" class="spoke" transform="rotate(330)" />
+
+    <!-- 12 Zodiac Vector Symbols -->
+
+    <!-- Aries (15°) -->
+    <g transform="rotate(15) translate(0, -170)">
+      <path class="symbol-path" d="M 0,18 V -6 M 0,-6 C -6,-18 -18,-12 -18,0 C -18,8 -6,8 0,0 M 0,-6 C 6,-18 18,-12 18,0 C 18,8 6,8 0,0" />
+    </g>
+
+    <!-- Taurus (45°) -->
+    <g transform="rotate(45) translate(0, -170)">
+      <circle cx="0" cy="6" r="10" class="symbol-path" />
+      <path class="symbol-path" d="M -14,-10 C -8,-2 8,-2 14,-10" />
+    </g>
+
+    <!-- Gemini (75°) -->
+    <g transform="rotate(75) translate(0, -170)">
+      <path class="symbol-path" d="M -12,-14 H 12 M -12,14 H 12 M -6,-14 C 0,-6 0,6 -6,14 M 6,-14 C 0,-6 0,6 6,14" />
+    </g>
+
+    <!-- Virgo (105°) -->
+    <g transform="rotate(105) translate(0, -170)">
+      <path class="symbol-path" d="M -12,-12 V 12 M -12,-3 C -12,-12 -4,-12 -4,-3 V 12 M -4,-3 C -4,-12 4,-12 4,-3 V 12 C 4,18 12,18 12,9 M 4,6 H 15" />
+    </g>
+
+    <!-- Scorpio (135°) -->
+    <g transform="rotate(135) translate(0, -170)">
+      <path class="symbol-path" d="M -12,-12 V 10 M -12,-3 C -12,-12 -4,-12 -4,-3 V 10 M -4,-3 C -4,-12 4,-12 4,-3 V 12 L 10,6 M 4,12 L 10,18" />
+    </g>
+
+    <!-- Libra (165°) -->
+    <g transform="rotate(165) translate(0, -170)">
+      <path class="symbol-path" d="M -14,10 H 14 M -14,2 H -6 C -6,-6 6,-6 6,2 H 14" />
+    </g>
+
+    <!-- Gemini Alternate (195°) -->
+    <g transform="rotate(195) translate(0, -170)">
+      <path class="symbol-path" d="M -12,-12 H 12 M -12,12 H 12 M -6,-12 V 12 M 6,-12 V 12" />
+    </g>
+
+    <!-- Leo (225°) -->
+    <g transform="rotate(225) translate(0, -170)">
+      <circle cx="-10" cy="8" r="5" class="symbol-path" />
+      <path class="symbol-path" d="M -5,8 C -5,-10 8,-16 8,-3 C 8,8 16,14 16,3" />
+    </g>
+
+    <!-- Sagittarius (255°) -->
+    <g transform="rotate(255) translate(0, -170)">
+      <path class="symbol-path" d="M -12,12 L 12,-12 M 12,-12 H 1 M 12,-12 V -1 M -4,-2 L 2,4" />
+    </g>
+
+    <!-- Capricorn (285°) -->
+    <g transform="rotate(285) translate(0, -170)">
+      <path class="symbol-path" d="M -10,-12 L -4,6 L 3,-6 C 8,-6 12,0 9,7 C 6,13 0,10 3,4" />
+    </g>
+
+    <!-- Aquarius (315°) -->
+    <g transform="rotate(315) translate(0, -170)">
+      <path class="symbol-path" d="M -14,-6 L -8,-12 L -2,-6 L 4,-12 L 10,-6 L 16,-12 M -14,6 L -8,0 L -2,6 L 4,0 L 10,6 L 16,0" />
+    </g>
+
+    <!-- Pisces (345°) -->
+    <g transform="rotate(345) translate(0, -170)">
+      <path class="symbol-path" d="M -14,0 H 14 M -8,-14 C -1,-6 -1,6 -8,14 M 8,-14 C 1,-6 1,6 8,14" />
+    </g>
+  </g>
+</svg>
+
