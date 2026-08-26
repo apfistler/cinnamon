@@ -1,5 +1,6 @@
 import os
 import re
+import html
 import yaml
 
 
@@ -56,11 +57,22 @@ class Parser:
         )
 
 
+    # ==========================================================
+    # CONFIGURATION
+    # ==========================================================
+
     def load_config(self, config_filename):
+
+        if not os.path.isfile(
+                config_filename
+            ):
+
+            return {}
 
         with open(
                 config_filename,
-                'r'
+                'r',
+                encoding='utf-8'
             ) as config_file:
 
             config = yaml.safe_load(
@@ -94,15 +106,24 @@ class Parser:
         return result
 
 
+    # ==========================================================
+    # INPUT
+    # ==========================================================
+
     def read_input(self):
 
         with open(
                 self.input_filename,
-                'r'
+                'r',
+                encoding='utf-8'
             ) as input_file:
 
             return input_file.readlines()
 
+
+    # ==========================================================
+    # TEMPLATE
+    # ==========================================================
 
     def parse_template(self):
 
@@ -246,6 +267,10 @@ class Parser:
         )
 
 
+    # ==========================================================
+    # KEYWORDS
+    # ==========================================================
+
     def extract_keywords(self, input_lines):
 
         keywords = []
@@ -269,6 +294,10 @@ class Parser:
         return keywords
 
 
+    # ==========================================================
+    # MENU
+    # ==========================================================
+
     def generate_menu(self, indent):
 
         menu_items = self.config.get(
@@ -278,14 +307,34 @@ class Parser:
 
         menu_html = []
 
-        for label, link in menu_items.items():
+        for label, menu_item in menu_items.items():
 
-            if isinstance(link, dict):
+            # --------------------------------------------------
+            # Parent menu item
+            #
+            # New YAML format:
+            #
+            # Hypnosis:
+            #   url: /html/main/home.html#hypnosis
+            #   Professional Experience: /...
+            #   About Hypnosis: /...
+            #
+            # --------------------------------------------------
+
+            if isinstance(
+                    menu_item,
+                    dict
+                ):
+
+                parent_url = menu_item.get(
+                    'url',
+                    'javascript:void(0)'
+                )
 
                 menu_html.append(
                     f'{indent}<li>'
                     f'<a class="menu-item parent active" '
-                    f'href="javascript:void(0)">{label}</a>'
+                    f'href="{parent_url}">{label}</a>'
                 )
 
                 menu_html.append(
@@ -293,7 +342,12 @@ class Parser:
                     f'<ul class="child-menu hidden">'
                 )
 
-                for child_label, child_link in link.items():
+                for child_label, child_link in menu_item.items():
+
+                    # "url" belongs to the parent and is not
+                    # itself a child menu item.
+                    if child_label == 'url':
+                        continue
 
                     menu_html.append(
                         f'{indent}    '
@@ -312,12 +366,16 @@ class Parser:
                     f'{indent}</li>'
                 )
 
+            # --------------------------------------------------
+            # Normal menu item
+            # --------------------------------------------------
+
             else:
 
                 menu_html.append(
                     f'{indent}<li>'
                     f'<a class="menu-item" '
-                    f'href="{link}">'
+                    f'href="{menu_item}">'
                     f'{label}</a>'
                     f'</li>'
                 )
@@ -326,6 +384,10 @@ class Parser:
             menu_html
         )
 
+
+    # ==========================================================
+    # CONTENT PROCESSING
+    # ==========================================================
 
     def get_input(self, padding, input_lines):
 
@@ -356,7 +418,6 @@ class Parser:
                     )
                 )
 
-                # Preserve indentation of the directive
                 line_indent = (
                     line[
                         :len(line)
@@ -375,6 +436,57 @@ class Parser:
                         processed_lines.append(
                             line_indent
                             + snippet_line
+                        )
+
+                    else:
+
+                        processed_lines.append(
+                            ''
+                        )
+
+                continue
+
+
+            # --------------------------------------------------
+            # FAQ
+            # --------------------------------------------------
+
+            faq_directive = re.search(
+                r'<!--\s*FAQ(?:\s+([A-Za-z0-9_-]+))?\s*-->',
+                line,
+                re.IGNORECASE
+            )
+
+            if faq_directive:
+
+                faq_name = (
+                    faq_directive.group(1)
+                )
+
+                faq_html = (
+                    self.generate_faq(
+                        faq_name
+                    )
+                )
+
+                line_indent = (
+                    line[
+                        :len(line)
+                        - len(line.lstrip())
+                    ]
+                )
+
+                faq_lines = (
+                    faq_html.splitlines()
+                )
+
+                for faq_line in faq_lines:
+
+                    if faq_line.strip():
+
+                        processed_lines.append(
+                            line_indent
+                            + faq_line
                         )
 
                     else:
@@ -422,6 +534,12 @@ class Parser:
                     '<!-- HYPNOSIS_ISSUES -->',
                     hypnosis_list_html
                 )
+
+                processed_lines.append(
+                    f'{padding}{line}'
+                )
+
+                continue
 
 
             # --------------------------------------------------
@@ -533,6 +651,341 @@ class Parser:
         )
 
 
+    # ==========================================================
+    # FAQ
+    # ==========================================================
+
+    def generate_faq(self, faq_name=None):
+
+        # ------------------------------------------------------
+        # Determine FAQ name
+        # ------------------------------------------------------
+
+        if not faq_name:
+
+            faq_name = self.metadata.get(
+                'faq',
+                ''
+            )
+
+        if not faq_name:
+
+            return (
+                '<!-- FAQ: no FAQ name specified -->'
+            )
+
+
+        # ------------------------------------------------------
+        # Locate FAQ YAML
+        # ------------------------------------------------------
+
+        faq_filename = os.path.join(
+            self.input_dir,
+            f'{faq_name}.yaml'
+        )
+
+
+        if not os.path.isfile(
+                faq_filename
+            ):
+
+            return (
+                '<!-- FAQ file not found: '
+                f'{faq_filename} -->'
+            )
+
+
+        # ------------------------------------------------------
+        # Load FAQ YAML
+        # ------------------------------------------------------
+
+        faq_data = self.load_config(
+            faq_filename
+        )
+
+
+        if not faq_data:
+
+            return (
+                '<!-- FAQ file is empty: '
+                f'{faq_filename} -->'
+            )
+
+
+        # ------------------------------------------------------
+        # Begin FAQ
+        # ------------------------------------------------------
+
+        html_output = []
+
+        faq_title = faq_data.get(
+            'title',
+            ''
+        )
+
+        faq_description = faq_data.get(
+            'description',
+            ''
+        )
+
+        html_output.append(
+            '<section class="faq">'
+        )
+
+        if faq_title:
+
+            html_output.append(
+                f'  <h2 class="faq-title">'
+                f'{html.escape(str(faq_title))}'
+                f'</h2>'
+            )
+
+        if faq_description:
+
+            description_paragraphs = (
+                self.format_faq_paragraphs(
+                    faq_description
+                )
+            )
+
+            for paragraph in description_paragraphs:
+
+                html_output.append(
+                    f'  <p class="faq-description">'
+                    f'{paragraph}'
+                    f'</p>'
+                )
+
+
+        # ------------------------------------------------------
+        # Topic areas
+        # ------------------------------------------------------
+
+        topic_areas = faq_data.get(
+            'topic_areas',
+            []
+        )
+
+        for topic in topic_areas:
+
+            topic_title = topic.get(
+                'title',
+                ''
+            )
+
+            questions = topic.get(
+                'questions',
+                []
+            )
+
+            html_output.append(
+                '  <section class="faq-topic">'
+            )
+
+            if topic_title:
+
+                html_output.append(
+                    f'    <h3 class="faq-topic-title">'
+                    f'{html.escape(str(topic_title))}'
+                    f'</h3>'
+                )
+
+
+            # --------------------------------------------------
+            # Questions
+            # --------------------------------------------------
+
+            for item in questions:
+
+                question = item.get(
+                    'question',
+                    ''
+                )
+
+                response = item.get(
+                    'response',
+                    ''
+                )
+
+                if not question:
+
+                    continue
+
+                html_output.append(
+                    '    <div class="faq-item">'
+                )
+
+                html_output.append(
+                    '      '
+                    '<button '
+                    'class="faq-question" '
+                    'type="button" '
+                    'aria-expanded="false">'
+                )
+
+                html_output.append(
+                    f'        '
+                    f'{html.escape(str(question))}'
+                )
+
+                html_output.append(
+                    '        '
+                    '<span class="faq-question-icon">'
+                    '+'
+                    '</span>'
+                )
+
+                html_output.append(
+                    '      </button>'
+                )
+
+
+                # --------------------------------------------------
+                # Answer
+                # --------------------------------------------------
+
+                html_output.append(
+                    '      '
+                    '<div class="faq-answer" '
+                    'hidden>'
+                )
+
+                paragraphs = (
+                    self.format_faq_paragraphs(
+                        response
+                    )
+                )
+
+                for paragraph in paragraphs:
+
+                    html_output.append(
+                        f'        '
+                        f'<p>{paragraph}</p>'
+                    )
+
+                html_output.append(
+                    '      </div>'
+                )
+
+                html_output.append(
+                    '    </div>'
+                )
+
+
+            html_output.append(
+                '  </section>'
+            )
+
+
+        # ------------------------------------------------------
+        # End FAQ
+        # ------------------------------------------------------
+
+        html_output.append(
+            '</section>'
+        )
+
+        return '\n'.join(
+            html_output
+        )
+
+
+    def format_faq_paragraphs(self, text):
+
+        if text is None:
+
+            return []
+
+
+        # ------------------------------------------------------
+        # YAML may return a string, list, or another value.
+        # ------------------------------------------------------
+
+        if isinstance(
+                text,
+                list
+            ):
+
+            text = '\n\n'.join(
+                str(item)
+                for item in text
+            )
+
+        else:
+
+            text = str(text)
+
+
+        # ------------------------------------------------------
+        # Normalize line endings
+        # ------------------------------------------------------
+
+        text = text.replace(
+            '\r\n',
+            '\n'
+        )
+
+        text = text.replace(
+            '\r',
+            '\n'
+        )
+
+
+        # ------------------------------------------------------
+        # A YAML folded scalar using ">" turns ordinary line breaks
+        # into spaces. A blank line in the YAML is preserved as one
+        # newline in the parsed value, so each remaining newline marks
+        # a paragraph boundary.
+        # ------------------------------------------------------
+
+        raw_paragraphs = re.split(
+            r'\n+',
+            text.strip()
+        )
+
+        paragraphs = []
+
+        for paragraph in raw_paragraphs:
+
+            paragraph = (
+                paragraph.strip()
+            )
+
+            if not paragraph:
+
+                continue
+
+
+            # --------------------------------------------------
+            # Collapse whitespace left by YAML folding.
+            # --------------------------------------------------
+
+            paragraph = re.sub(
+                r'\s+',
+                ' ',
+                paragraph
+            )
+
+
+            # --------------------------------------------------
+            # Escape plain text for HTML.
+            # --------------------------------------------------
+
+            paragraph = html.escape(
+                paragraph
+            )
+
+            paragraphs.append(
+                paragraph
+            )
+
+        return paragraphs
+
+
+    # ==========================================================
+    # SNIPPETS
+    # ==========================================================
+
     def load_snippet(self, snippet_name):
 
         snippet_filename = os.path.join(
@@ -551,11 +1004,16 @@ class Parser:
 
         with open(
                 snippet_filename,
-                'r'
+                'r',
+                encoding='utf-8'
             ) as snippet_file:
 
             return snippet_file.read()
 
+
+    # ==========================================================
+    # PRACTICE AREAS
+    # ==========================================================
 
     def generate_practice_areas(self):
 
@@ -564,13 +1022,13 @@ class Parser:
             []
         )
 
-        html = []
+        html_output = []
 
-        html.append(
+        html_output.append(
             '<section class="practice-areas">'
         )
 
-        html.append(
+        html_output.append(
             '  <div class="practice-grid">'
         )
 
@@ -599,130 +1057,84 @@ class Parser:
 
             svg_html = ''
 
-            if os.path.isfile(svg_filename):
+            if os.path.isfile(
+                    svg_filename
+                ):
 
                 with open(
                         svg_filename,
-                        'r'
+                        'r',
+                        encoding='utf-8'
                     ) as svg_file:
 
                     svg_html = svg_file.read()
 
-            html.append(
+            html_output.append(
                 f'    <button '
                 f'class="practice-card" '
                 f'type="button" '
                 f'data-practice="{practice_id}">'
             )
 
-            html.append(
+            html_output.append(
                 '      '
                 '<div class="practice-card__content">'
             )
 
             if svg_html:
 
-                html.append(
+                html_output.append(
                     '        '
                     '<div class="practice-card__icon">'
                 )
 
-                html.append(
+                html_output.append(
                     f'          {svg_html}'
                 )
 
-                html.append(
+                html_output.append(
                     '        </div>'
                 )
 
-            html.append(
-                f'        <h2>{title}</h2>'
+            html_output.append(
+                f'        <h2>{html.escape(str(title))}</h2>'
             )
 
-            html.append(
-                f'        <p>{description}</p>'
+            html_output.append(
+                f'        <p>{html.escape(str(description))}</p>'
             )
 
-            html.append(
+            html_output.append(
                 '        '
                 '<span class="practice-card__link">'
                 'Explore →'
                 '</span>'
             )
 
-            html.append(
+            html_output.append(
                 '      </div>'
             )
 
-            html.append(
+            html_output.append(
                 '    </button>'
             )
 
-        html.append(
+        html_output.append(
             '  </div>'
         )
 
-        html.append(
-            '  <div class="practice-details">'
-        )
-
-        for practice in practice_areas:
-
-            practice_id = practice.get(
-                'id',
-                ''
-            )
-
-            title = practice.get(
-                'title',
-                ''
-            )
-
-            description = practice.get(
-                'description',
-                ''
-            )
-
-            link = practice.get(
-                'link',
-                '#'
-            )
-
-            html.append(
-                f'    <article '
-                f'id="practice-{practice_id}" '
-                f'class="practice-detail">'
-            )
-
-            html.append(
-                f'      <h2>{title}</h2>'
-            )
-
-            html.append(
-                f'      <p>{description}</p>'
-            )
-
-            html.append(
-                f'      <p>'
-                f'<a href="{link}">'
-                f'Learn more →'
-                f'</a>'
-                f'</p>'
-            )
-
-            html.append(
-                '    </article>'
-            )
-
-        html.append(
-            '  </div>'
-        )
-
-        html.append(
+        html_output.append(
             '</section>'
         )
 
-        return '\n'.join(html)
+        return '\n'.join(
+            html_output
+        )
+
+
+    # ==========================================================
+    # DISPLAY TABLES
+    # ==========================================================
 
     def construct_table_from_data(self, table_data):
 
@@ -859,6 +1271,10 @@ class Parser:
 
         return cell_html
 
+
+    # ==========================================================
+    # HYPNOSIS ISSUES
+    # ==========================================================
 
     def generate_hypnosis_list(self):
 

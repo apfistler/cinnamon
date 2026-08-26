@@ -1,114 +1,153 @@
 title: 'Adam Fistler Services'
 name: 'Adam Fistler Services'
+
 address:
-  street: 'New Office Comming Soon'
-  city: 'South Jersey or Philadelphia?'
+  street: 'New Office Coming Soon'
+  city: 'South Jersey / Philadelphia'
   state: 'NJ'
-  zip: '08000' 
-phone: '<a href="tel:(609) 200-0230">(609) 200-0230</a>'
-email: '<a href="mailto:apfistler@gmail.com/">apfistler@gmail.com</a>'
+  zip: '08000'
+
+phone: '(609) 200-0230'
+email: 'fistlerap@gmail.com'
+
 footer:
-  - 'Copyright © 2023 - Adam Fistler Services - Camden, NJ.  All Rights Reserved.'
-  - 'Adam Fistler &nbsp; New Office Coming Soon <!-- PHONE -->'
-  - 'Server South Jersey and Philadelphia with the latest in hypnosis, addiction alternatives, astrology, graphology, and technology.'
-  - 'South Jerseys Choice for Holistic Healing.'
+  - 'Copyright © 2026 - Adam Fistler Services - Camden, NJ. All Rights Reserved.'
+  - 'Adam Fistler | New Office Coming Soon'
+  - 'Serving South Jersey & Philadelphia with the latest in hypnosis, addiction alternatives, astrology, graphology, & technology.'
+  - "South Jersey's Choice for Holistic Healing."
+
 menu:
-  Home: /html/main/home.html
-  GoFundMe: /html/main/go_fund_me.html
+  Home: '/html/main/home.html'
+  GoFundMe: '/html/main/go_fund_me.html'
+
   Hypnosis:
-    Professional Experience: /html/articles/hypnosis/bhc.html
-    About Hypnosis: /html/hypnosis/about_hypnosis.html
-    Hypnosis Services: /html//hypnosis/hypnosis_services.html
-    Testimonials: /html/hypnosis/testimonials.html
-    Anger: /html/hypnosis/anger.html
-    Weight Loss: /html/hypnosis/weight_loss.html
-    Smoking Cessation: /html/hypnosis/smoking_cessation.html
-  Addiction Services: /html/addiction/addiction_services.html
-  Astrology: /html/astrology/astrology.html
-  Handwriting Analysis: /html/graphology/graphology.html
+    url: '/html/main/home.html#hypnosis'
+    children:
+      Professional Experience: '/html/articles/hypnosis/bhc.html'
+      About Hypnosis: '/html/hypnosis/about_hypnosis.html'
+      Hypnosis FAQ: '/html/hypnosis/hypnosis_faq.html'
+      Hypnosis Services: '/html/hypnosis/hypnosis_services.html'
+      Articles: '/html/articles/articles.html'
+      Testimonials: '/html/hypnosis/testimonials.html'
+      Anger: '/html/hypnosis/anger.html'
+      Weight Loss: '/html/hypnosis/weight_loss.html'
+      Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
+
+  Mindfulness:
+    url: '/html/main/home.html#mindfulness'
+    children:
+      Services: '/html/mindfulness/mindfulness.html'
+
+  Addiction & Recovery:
+    url: '/html/main/home.html#addiction-recovery'
+    children:
+      Services: '/html/addiction/addiction_services.html'
+
+  Astrology:
+    url: '/html/main/home.html#astrology'
+    children:
+      Services: '/html/astrology/astrology.html'
+
+  Handwriting Analysis:
+    url: '/html/main/home.html#handwriting-analysis'
+    children:
+      Services: '/html/graphology/graphology.html'
+
   Technology:
-    Projects: /html/technology/projects.html
-    Artwork: /html/technology/artwork.html
-    Resume: /html/technology/resume.html
-  Upcoming Events: /html/main/upcoming_events.html
-  Articles: /html/articles/articles.html
-  Contact Us: /html/main/contact_us.html
+    url: '/html/main/home.html#technology'
+    children:
+      Projects: '/html/technology/projects.html'
+      Artwork: '/html/technology/artwork.html'
+      Resume: '/html/technology/resume.html'
+
+  Groups & Workshops:
+    url: '/html/main/home.html#groups'
+    children:
+      Upcoming Events: '/html/groups/upcoming_events.html'
+
+  Parties & Events:
+    url: '/html/main/home.html#parties-events'
+    children:
+      Scheduling: '/html/parties/scheduling.html'
+
+  Contact Us: '/html/main/contact_us.html'
+
 hypnosis:
-  issue_columns: 4 
+  issue_columns: 4
   issues:
-    - Addiction
-    - Adderall Abuse
-    - Substance Abuse
-    - Heroin Abuse
-    - Opiate / Opioid Abuse
-    - Oxycodone (Percocet) Abuse
-    - Oxycodine Abuse
-    - Hydrocodone (Vicodin) Abuse 
-    - Alcohol Abuse
-    - Alcoholism
-    - Anger
-    - Anxiety
-    - Bad Habits
-    - Benzodiazepine Abuse
-    - Xanax Abuse
-    - Klonopin Abuse
-    - Bruxism (Teeth Grinding)
-    - Cocaine Abuse
-    - Crack Abuse
-    - Confidence
-    - Diabetes
-    - Emotional Eating
-    - Exercise Habits
-    - Fatigue
-    - Fear of Failure
-    - Focus
-    - Forgiveness
-    - Grief Issues
-    - Guilt
-    - Headaches
-    - Heroin Addiction
-    - Hopelessness
-    - Irrational Fears (Phobias)
-    - Irritability
-    - Laziness
-    - Methamphetamine Abuse
-    - Migraine Headaches
-    - Mood Swings
-    - Nail Biting
-    - Nose Picking
-    - Pain Control / Pain Management
-    - Panic Attacks
-    - Procrastination
-    - Relationship Issues
-    - Relaxation
-    - Road Rage
-    - Self Discipline
-    - Self Esteem
-    - Self Image
-    - Self Sabotage
-    - Skin Problems
-    - Smoking Cessation
-    - Social Anxiety (Shyness)
-    - Stress
-    - Stuttering
-    - Tension
-    - Test Anxiety
-    - Tiredness
-    - Trust Issues
-    - Weight Loss
-    - Worry
-    - Worthlessness
+    - 'Adderall Abuse'
+    - 'Addiction'
+    - 'Alcohol Abuse'
+    - 'Alcoholism'
+    - 'Anger'
+    - 'Anxiety'
+    - 'Bad Habits'
+    - 'Benzodiazepine Abuse'
+    - 'Bruxism (Teeth Grinding)'
+    - 'Cocaine Abuse'
+    - 'Confidence'
+    - 'Crack Abuse'
+    - 'Diabetes'
+    - 'Emotional Eating'
+    - 'Exercise Habits'
+    - 'Fatigue'
+    - 'Fear of Failure'
+    - 'Focus'
+    - 'Forgiveness'
+    - 'Grief Issues'
+    - 'Guilt'
+    - 'Headaches'
+    - 'Heroin Abuse'
+    - 'Heroin Addiction'
+    - 'Hopelessness'
+    - 'Hydrocodone (Vicodin) Abuse'
+    - 'Irrational Fears (Phobias)'
+    - 'Irritability'
+    - 'Klonopin Abuse'
+    - 'Laziness'
+    - 'Methamphetamine Abuse'
+    - 'Migraine Headaches'
+    - 'Mood Swings'
+    - 'Nail Biting'
+    - 'Nose Picking'
+    - 'Opiate / Opioid Abuse'
+    - 'Oxycodone (Percocet) Abuse'
+    - 'Pain Control / Pain Management'
+    - 'Panic Attacks'
+    - 'Procrastination'
+    - 'Relationship Issues'
+    - 'Relaxation'
+    - 'Road Rage'
+    - 'Self Discipline'
+    - 'Self Esteem'
+    - 'Self Image'
+    - 'Self Sabotage'
+    - 'Skin Problems'
+    - 'Smoking Cessation'
+    - 'Social Anxiety (Shyness)'
+    - 'Stress'
+    - 'Substance Abuse'
+    - 'Stuttering'
+    - 'Tension'
+    - 'Test Anxiety'
+    - 'Tiredness'
+    - 'Trust Issues'
+    - 'Weight Loss'
+    - 'Worry'
+    - 'Worthlessness'
+    - 'Xanax Abuse'
+
 keywords:
-  - Addiction
-  - "Substance Abuse"
-  - Astrology
-  - "Handwriting Analysis"
-  - Technology
-  - Hypnosis
-  - Hypnotism
-  - Hypnotist
-  - Zodiac
-  - "Natal Chart" 
-  - "Birth Chart"
-  - "Birth Chart Reading"
-  - "Natal Chart Reading"
+  - 'Addiction'
+  - 'Substance Abuse'
+  - 'Astrology'
+  - 'Handwriting Analysis'
+  - 'Technology'
+  - 'Hypnosis'
+  - 'Hypnotism'
+  - 'Hypnotist'
+  - 'Zodiac'
+  - 'Natal Chart'
+  - 'Birth Chart'
+  - 'Birth Chart Reading'
+  - 'Natal Chart Reading'
