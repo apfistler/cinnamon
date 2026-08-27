@@ -955,10 +955,8 @@ class Parser:
                 paragraph
             )
 
-            paragraph = html.escape(
-                paragraph
-            )
-
+            # FAQ responses may contain intentional HTML.
+            # Do not HTML-escape the response here.
             paragraphs.append(
                 paragraph
             )

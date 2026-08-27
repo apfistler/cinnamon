@@ -68,7 +68,7 @@ menu:
       Projects: '/html/technology/projects.html'
       Artwork: '/html/technology/artwork.html'
       Resume: '/html/technology/resume.html'
-      FAQ: '/html/technology/faq.html'
+      FAQ: '/html/technology/technology_faq.html'
 
   Groups & Workshops:
     area: 'groups'
