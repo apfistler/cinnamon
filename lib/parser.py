@@ -135,14 +135,16 @@ class Parser:
             ''
         )
 
-
         tagline = self.config.get(
-           'tagline',
-           ''
+            'tagline',
+            ''
         )
 
         if tagline:
-            title = f'{title} | {tagline}'
+
+            title = (
+                f'{title} | {tagline}'
+            )
 
         input_keywords = self.extract_keywords(
             input_lines
@@ -307,6 +309,21 @@ class Parser:
     # MENU
     # ==========================================================
 
+    def add_area_to_url(self, url, area):
+
+        if not url:
+            return url
+
+        if not area:
+            return url
+
+        # Do not modify URLs that already have an anchor.
+        if '#' in url:
+            return url
+
+        return f'{url}#{area}'
+
+
     def generate_menu(self, indent):
 
         menu_items = self.config.get(
@@ -321,20 +338,35 @@ class Parser:
             # --------------------------------------------------
             # Parent menu item
             #
-            # YAML:
+            # Example YAML:
             #
             # Hypnosis:
-            #   url: /html/hypnosis/landing.html#hypnosis
+            #   area: hypnosis
+            #   url: '/html/hypnosis/landing.html'
             #   children:
-            #     About Hypnosis: /html/hypnosis/about_hypnosis.html
+            #     About Hypnosis: '/html/hypnosis/about.html'
             #
+            # The parser automatically produces:
+            #
+            # /html/hypnosis/landing.html#hypnosis
+            # /html/hypnosis/about.html#hypnosis
             # --------------------------------------------------
 
             if isinstance(item, dict):
 
+                area = item.get(
+                    'area',
+                    ''
+                )
+
                 parent_url = item.get(
                     'url',
                     'javascript:void(0)'
+                )
+
+                parent_url = self.add_area_to_url(
+                    parent_url,
+                    area
                 )
 
                 children = item.get(
@@ -348,7 +380,7 @@ class Parser:
 
                 menu_html.append(
                     f'{indent}  '
-                    f'<a class="menu-item parent active" '
+                    f'<a class="menu-item parent" '
                     f'href="{parent_url}">'
                     f'{label}</a>'
                 )
@@ -362,10 +394,17 @@ class Parser:
 
                     for child_label, child_link in children.items():
 
+                        child_link = (
+                            self.add_area_to_url(
+                                child_link,
+                                area
+                            )
+                        )
+
                         menu_html.append(
                             f'{indent}    '
                             f'<li>'
-                            f'<a class="menu-item child active" '
+                            f'<a class="menu-item child" '
                             f'href="{child_link}">'
                             f'{child_label}</a>'
                             f'</li>'
@@ -382,11 +421,10 @@ class Parser:
             # --------------------------------------------------
             # Normal menu item
             #
-            # YAML:
+            # Example:
             #
             # Home:
             #   /html/main/home.html
-            #
             # --------------------------------------------------
 
             else:
@@ -796,7 +834,6 @@ class Parser:
                 )
 
                 if not question:
-
                     continue
 
                 html_output.append(
@@ -855,7 +892,7 @@ class Parser:
                 )
 
             html_output.append(
-                '  </section'
+                '  </section>'
             )
 
         html_output.append(
@@ -870,7 +907,6 @@ class Parser:
     def format_faq_paragraphs(self, text):
 
         if text is None:
-
             return []
 
         if isinstance(
@@ -911,7 +947,6 @@ class Parser:
             )
 
             if not paragraph:
-
                 continue
 
             paragraph = re.sub(
@@ -1000,7 +1035,7 @@ class Parser:
 
             url = practice.get(
                 'url',
-                '#'
+                ''
             )
 
             svg_filename = os.path.join(
@@ -1023,10 +1058,19 @@ class Parser:
 
                     svg_html = svg_file.read()
 
+            # --------------------------------------------------
+            # Practice cards now follow their URLs.
+            #
+            # The old data-practice attribute is retained so
+            # the previous JavaScript behavior can be restored
+            # if desired.
+            # --------------------------------------------------
+
             html_output.append(
                 f'    <a '
                 f'class="practice-card" '
-                f'href="{url}">'
+                f'href="{url}" '
+                f'data-practice="{practice_id}">'
             )
 
             html_output.append(
@@ -1083,6 +1127,7 @@ class Parser:
         return '\n'.join(
             html_output
         )
+
 
     # ==========================================================
     # DISPLAY TABLES

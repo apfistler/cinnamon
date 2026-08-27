@@ -21,7 +21,8 @@ menu:
   Home: '/html/main/home.html'
 
   Hypnosis:
-    url: '/html/hypnosis/landing.html#hypnosis'
+    area: 'hypnosis'
+    url: '/html/hypnosis/landing.html'
     children:
       Professional Experience: '/html/articles/hypnosis/bhc.html'
       About Hypnosis: '/html/hypnosis/about_hypnosis.html'
@@ -34,29 +35,34 @@ menu:
       Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
 
   Mindfulness:
+    area: 'mindfulness'
     url: '/html/mindfulness/landing.html#mindfulness'
     children:
       Mindfulness FAQ: '/html/mindfulness/mindfulness_faq.html'
 
   Addiction & Recovery:
+    area: 'addiction'
     url: '/html/addiction/landing.html#addiction'
     children:
       Approaches: '/html/addiction/addiction_services.html'
       FAQ: '/html/addiction/addiction_faq.html'
 
   Astrology:
+    area: 'astrology'
     url: '/html/astrology/landing.html#astrology'
     children:
       About Astrology: '/html/astrology/astrology.html'
       Astrology FAQ: '/html/astrology/astrology_faq.html'
 
   Handwriting Analysis:
+    area: 'graphology'
     url: '/html/graphology/landing.html#handwriting_analysis'
     children:
       About Handwriting Analysis: '/html/graphology/graphology.html'
       Handwriting Analysis FAQ: '/html/graphology/graphology_faq.html'
 
   Technology:
+    area: 'technology'
     url: '/html/technology/landing.html#technology'
     children:
       Projects: '/html/technology/projects.html'
@@ -65,11 +71,13 @@ menu:
       FAQ: '/html/technology/faq.html'
 
   Groups & Workshops:
+    area: 'groups'
     url: '/html/groups/landing.html#groups'
     children:
       Upcoming Events: '/html/groups/upcoming_events.html'
 
   Parties & Events:
+    area: 'parties'
     url: '/html/parties/landing.html#parties'
     children:
       Scheduling: '/html/parties/scheduling.html'
