@@ -55,25 +55,30 @@ practice_areas:
     description: "Change begins beneath the surface."
     url: "/html/hypnosis/landing.html#hypnosis"
 
-  - id: handwriting-analysis
-    title: "Handwriting Analysis"
-    description: "Your handwriting tells a story."
-    url: "/html/graphology/landing.html#graphology"
+  - id: mindfulness
+    title: "Mindfulness"
+    description: "Attention is where transformation begins."
+    url: "/html/mindfulness/landing.html#mindfulness"
 
   - id: addiction-recovery
     title: "Addiction & Recovery"
     description: "Understanding change, choice, and recovery."
     url: "/html/addiction/landing.html#addiction"
 
-  - id: mindfulness
-    title: "Mindfulness"
-    description: "Attention is where transformation begins."
-    url: "/html/mindfulness/landing.html#mindfulness"
+  - id: handwriting-analysis
+    title: "Handwriting Analysis"
+    description: "Your handwriting tells a story."
+    url: "/html/graphology/landing.html#graphology"
 
   - id: astrology
     title: "Astrology"
     description: "Explore yourself through a symbolic lens."
     url: "/html/astrology/landing.html#astrology"
+
+  - id: technology
+    title: "Technology"
+    description: "Exploring systems, software, automation, and the ideas behind technology."
+    url: "/html/technology/landing.html#technology"
 
   - id: groups
     title: "Groups & Workshops"
@@ -85,7 +90,3 @@ practice_areas:
     description: "Bring handwriting analysis and astrology to your next gathering."
     url: "/html/parties/landing.html#parties"
 
-  - id: technology
-    title: "Technology"
-    description: "Exploring systems, software, automation, and the ideas behind technology."
-    url: "/html/technology/landing.html#technology"

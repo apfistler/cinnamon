@@ -47,19 +47,19 @@ menu:
       Approaches: '/html/addiction/addiction_services.html'
       FAQ: '/html/addiction/addiction_faq.html'
 
-  Astrology:
-    area: 'astrology'
-    url: '/html/astrology/landing.html#astrology'
-    children:
-      About Astrology: '/html/astrology/astrology.html'
-      Astrology FAQ: '/html/astrology/astrology_faq.html'
-
   Handwriting Analysis:
     area: 'graphology'
     url: '/html/graphology/landing.html#handwriting_analysis'
     children:
       About Handwriting Analysis: '/html/graphology/graphology.html'
       Handwriting Analysis FAQ: '/html/graphology/graphology_faq.html'
+
+  Astrology:
+    area: 'astrology'
+    url: '/html/astrology/landing.html#astrology'
+    children:
+      About Astrology: '/html/astrology/astrology.html'
+      Astrology FAQ: '/html/astrology/astrology_faq.html'
 
   Technology:
     area: 'technology'
@@ -82,7 +82,7 @@ menu:
     children:
       Scheduling: '/html/parties/scheduling.html'
 
-  Contact Us: '/html/main/contact_us.html'
+  Contact Adam: '/html/main/contact_us.html'
 
 hypnosis:
   issue_columns: 4
