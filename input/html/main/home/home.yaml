@@ -1,7 +1,7 @@
 name: home
 category: main
 
-title: Behavior Change Consulting South Jersey - Addiction Recovery, Hypnosis, Stress, Anger & Personal Growth
+title: Adam Fistler, Behavior Change Consulting South Jersey - Addiction Recovery, Hypnosis, Stress, Anger & Personal Growth
 
 keywords:
   - behavior change
@@ -9,6 +9,21 @@ keywords:
   - addiction recovery
   - SMART Recovery
   - recovery coaching
+  - mindfulness
+  - meditation
+  - addiction
+  - recovery
+  - better than 12 step
+  - better than tweleve step
+  - something else besides tweleve step
+  - something else besides 12 step
+  - hypnosis for addiction
+  - adiction hypnotist
+  - smart reocvery
+  - cbt
+  - dbt
+  - conginative behavioral therapy
+  - dialetical behavioral therapy
   - hypnosis
   - hypnotherapy
   - stress management
@@ -32,35 +47,45 @@ keywords:
   - NLP
   - relaxation techniques
 
+practice_area_navigation: url
+
 practice_areas:
   - id: hypnosis
     title: "Hypnosis"
     description: "Change begins beneath the surface."
+    url: "/html/hypnosis/landing.html#hypnosis"
 
   - id: handwriting-analysis
     title: "Handwriting Analysis"
     description: "Your handwriting tells a story."
+    url: "/html/graphology/landing.html#graphology"
 
   - id: addiction-recovery
     title: "Addiction & Recovery"
     description: "Understanding change, choice, and recovery."
+    url: "/html/addiction/landing.html#addiction"
 
   - id: mindfulness
     title: "Mindfulness"
     description: "Attention is where transformation begins."
+    url: "/html/mindfulness/landing.html#mindfulness"
 
   - id: astrology
     title: "Astrology"
     description: "Explore yourself through a symbolic lens."
+    url: "/html/astrology/landing.html#astrology"
 
   - id: groups
     title: "Groups & Workshops"
     description: "Learn, practice, and explore together."
+    url: "/html/groups/landing.html#groups"
 
-  - id: parties-events
+  - id: parties
     title: "Parties & Events"
     description: "Bring handwriting analysis and astrology to your next gathering."
+    url: "/html/parties/landing.html#parties"
 
   - id: technology
     title: "Technology"
     description: "Exploring systems, software, automation, and the ideas behind technology."
+    url: "/html/technology/landing.html#technology"

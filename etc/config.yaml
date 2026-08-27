@@ -1,5 +1,6 @@
-title: 'Adam Fistler Services'
-name: 'Adam Fistler Services'
+title: 'Adam Fistler'
+name: 'Adam Fistler'
+tagline: "Adam Fistler - Mind, Meaning & Transformation"
 
 address:
   street: 'New Office Coming Soon'
@@ -20,7 +21,7 @@ menu:
   Home: '/html/main/home.html'
 
   Hypnosis:
-    url: '/html/hypnosis/landing.html'
+    url: '/html/hypnosis/landing.html#hypnosis'
     children:
       Professional Experience: '/html/articles/hypnosis/bhc.html'
       About Hypnosis: '/html/hypnosis/about_hypnosis.html'
@@ -33,30 +34,30 @@ menu:
       Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
 
   Mindfulness:
-    url: '/html/mindfulness/landing.html'
+    url: '/html/mindfulness/landing.html#mindfulness'
     children:
       Mindfulness FAQ: '/html/mindfulness/mindfulness_faq.html'
 
   Addiction & Recovery:
-    url: '/html/addiction/landing.html'
+    url: '/html/addiction/landing.html#addiction'
     children:
       Approaches: '/html/addiction/addiction_services.html'
       FAQ: '/html/addiction/addiction_faq.html'
 
   Astrology:
-    url: '/html/astrology/landing.html'
+    url: '/html/astrology/landing.html#astrology'
     children:
       About Astrology: '/html/astrology/astrology.html'
       Astrology FAQ: '/html/astrology/astrology_faq.html'
 
   Handwriting Analysis:
-    url: '/html/graphology/landing.html'
+    url: '/html/graphology/landing.html#handwriting_analysis'
     children:
       About Handwriting Analysis: '/html/graphology/graphology.html'
       Handwriting Analysis FAQ: '/html/graphology/graphology_faq.html'
 
   Technology:
-    url: '/html/technology/landing.html'
+    url: '/html/technology/landing.html#technology'
     children:
       Projects: '/html/technology/projects.html'
       Artwork: '/html/technology/artwork.html'
@@ -64,12 +65,12 @@ menu:
       FAQ: '/html/technology/faq.html'
 
   Groups & Workshops:
-    url: '/html/main/home.html#groups'
+    url: '/html/groups/landing.html#groups'
     children:
       Upcoming Events: '/html/groups/upcoming_events.html'
 
   Parties & Events:
-    url: '/html/main/home.html#parties-events'
+    url: '/html/parties/landing.html#parties'
     children:
       Scheduling: '/html/parties/scheduling.html'
 
@@ -154,3 +155,18 @@ keywords:
   - 'Birth Chart'
   - 'Birth Chart Reading'
   - 'Natal Chart Reading'
+  - 'hypnosis'
+  - 'hypnotist'
+  - 'recovery'
+  - 'addiction'
+  - 'something else besides 12 step'
+  - 'something else besides twleve step'
+  - 'better than 12 step'
+  - 'better than twelve step'
+  - 'smart recovery'
+  - 'different than 12 step'
+  - 'different than twelve step'
+  - 'hypnosis for addiction'
+  - 'hypnosis for recovery'
+  - 'addiction hypnosis'
+  - 'recovery hypnosis'

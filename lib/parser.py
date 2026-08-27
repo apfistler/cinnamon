@@ -135,6 +135,15 @@ class Parser:
             ''
         )
 
+
+        tagline = self.config.get(
+           'tagline',
+           ''
+        )
+
+        if tagline:
+            title = f'{title} | {tagline}'
+
         input_keywords = self.extract_keywords(
             input_lines
         )
@@ -258,12 +267,12 @@ class Parser:
                     template_line
                 )
 
-        html = '\n'.join(
+        output_html = '\n'.join(
             html_lines
         )
 
         self.output_obj.write(
-            html
+            output_html
         )
 
 
@@ -312,12 +321,13 @@ class Parser:
             # --------------------------------------------------
             # Parent menu item
             #
-            # New YAML structure:
+            # YAML:
             #
             # Hypnosis:
-            #   url: /html/main/home.html#hypnosis
+            #   url: /html/hypnosis/landing.html#hypnosis
             #   children:
-            #     Professional Experience: /html/articles/...
+            #     About Hypnosis: /html/hypnosis/about_hypnosis.html
+            #
             # --------------------------------------------------
 
             if isinstance(item, dict):
@@ -372,8 +382,11 @@ class Parser:
             # --------------------------------------------------
             # Normal menu item
             #
+            # YAML:
+            #
             # Home:
             #   /html/main/home.html
+            #
             # --------------------------------------------------
 
             else:
@@ -842,7 +855,7 @@ class Parser:
                 )
 
             html_output.append(
-                '  </section>'
+                '  </section'
             )
 
         html_output.append(
@@ -951,10 +964,6 @@ class Parser:
     # PRACTICE AREAS
     # ==========================================================
 
-    # ==========================================================
-    # PRACTICE AREAS
-    # ==========================================================
-
     def generate_practice_areas(self):
 
         practice_areas = self.config.get(
@@ -989,6 +998,11 @@ class Parser:
                 ''
             )
 
+            url = practice.get(
+                'url',
+                '#'
+            )
+
             svg_filename = os.path.join(
                 self.input_dir,
                 'svg',
@@ -1010,10 +1024,9 @@ class Parser:
                     svg_html = svg_file.read()
 
             html_output.append(
-                f'    <button '
+                f'    <a '
                 f'class="practice-card" '
-                f'type="button" '
-                f'data-practice="{practice_id}">'
+                f'href="{url}">'
             )
 
             html_output.append(
@@ -1056,7 +1069,7 @@ class Parser:
             )
 
             html_output.append(
-                '    </button>'
+                '    </a>'
             )
 
         html_output.append(
