@@ -1,0 +1,23 @@
+#!/bin/bash
+
+PLACE="./place"
+
+find input -type f -name '*.html' -print0 |
+while IFS= read -r -d '' HTML; do
+
+  DIR="$(dirname "$HTML")"
+  NAME="$(basename "$HTML" .html)"
+
+  # Only process directories containing matching HTML and YAML
+  if [ -f "$DIR/$NAME.yaml" ]; then
+
+    echo
+    echo "========================================"
+    echo "Processing: $DIR"
+    echo "========================================"
+
+    "$PLACE" "$DIR" || exit 1
+
+  fi
+
+done

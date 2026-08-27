@@ -1,0 +1,705 @@
+#!/bin/bash
+
+#
+# Cinnamon Landing Page Generator
+#
+# One-time conversion script.
+#
+# IMPORTANT:
+#
+#   Existing Cinnamon input is READ ONLY.
+#
+#   Generated Cinnamon landing files go into:
+#
+#     /tmp/cinnamon-landing
+#
+#   Existing input/$area directories are NEVER modified.
+#
+#   New web assets are copied into their landing locations.
+#
+
+
+cinnamon_dir="/home/apfistler/cinnamon"
+
+#
+# Existing Cinnamon input -- READ ONLY
+#
+input_dir="$cinnamon_dir/input"
+
+#
+# Temporary generated output
+#
+output_dir="/tmp/cinnamon-landing"
+
+#
+# Website
+#
+web_dir="/var/www/adamfistler.com/public_html"
+
+img_dir="$web_dir/img"
+css_dir="$web_dir/css"
+js_dir="$web_dir/js"
+
+site_url="https://www.adamfistler.com"
+
+
+#
+# ------------------------------------------------------------
+# Convert area name to title
+# ------------------------------------------------------------
+#
+# handwriting_analysis
+#
+# becomes:
+#
+# Handwriting Analysis
+#
+area_title() {
+  echo "$1" |
+    tr '_' ' ' |
+    awk '{
+      for (i = 1; i <= NF; i++)
+        $i = toupper(substr($i,1,1)) substr($i,2)
+      print
+    }'
+}
+
+
+#
+# ------------------------------------------------------------
+# Set paths for current area
+# ------------------------------------------------------------
+#
+set_area_paths() {
+  local area="$1"
+
+  #
+  # IMPORTANT:
+  #
+  # This is /tmp, NOT the real input directory.
+  #
+  working_dir="$output_dir/$area/landing"
+
+  #
+  # Web asset destinations
+  #
+  web_img_dir="$img_dir/$area/landing"
+  web_css_dir="$css_dir/$area/landing"
+  web_js_dir="$js_dir/$area/landing"
+}
+
+
+#
+# ------------------------------------------------------------
+# Create temporary landing directory
+# ------------------------------------------------------------
+#
+create_working_dir() {
+
+  echo
+  echo "  Creating temporary landing directory:"
+  echo "    $working_dir"
+
+  mkdir -p "$working_dir"
+
+  if [ ! -d "$working_dir" ]; then
+    echo
+    echo "ERROR: Could not create:"
+    echo "  $working_dir"
+    exit 1
+  fi
+}
+
+
+#
+# ------------------------------------------------------------
+# Create web asset directories
+# ------------------------------------------------------------
+#
+create_asset_dirs() {
+
+  echo
+  echo "  Creating web asset directories:"
+
+  echo "    $web_img_dir"
+  mkdir -p "$web_img_dir"
+
+  echo "    $web_css_dir"
+  mkdir -p "$web_css_dir"
+
+  echo "    $web_js_dir"
+  mkdir -p "$web_js_dir"
+}
+
+
+#
+# ------------------------------------------------------------
+# Create landing.yaml
+# ------------------------------------------------------------
+#
+create_yaml() {
+  local area="$1"
+  local title
+
+  title="$(area_title "$area")"
+
+  echo
+  echo "  Creating:"
+  echo "    $working_dir/landing.yaml"
+
+  cat > "$working_dir/landing.yaml" <<EOF
+name: landing
+category: $area
+title: About $title
+keywords:
+  - $area
+EOF
+}
+
+
+#
+# ------------------------------------------------------------
+# Create landing.html
+# ------------------------------------------------------------
+#
+# The original practice file is copied into /tmp.
+#
+create_landing_html() {
+  local file="$1"
+
+  echo
+  echo "  Creating:"
+  echo "    $working_dir/landing.html"
+
+  echo "  From:"
+  echo "    $file"
+
+  cp "$file" "$working_dir/landing.html"
+}
+
+
+#
+# ------------------------------------------------------------
+# Is URL?
+# ------------------------------------------------------------
+#
+is_url() {
+  [[ "$1" =~ ^https?:// ]]
+}
+
+
+#
+# ------------------------------------------------------------
+# Extract path from URL
+# ------------------------------------------------------------
+#
+url_path() {
+  local url="$1"
+
+  if is_url "$url"; then
+    echo "$url" | sed -E 's|^https?://[^/]+||'
+  else
+    echo "$url"
+  fi
+}
+
+
+#
+# ------------------------------------------------------------
+# Process image
+# ------------------------------------------------------------
+#
+process_image() {
+  local area="$1"
+  local img="$2"
+
+  local path
+  local relative_path
+  local filename
+  local source
+  local destination
+  local new_reference
+
+  path="$(url_path "$img")"
+
+  relative_path="${path#/}"
+  filename="$(basename "$relative_path")"
+
+  #
+  # Existing image on website
+  #
+  source="$web_dir/$relative_path"
+
+  #
+  # New landing image
+  #
+  destination="$web_img_dir/$filename"
+
+  #
+  # New URL inside landing.html
+  #
+  new_reference="$site_url/img/$area/landing/$filename"
+
+  echo
+  echo "    IMAGE"
+  echo "      Original:"
+  echo "        $img"
+
+  echo "      Source:"
+  echo "        $source"
+
+  echo "      Destination:"
+  echo "        $destination"
+
+  echo "      New reference:"
+  echo "        $new_reference"
+
+  #
+  # Copy image.
+  #
+  # Existing destination is overwritten.
+  #
+  cp "$source" "$destination"
+
+  #
+  # Change reference ONLY in generated landing.html.
+  #
+  sed -i "s|$img|$new_reference|g" \
+    "$working_dir/landing.html"
+}
+
+
+#
+# ------------------------------------------------------------
+# Process CSS
+# ------------------------------------------------------------
+#
+process_css() {
+  local area="$1"
+  local css="$2"
+
+  local path
+  local relative_path
+  local filename
+  local source
+  local destination
+  local new_reference
+
+  path="$(url_path "$css")"
+
+  relative_path="${path#/}"
+  filename="$(basename "$relative_path")"
+
+  #
+  # Shared CSS:
+  #
+  # https://www.adamfistler.com/css/main.css
+  #
+  # Leave it where it is.
+  #
+  if [[ "$relative_path" != css/*/* ]]; then
+
+    echo
+    echo "    CSS"
+    echo "      SHARED — unchanged:"
+    echo "        $css"
+
+    return
+  fi
+
+  source="$web_dir/$relative_path"
+
+  destination="$web_css_dir/$filename"
+
+  new_reference="$site_url/css/$area/landing/$filename"
+
+  echo
+  echo "    CSS"
+  echo "      Original:"
+  echo "        $css"
+
+  echo "      Source:"
+  echo "        $source"
+
+  echo "      Destination:"
+  echo "        $destination"
+
+  echo "      New reference:"
+  echo "        $new_reference"
+
+  #
+  # Copy CSS.
+  #
+  cp "$source" "$destination"
+
+  #
+  # Change reference in generated landing.html.
+  #
+  sed -i "s|$css|$new_reference|g" \
+    "$working_dir/landing.html"
+}
+
+
+#
+# ------------------------------------------------------------
+# Process JavaScript
+# ------------------------------------------------------------
+#
+process_js() {
+  local area="$1"
+  local js="$2"
+
+  local path
+  local relative_path
+  local filename
+  local source
+  local destination
+  local new_reference
+
+  path="$(url_path "$js")"
+
+  relative_path="${path#/}"
+  filename="$(basename "$relative_path")"
+
+  #
+  # Shared JS:
+  #
+  # https://www.adamfistler.com/js/main.js
+  #
+  # Leave it where it is.
+  #
+  if [[ "$relative_path" != js/*/* ]]; then
+
+    echo
+    echo "    JS"
+    echo "      SHARED — unchanged:"
+    echo "        $js"
+
+    return
+  fi
+
+  source="$web_dir/$relative_path"
+
+  destination="$web_js_dir/$filename"
+
+  new_reference="$site_url/js/$area/landing/$filename"
+
+  echo
+  echo "    JS"
+  echo "      Original:"
+  echo "        $js"
+
+  echo "      Source:"
+  echo "        $source"
+
+  echo "      Destination:"
+  echo "        $destination"
+
+  echo "      New reference:"
+  echo "        $new_reference"
+
+  #
+  # Copy JS.
+  #
+  cp "$source" "$destination"
+
+  #
+  # Change reference in generated landing.html.
+  #
+  sed -i "s|$js|$new_reference|g" \
+    "$working_dir/landing.html"
+}
+
+
+#
+# ------------------------------------------------------------
+# Find images
+# ------------------------------------------------------------
+#
+find_images() {
+  local area="$1"
+  local file="$2"
+
+  echo
+  echo "  Looking for images..."
+
+  grep -oE '<img[^>]+src=["'\''][^"'\'']+["'\'']' "$file" |
+    sed -E 's/.*src=["'\'']([^"'\'']+)["'\''].*/\1/' |
+    while read -r img; do
+
+      [ -n "$img" ] || continue
+
+      process_image "$area" "$img"
+
+    done
+}
+
+
+#
+# ------------------------------------------------------------
+# Find CSS
+# ------------------------------------------------------------
+#
+find_css() {
+  local area="$1"
+  local file="$2"
+
+  echo
+  echo "  Looking for CSS..."
+
+  grep -oE '<link[^>]+href=["'\''][^"'\'']+["'\'']' "$file" |
+    sed -E 's/.*href=["'\'']([^"'\'']+)["'\''].*/\1/' |
+    while read -r css; do
+
+      [ -n "$css" ] || continue
+
+      process_css "$area" "$css"
+
+    done
+}
+
+
+#
+# ------------------------------------------------------------
+# Find JavaScript
+# ------------------------------------------------------------
+#
+find_js() {
+  local area="$1"
+  local file="$2"
+
+  echo
+  echo "  Looking for JavaScript..."
+
+  grep -oE '<script[^>]+src=["'\''][^"'\'']+["'\'']' "$file" |
+    sed -E 's/.*src=["'\'']([^"'\'']+)["'\''].*/\1/' |
+    while read -r js; do
+
+      [ -n "$js" ] || continue
+
+      process_js "$area" "$js"
+
+    done
+}
+
+
+#
+# ------------------------------------------------------------
+# Remove article wrapper
+# ------------------------------------------------------------
+#
+remove_article_tags() {
+
+  echo
+  echo "  Removing outer article tags..."
+
+  #
+  # Remove everything through opening <article>.
+  #
+  sed -i '0,/<article[^>]*>/d' \
+    "$working_dir/landing.html"
+
+  #
+  # Remove final closing </article>.
+  #
+  sed -i '${s|</article>||}' \
+    "$working_dir/landing.html"
+}
+
+
+#
+# ------------------------------------------------------------
+# Process one practice file
+# ------------------------------------------------------------
+#
+process_practice_file() {
+  local file="$1"
+  local area="$2"
+
+  set_area_paths "$area"
+
+  echo
+  echo
+  echo "============================================================"
+  echo "AREA: $area"
+  echo "============================================================"
+
+  echo
+  echo "SOURCE:"
+  echo "  $file"
+
+  echo
+  echo "REAL INPUT AREA:"
+  echo "  $input_dir/$area"
+
+  echo
+  echo "TEMPORARY OUTPUT:"
+  echo "  $working_dir"
+
+  echo
+  echo "IMPORTANT:"
+  echo "  Real input directory will NOT be modified."
+  echo "  Only /tmp/cinnamon-landing will receive generated files."
+
+  #
+  # Create temporary landing directory.
+  #
+  create_working_dir
+
+  #
+  # Create web asset directories.
+  #
+  create_asset_dirs
+
+  #
+  # Create temporary landing.html.
+  #
+  create_landing_html "$file"
+
+  #
+  # Find assets in ORIGINAL practice file.
+  #
+  find_images "$area" "$file"
+  find_css "$area" "$file"
+  find_js "$area" "$file"
+
+  #
+  # Modify ONLY the generated landing.html.
+  #
+  remove_article_tags
+
+  #
+  # Create landing.yaml.
+  #
+  create_yaml "$area"
+
+  echo
+  echo "------------------------------------------------------------"
+  echo "DONE: $area"
+  echo "------------------------------------------------------------"
+
+  echo
+  echo "Generated:"
+  echo "  $working_dir/landing.html"
+  echo "  $working_dir/landing.yaml"
+}
+
+
+#
+# ------------------------------------------------------------
+# Process directory
+# ------------------------------------------------------------
+#
+process_directory() {
+  local directory="$1"
+
+  echo
+  echo "============================================================"
+  echo "CINNAMON LANDING PAGE GENERATOR"
+  echo "============================================================"
+
+  echo
+  echo "Practice files:"
+  echo "  $directory"
+
+  echo
+  echo "Existing Cinnamon input:"
+  echo "  $input_dir"
+  echo "  READ ONLY"
+
+  echo
+  echo "Temporary output:"
+  echo "  $output_dir"
+
+  echo
+  echo "Web directory:"
+  echo "  $web_dir"
+
+  #
+  # Create top-level temporary directory.
+  #
+  mkdir -p "$output_dir"
+
+  #
+  # Process every practice_*.html file.
+  #
+  for file in "$directory"/practice_*.html; do
+
+    #
+    # No matches.
+    #
+    [ -f "$file" ] || continue
+
+    filename="$(basename "$file")"
+
+    if [[ "$filename" =~ ^practice_(.*)\.html$ ]]; then
+
+      area="${BASH_REMATCH[1]}"
+
+      echo
+      echo "DEBUG:"
+      echo "  filename = [$filename]"
+      echo "  area     = [$area]"
+      echo "  output   = [$output_dir/$area/landing]"
+
+      process_practice_file "$file" "$area"
+
+    fi
+
+  done
+}
+
+
+#
+# ------------------------------------------------------------
+# Main
+# ------------------------------------------------------------
+#
+
+if [ $# -ne 1 ]; then
+
+  echo
+  echo "Usage:"
+  echo
+  echo "  $0 <practice-directory>"
+  echo
+  echo "Example:"
+  echo
+  echo "  $0 /home/afistler/cinnamon/input/html/main/snippets"
+  echo
+
+  exit 1
+fi
+
+
+if [ ! -d "$1" ]; then
+
+  echo
+  echo "ERROR: Directory does not exist:"
+  echo "  $1"
+  echo
+
+  exit 1
+fi
+
+
+#
+# Process everything.
+#
+process_directory "$1"
+
+
+echo
+echo
+echo "============================================================"
+echo "COMPLETE"
+echo "============================================================"
+
+echo
+echo "Generated landing pages are in:"
+echo
+echo "  $output_dir"
+echo
+
+echo "Your existing Cinnamon input was NOT modified."
+echo

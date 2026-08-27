@@ -307,60 +307,63 @@ class Parser:
 
         menu_html = []
 
-        for label, menu_item in menu_items.items():
+        for label, item in menu_items.items():
 
             # --------------------------------------------------
             # Parent menu item
             #
-            # New YAML format:
+            # New YAML structure:
             #
             # Hypnosis:
             #   url: /html/main/home.html#hypnosis
-            #   Professional Experience: /...
-            #   About Hypnosis: /...
-            #
+            #   children:
+            #     Professional Experience: /html/articles/...
             # --------------------------------------------------
 
-            if isinstance(
-                    menu_item,
-                    dict
-                ):
+            if isinstance(item, dict):
 
-                parent_url = menu_item.get(
+                parent_url = item.get(
                     'url',
                     'javascript:void(0)'
                 )
 
+                children = item.get(
+                    'children',
+                    {}
+                )
+
                 menu_html.append(
                     f'{indent}<li>'
-                    f'<a class="menu-item parent active" '
-                    f'href="{parent_url}">{label}</a>'
                 )
 
                 menu_html.append(
                     f'{indent}  '
-                    f'<ul class="child-menu hidden">'
+                    f'<a class="menu-item parent active" '
+                    f'href="{parent_url}">'
+                    f'{label}</a>'
                 )
 
-                for child_label, child_link in menu_item.items():
-
-                    # "url" belongs to the parent and is not
-                    # itself a child menu item.
-                    if child_label == 'url':
-                        continue
+                if children:
 
                     menu_html.append(
-                        f'{indent}    '
-                        f'<li>'
-                        f'<a class="menu-item child active" '
-                        f'href="{child_link}">'
-                        f'{child_label}</a>'
-                        f'</li>'
+                        f'{indent}  '
+                        f'<ul class="child-menu hidden">'
                     )
 
-                menu_html.append(
-                    f'{indent}  </ul>'
-                )
+                    for child_label, child_link in children.items():
+
+                        menu_html.append(
+                            f'{indent}    '
+                            f'<li>'
+                            f'<a class="menu-item child active" '
+                            f'href="{child_link}">'
+                            f'{child_label}</a>'
+                            f'</li>'
+                        )
+
+                    menu_html.append(
+                        f'{indent}  </ul>'
+                    )
 
                 menu_html.append(
                     f'{indent}</li>'
@@ -368,6 +371,9 @@ class Parser:
 
             # --------------------------------------------------
             # Normal menu item
+            #
+            # Home:
+            #   /html/main/home.html
             # --------------------------------------------------
 
             else:
@@ -375,7 +381,7 @@ class Parser:
                 menu_html.append(
                     f'{indent}<li>'
                     f'<a class="menu-item" '
-                    f'href="{menu_item}">'
+                    f'href="{item}">'
                     f'{label}</a>'
                     f'</li>'
                 )
@@ -657,10 +663,6 @@ class Parser:
 
     def generate_faq(self, faq_name=None):
 
-        # ------------------------------------------------------
-        # Determine FAQ name
-        # ------------------------------------------------------
-
         if not faq_name:
 
             faq_name = self.metadata.get(
@@ -674,16 +676,10 @@ class Parser:
                 '<!-- FAQ: no FAQ name specified -->'
             )
 
-
-        # ------------------------------------------------------
-        # Locate FAQ YAML
-        # ------------------------------------------------------
-
         faq_filename = os.path.join(
             self.input_dir,
             f'{faq_name}.yaml'
         )
-
 
         if not os.path.isfile(
                 faq_filename
@@ -694,15 +690,9 @@ class Parser:
                 f'{faq_filename} -->'
             )
 
-
-        # ------------------------------------------------------
-        # Load FAQ YAML
-        # ------------------------------------------------------
-
         faq_data = self.load_config(
             faq_filename
         )
-
 
         if not faq_data:
 
@@ -710,11 +700,6 @@ class Parser:
                 '<!-- FAQ file is empty: '
                 f'{faq_filename} -->'
             )
-
-
-        # ------------------------------------------------------
-        # Begin FAQ
-        # ------------------------------------------------------
 
         html_output = []
 
@@ -756,11 +741,6 @@ class Parser:
                     f'</p>'
                 )
 
-
-        # ------------------------------------------------------
-        # Topic areas
-        # ------------------------------------------------------
-
         topic_areas = faq_data.get(
             'topic_areas',
             []
@@ -789,11 +769,6 @@ class Parser:
                     f'{html.escape(str(topic_title))}'
                     f'</h3>'
                 )
-
-
-            # --------------------------------------------------
-            # Questions
-            # --------------------------------------------------
 
             for item in questions:
 
@@ -839,11 +814,6 @@ class Parser:
                     '      </button>'
                 )
 
-
-                # --------------------------------------------------
-                # Answer
-                # --------------------------------------------------
-
                 html_output.append(
                     '      '
                     '<div class="faq-answer" '
@@ -871,15 +841,9 @@ class Parser:
                     '    </div>'
                 )
 
-
             html_output.append(
                 '  </section>'
             )
-
-
-        # ------------------------------------------------------
-        # End FAQ
-        # ------------------------------------------------------
 
         html_output.append(
             '</section>'
@@ -896,11 +860,6 @@ class Parser:
 
             return []
 
-
-        # ------------------------------------------------------
-        # YAML may return a string, list, or another value.
-        # ------------------------------------------------------
-
         if isinstance(
                 text,
                 list
@@ -915,11 +874,6 @@ class Parser:
 
             text = str(text)
 
-
-        # ------------------------------------------------------
-        # Normalize line endings
-        # ------------------------------------------------------
-
         text = text.replace(
             '\r\n',
             '\n'
@@ -929,14 +883,6 @@ class Parser:
             '\r',
             '\n'
         )
-
-
-        # ------------------------------------------------------
-        # A YAML folded scalar using ">" turns ordinary line breaks
-        # into spaces. A blank line in the YAML is preserved as one
-        # newline in the parsed value, so each remaining newline marks
-        # a paragraph boundary.
-        # ------------------------------------------------------
 
         raw_paragraphs = re.split(
             r'\n+',
@@ -955,21 +901,11 @@ class Parser:
 
                 continue
 
-
-            # --------------------------------------------------
-            # Collapse whitespace left by YAML folding.
-            # --------------------------------------------------
-
             paragraph = re.sub(
                 r'\s+',
                 ' ',
                 paragraph
             )
-
-
-            # --------------------------------------------------
-            # Escape plain text for HTML.
-            # --------------------------------------------------
 
             paragraph = html.escape(
                 paragraph
@@ -1010,6 +946,10 @@ class Parser:
 
             return snippet_file.read()
 
+
+    # ==========================================================
+    # PRACTICE AREAS
+    # ==========================================================
 
     # ==========================================================
     # PRACTICE AREAS
@@ -1097,11 +1037,11 @@ class Parser:
                 )
 
             html_output.append(
-                f'        <h2>{html.escape(str(title))}</h2>'
+                f'        <h2>{title}</h2>'
             )
 
             html_output.append(
-                f'        <p>{html.escape(str(description))}</p>'
+                f'        <p>{description}</p>'
             )
 
             html_output.append(
@@ -1130,7 +1070,6 @@ class Parser:
         return '\n'.join(
             html_output
         )
-
 
     # ==========================================================
     # DISPLAY TABLES

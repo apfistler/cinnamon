@@ -18,10 +18,9 @@ footer:
 
 menu:
   Home: '/html/main/home.html'
-  GoFundMe: '/html/main/go_fund_me.html'
 
   Hypnosis:
-    url: '/html/main/home.html#hypnosis'
+    url: '/html/hypnosis/landing.html'
     children:
       Professional Experience: '/html/articles/hypnosis/bhc.html'
       About Hypnosis: '/html/hypnosis/about_hypnosis.html'
@@ -34,31 +33,35 @@ menu:
       Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
 
   Mindfulness:
-    url: '/html/main/home.html#mindfulness'
+    url: '/html/mindfulness/landing.html'
     children:
-      Services: '/html/mindfulness/mindfulness.html'
+      Mindfulness FAQ: '/html/mindfulness/mindfulness_faq.html'
 
   Addiction & Recovery:
-    url: '/html/main/home.html#addiction-recovery'
+    url: '/html/addiction/landing.html'
     children:
-      Services: '/html/addiction/addiction_services.html'
+      Approaches: '/html/addiction/addiction_services.html'
+      FAQ: '/html/addiction/addiction_faq.html'
 
   Astrology:
-    url: '/html/main/home.html#astrology'
+    url: '/html/astrology/landing.html'
     children:
-      Services: '/html/astrology/astrology.html'
+      About Astrology: '/html/astrology/astrology.html'
+      Astrology FAQ: '/html/astrology/astrology_faq.html'
 
   Handwriting Analysis:
-    url: '/html/main/home.html#handwriting-analysis'
+    url: '/html/graphology/landing.html'
     children:
-      Services: '/html/graphology/graphology.html'
+      About Handwriting Analysis: '/html/graphology/graphology.html'
+      Handwriting Analysis FAQ: '/html/graphology/graphology_faq.html'
 
   Technology:
-    url: '/html/main/home.html#technology'
+    url: '/html/technology/landing.html'
     children:
       Projects: '/html/technology/projects.html'
       Artwork: '/html/technology/artwork.html'
       Resume: '/html/technology/resume.html'
+      FAQ: '/html/technology/faq.html'
 
   Groups & Workshops:
     url: '/html/main/home.html#groups'

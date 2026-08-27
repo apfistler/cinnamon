@@ -1,35 +1,164 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-  echo "Usage: place <input-directory>"
-  exit 1
-fi
+# ==========================================================
+# CONFIGURATION
+# ==========================================================
 
-INPUT="$1"
+CINNAMON="./cinnamon.py"
+WEBROOT="/var/www/adamfistler.com/public_html"
 
-if [[ "$INPUT" != input/* ]]; then
-  echo "Error: directory must be inside input/"
-  exit 1
-fi
 
-if [ ! -d "$INPUT" ]; then
-  echo "Error: input directory does not exist: $INPUT"
-  exit 1
-fi
+# ==========================================================
+# PAGE STATE
+# ==========================================================
 
-NAME="$(basename "$INPUT")"
+INPUT=""
+NAME=""
+HTML=""
+YAML=""
+RELATIVE=""
+DEST=""
 
-if [ ! -f "$INPUT/$NAME.html" ]; then
-  echo "Error: expected $INPUT/$NAME.html"
-  exit 1
-fi
 
-./cinnamon.py "$INPUT" || exit 1
+# ==========================================================
+# VALIDATION
+# ==========================================================
 
-RELATIVE="${INPUT#input/}"
+validate_arguments() {
 
-DEST="/var/www/adamfistler.com/public_html/${RELATIVE}.html"
+  if [ $# -ne 1 ]; then
+    echo "Usage: place <input-directory>"
+    return 1
+  fi
 
-mkdir -p "$(dirname "$DEST")"
+  return 0
+}
 
-cp "output/${RELATIVE}.html" "$DEST"
+
+validate_input_directory() {
+
+  if [[ "$INPUT" != input/* ]]; then
+    echo "Error: directory must be inside input/"
+    return 1
+  fi
+
+  if [ ! -d "$INPUT" ]; then
+    echo "Error: input directory does not exist: $INPUT"
+    return 1
+  fi
+
+  return 0
+}
+
+
+get_page_files() {
+
+  NAME="$(basename "$INPUT")"
+
+  HTML="$INPUT/$NAME.html"
+  YAML="$INPUT/$NAME.yaml"
+
+  RELATIVE="${INPUT#input/}"
+
+  DEST="$WEBROOT/${RELATIVE}.html"
+}
+
+
+validate_page_files() {
+
+  if [ ! -f "$HTML" ]; then
+    echo "Error: expected $HTML"
+    return 1
+  fi
+
+  if [ ! -f "$YAML" ]; then
+    echo "Error: expected $YAML"
+    return 1
+  fi
+
+  return 0
+}
+
+
+# ==========================================================
+# SANITIZATION
+# ==========================================================
+
+strip_backticks() {
+
+  local FILE="$1"
+
+  echo "  Sanitizing backticks: $FILE"
+
+  sed -i 's/```//g' "$FILE"
+}
+
+
+sanitize_files() {
+
+  echo "Sanitizing files..."
+
+  strip_backticks "$HTML" || return 1
+  strip_backticks "$YAML" || return 1
+
+  return 0
+}
+
+
+# ==========================================================
+# BUILD
+# ==========================================================
+
+run_cinnamon() {
+
+  echo "Running Cinnamon..."
+
+  "$CINNAMON" "$INPUT" || return 1
+
+  return 0
+}
+
+
+# ==========================================================
+# INSTALL
+# ==========================================================
+
+install_output() {
+
+  echo "Installing output..."
+
+  mkdir -p "$(dirname "$DEST")" || return 1
+
+  cp "output/${RELATIVE}.html" "$DEST" || return 1
+
+  echo "Placed: $DEST"
+
+  return 0
+}
+
+
+# ==========================================================
+# MAIN
+# ==========================================================
+
+main() {
+
+  validate_arguments "$@" || exit 1
+
+  INPUT="$1"
+
+  validate_input_directory || exit 1
+
+  get_page_files
+
+  validate_page_files || exit 1
+
+  sanitize_files || exit 1
+
+  run_cinnamon || exit 1
+
+  install_output || exit 1
+}
+
+
+main "$@"
