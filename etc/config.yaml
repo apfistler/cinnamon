@@ -8,6 +8,7 @@ address:
   state: 'NJ'
   zip: '08000'
 
+bcc: '<a href="/html/main/contact_adam.html">Adam Fistler - Behavioral Change Consultant</a>'
 contact_adam: '<a href="/html/main/contact_adam.html">Contact me</a>'
 phone: '(609) 200-0230'
 email: 'adam@adamfistler.com'
@@ -45,11 +46,11 @@ menu:
     area: 'addiction'
     url: '/html/addiction/landing.html#addiction'
     children:
-      Approaches: '/html/addiction/addiction_services.html'
+      Approach & Services: '/html/addiction/addiction_services.html'
       FAQ: '/html/addiction/addiction_faq.html'
 
   Handwriting Analysis:
-    area: 'graphology'
+    area: 'handwriting_analysis'
     url: '/html/graphology/landing.html#handwriting_analysis'
     children:
       About Handwriting Analysis: '/html/graphology/graphology.html'

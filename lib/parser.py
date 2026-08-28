@@ -263,6 +263,41 @@ class Parser:
                     content
                 )
 
+                # --------------------------------------------------
+                # BREADCRUMB
+                #
+                # The breadcrumb is inserted immediately after
+                # the generated input content.
+                #
+                # breadcrumb: false
+                #     disables the breadcrumb.
+                #
+                # breadcrumb: true
+                #     enables the breadcrumb.
+                #
+                # breadcrumb not defined
+                #     defaults to true.
+                # --------------------------------------------------
+
+                breadcrumb_enabled = (
+                    self.metadata.get(
+                        'breadcrumb',
+                        True
+                    )
+                )
+
+                if breadcrumb_enabled:
+
+                    breadcrumb = (
+                        self.generate_breadcrumb()
+                    )
+
+                    if breadcrumb:
+
+                        html_lines.append(
+                            breadcrumb
+                        )
+
             else:
 
                 html_lines.append(
@@ -303,6 +338,222 @@ class Parser:
                 )
 
         return keywords
+
+
+    # ==========================================================
+    # BREADCRUMBS
+    # ==========================================================
+
+    def generate_breadcrumb(self):
+
+        category = self.metadata.get(
+            'category',
+            ''
+        )
+
+        name = self.metadata.get(
+            'name',
+            self.page_name
+        )
+
+        title = self.metadata.get(
+            'title',
+            ''
+        )
+
+        category = str(
+            category
+        ).strip()
+
+        name = str(
+            name
+        ).strip()
+
+        title = str(
+            title
+        ).strip()
+
+        # ------------------------------------------------------
+        # Determine the current page label.
+        # ------------------------------------------------------
+
+        if name == 'landing':
+
+            current_label = category
+
+        elif name == 'home' and category.lower() == 'main':
+
+            current_label = 'Home'
+
+        elif title:
+
+            current_label = title
+
+        else:
+
+            current_label = name
+
+        # ------------------------------------------------------
+        # Build breadcrumb hierarchy.
+        # ------------------------------------------------------
+
+        breadcrumbs = [
+            ('Home', '/html/main/home.html')
+        ]
+
+        # ------------------------------------------------------
+        # Main category represents Home.
+        #
+        # Therefore:
+        #
+        # category: main
+        #
+        # does not create another breadcrumb level.
+        # ------------------------------------------------------
+
+        if category and category.lower() != 'main':
+
+            category_path = (
+                f'/html/{category}/landing.html'
+            )
+
+            # --------------------------------------------------
+            # Landing pages:
+            #
+            # Home → Astrology
+            #
+            # --------------------------------------------------
+
+            if name == 'landing':
+
+                current_label = self.breadcrumb_title(current_label)
+
+                breadcrumbs.append(
+                    (
+                        current_label,
+                        category_path
+                    )
+                )
+
+            # --------------------------------------------------
+            # Normal pages:
+            #
+            # Home → Astrology → Page
+            #
+            # --------------------------------------------------
+
+            else:
+
+                category = self.breadcrumb_title(category)
+
+                breadcrumbs.append(
+                    (
+                        category,
+                        category_path
+                    )
+                )
+
+                page_path = (
+                    f'/html/{category}/{name}.html'
+                )
+
+                current_label = self.breadcrumb_title(current_label)
+
+                breadcrumbs.append(
+                    (
+                        current_label,
+                        page_path
+                    )
+                )
+
+        else:
+
+            # --------------------------------------------------
+            # Main-category pages:
+            #
+            # Home → Contact Adam
+            #
+            # Don't create Home → Home.
+            # --------------------------------------------------
+
+            if current_label != 'Home':
+
+                page_path = (
+                    f'/html/main/{name}.html'
+                )
+
+                breadcrumbs.append(
+                    (
+                        current_label,
+                        page_path
+                    )
+                )
+
+        # ------------------------------------------------------
+        # Generate HTML.
+        # ------------------------------------------------------
+
+        html_output = []
+
+        html_output.append(
+            '<nav class="breadcrumb" '
+            'aria-label="Breadcrumb">'
+        )
+
+        html_output.append(
+            '  <ol class="breadcrumb-list">'
+        )
+
+        last_index = (
+            len(breadcrumbs) - 1
+        )
+
+        for index, (label, url) in enumerate(
+                breadcrumbs
+            ):
+
+            escaped_label = html.escape(
+                label
+            )
+
+            if index == last_index:
+
+                html_output.append(
+                    '    '
+                    '<li class="breadcrumb-item '
+                    'breadcrumb-current" '
+                    'aria-current="page">'
+                    f'{escaped_label}'
+                    '</li>'
+                )
+
+            else:
+
+                escaped_url = html.escape(
+                    url,
+                    quote=True
+                )
+
+                html_output.append(
+                    '    '
+                    '<li class="breadcrumb-item">'
+                    f'<a href="{escaped_url}">'
+                    f'{escaped_label}'
+                    '</a>'
+                    '</li>'
+                )
+
+        html_output.append(
+            '  </ol>'
+        )
+
+        html_output.append(
+            '</nav>'
+        )
+
+        return '\n'.join(
+            html_output
+        )
 
 
     # ==========================================================
@@ -543,8 +794,7 @@ class Parser:
 
             selectbox_directive = re.search(
                 r'<!--\s*SELECTBOX\s+([A-Za-z0-9_-]+)\s*-->',
-                line,
-                re.IGNORECASE
+                line
             )
 
             if selectbox_directive:
@@ -1439,4 +1689,11 @@ class Parser:
 
         return '\n'.join(
             hypnosis_list_html
+        )
+
+    def breadcrumb_title(self, value):
+
+        return ' '.join(
+            word.capitalize()
+            for word in str(value).split()
         )

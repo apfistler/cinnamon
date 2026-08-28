@@ -1,7 +1,7 @@
 name: home
 category: main
 
-title: Adam Fistler, Behavior Change Consulting South Jersey - Addiction Recovery, Hypnosis, Stress, Anger & Personal Growth
+title: Adam Fistler, Behavior Change Consultant 
 
 keywords:
   - behavior change
@@ -68,7 +68,7 @@ practice_areas:
   - id: handwriting-analysis
     title: "Handwriting Analysis"
     description: "Your handwriting tells a story."
-    url: "/html/graphology/landing.html#graphology"
+    url: "/html/graphology/landing.html#handwriting_analysis"
 
   - id: astrology
     title: "Astrology"
