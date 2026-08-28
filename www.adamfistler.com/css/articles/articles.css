@@ -1,0 +1,62 @@
+.article-aside {
+  float: right;
+  width: 40%;
+  margin-left: 50px;
+  padding-top: 2px;
+  background-color: #f0f0f0; /* Background color of the aside */
+  position: relative;
+}
+
+.article-aside::before {
+  content: '';
+  position: absolute;
+  left: -20px; /* Adjust the distance from the left */
+  top: 0;
+  height: 100%; /* Full height of the aside */
+  width: 20px; /* Width of the colored bars */
+  background: linear-gradient(to bottom, #007bff, #0056b3, #002f5e); /* Blue gradient colors */
+  background-size: 100% 100%; /* Ensure gradient covers the entire bar */
+  background-repeat: no-repeat; /* Prevent repeating the gradient */
+  background-position: right; /* Start gradient from the right */
+  background-clip: content-box; /* Clip background to content box */
+  border-right: 1px solid #002f5e; /* Border on the right of the bars */
+  border-bottom: 1px solid #002f5e; /* Border at the bottom of the bars */
+  z-index: 1; /* Ensure bars appear above the content */
+}
+
+.article-aside p {
+  padding: 10px; /* Padding inside the aside */
+  margin: 0; /* Remove default margins */
+  font-family: 'Kalam', sans-serif;
+  font-size: 16px; /* Optional: Set the font size */
+}
+
+/* Optional: Add texture to the bars */
+.article-aside::before {
+  background: linear-gradient(to bottom, #007bff, #0056b3, #002f5e),
+              repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #ffffff 10px, #ffffff 20px); /* Texture gradient */
+}
+
+.article {
+  font-family: 'Kalam', sans-serif;
+  font-size: 12pt;
+  display: flex;
+  align-items: flex-start;
+  padding: 5px;
+  background-image: linear-gradient(to bottom, #F3F3F3, #BCDAFF);
+}
+
+.article-table.left {
+  flex: 0 0 25%; /* Adjust the width of the left column as needed */
+  margin-right: 20px; /* Optional: Add space between image and text */
+}
+
+.article-table.right {
+  flex: 1;
+  overflow: hidden; /* or overflow: auto; */
+}
+
+.highlight {
+  color: #53006c;
+  text-decoration: underline;
+}

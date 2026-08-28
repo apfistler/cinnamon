@@ -1,0 +1,78 @@
+/* CSS for the zodiac table inside aside */
+.zodiac-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style for table header */
+.zodiac-table table th {
+  background-color: #f2f2f2;
+}
+
+/* Style for alternating rows */
+.zodiac-table table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Even row color */
+}
+
+.zodiac-table table tr:nth-child(odd) {
+  background-color: #ffffff; /* Odd row color */
+}
+
+/* CSS for the planets table inside aside */
+.planets-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style for table header */
+.planets-table table th {
+  background-color: #f2f2f2;
+}
+
+/* Style for alternating rows */
+.planets-table table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Even row color */
+}
+
+.planets-table table tr:nth-child(odd) {
+  background-color: #ffffff; /* Odd row color */
+}
+
+/* Style for table cells */
+.planets-table table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #dddddd;
+}
+
+/* CSS for the houses table inside aside */
+.houses-table {
+  width: 100%;
+}
+
+.houses-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.houses-table th,
+.houses-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.houses-table th:first-child,
+.houses-table td:first-child {
+  width: 20px; /* Set the width for the house number column */
+}
+
+.houses-table th:nth-child(2),
+.houses-table td:nth-child(2) {
+  width: 20px; /* Set the width for the UTC symbol column */
+}
+
+.houses-table th:nth-child(3),
+.houses-table td:nth-child(3) {
+  width: 300px; /* Set the width for the description column */
+}
+

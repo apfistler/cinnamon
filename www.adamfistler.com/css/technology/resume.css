@@ -1,0 +1,185 @@
+.resume {
+  color: black;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 12pt;
+  border: 3px solid #000000; /* Set border style and color */
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px; /* Rounded corners */
+  margin-top: 10px;
+} 
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.resume-header-title {
+  margin-top: -40px;
+  font-size: 48pt;
+  text-align: left;
+}
+
+.resume-header-subtitle {
+  font-size: 12pt;
+  text-align: center;
+}
+
+.resume-header-contact-name {
+  font-size: 32pt;
+  margin-right: 10px;
+}
+
+.resume-header-contact {
+  margin-right: 30px;
+  padding-top: 10px;
+  text-align: right;
+  line-height: .5; /* Set the line-height value to adjust spacing between lines */
+}
+
+.resume-content {
+  display: flex;
+}
+
+.resume-content-left {
+  width: 20%; /* Set the width for the left section */
+  /* Additional styles for the left section */
+}
+
+.resume-content-right {
+  width: 80%; /* The remaining width after the left section */
+  /* Additional styles for the right section */
+}
+
+.resume-content-block {
+  margin-bottom: 20px; /* Optional margin between blocks */
+}
+
+.resume-content-block-title {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.blue-line {
+    height: 10px;
+    background-color: #5b9bd5;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.resume-content-block-table {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.resume-content-block-verbage {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resume-content-block-column {
+    flex: 1;
+    margin-right: 20px; /* Adjust margin between columns as needed */
+}
+
+.resume-content-block-column p {
+    margin: 0;
+}
+
+.resume-content-block-column span {
+    margin-right: 10px; /* Adjust margin between content items as needed */
+}
+
+.work-experience {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.company-position {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.company-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.company-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.company-experience li {
+  list-style-type: '\2725'; /* Unicode character for ✤ */
+  padding: 5px;
+}
+
+.resume_download {
+  font-size: 18pt;
+  display: flex;
+  align-items: center;
+}
+
+.resume_download img {
+  border: solid 1px blue;
+  margin-right: 10px;
+}
+
+.resume_download a {
+  text-decoration: none; /* Remove underline from the anchor */
+  margin: 0; /* Reset margin to remove space */
+  padding: 0; /* Reset padding to remove space */
+}
+
+.resume-table {
+  margin-top: 20px;
+}
+
+.resume-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resume-table td {
+  border: none;
+  padding: 10px;
+  text-align: left;
+}
+
+.resume-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.resume-small-table {
+  background-color: #f0f0f0;
+}
+
+.resume-small-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}

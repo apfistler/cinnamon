@@ -1,0 +1,288 @@
+/* ==========================================================
+   FAQ
+   ========================================================== */
+
+.faq {
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Topic Areas
+   ---------------------------------------------------------- */
+
+.faq-topic {
+  margin-bottom: 2em;
+}
+
+.faq-topic-title {
+  padding-left: 4px;
+
+  color: #53006c;
+  font-size: 16pt;
+  text-decoration: underline;
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Items
+   ---------------------------------------------------------- */
+
+.faq-item {
+  margin-bottom: 6px;
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Questions
+   ---------------------------------------------------------- */
+
+.faq-question {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 10px 14px;
+
+  background-color: #BCDAFF;
+
+  border: 1px solid #8FB5D6;
+  border-radius: 4px;
+
+  color: #53006c;
+
+  font-family: 'Kalam', sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+
+  line-height: 1.4;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+/* Question hover */
+
+.faq-question:hover {
+  background-color: #BCDAFF;
+}
+
+
+/* Question keyboard focus */
+
+.faq-question:focus {
+  outline: 2px solid #53006c;
+  outline-offset: 2px;
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Question Icon
+   ---------------------------------------------------------- */
+
+.faq-question-icon {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 16px;
+  height: 16px;
+
+  margin-left: 1em;
+
+  font-family: Arial, sans-serif;
+  font-size: 0;
+
+  line-height: 1;
+}
+
+
+/*
+ * The parser generates a literal "+" inside the icon.
+ *
+ * We hide that character and create the icon with
+ * CSS pseudo-elements instead. This allows the
+ * vertical portion of the "+" to disappear when
+ * the FAQ is open.
+ */
+
+
+/* Horizontal bar */
+
+.faq-question-icon::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 14px;
+  height: 2px;
+
+  background-color: currentColor;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* Vertical bar */
+
+.faq-question-icon::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 2px;
+  height: 14px;
+
+  background-color: currentColor;
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+/* ----------------------------------------------------------
+   Open FAQ Icon
+   ---------------------------------------------------------- */
+
+/*
+ * When the FAQ item has the "open" class, the
+ * vertical bar disappears, leaving a minus sign.
+ */
+
+.faq-item.open .faq-question-icon::after {
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Answers
+   ---------------------------------------------------------- */
+
+.faq-answer {
+  display: none;
+
+  box-sizing: border-box;
+
+  padding: 8px 16px 12px 16px;
+
+  background-color: #F2F2F2;
+
+  color: #004444;
+
+  border-left: 5px solid #8FB5D6;
+
+  border-radius: 0 0 4px 0;
+}
+
+
+/* Display answer when open */
+
+.faq-item.open .faq-question {
+  border-radius: 4px 4px 0 0;
+}
+
+.faq-item.open .faq-answer {
+  display: block;
+}
+
+
+/* ----------------------------------------------------------
+   FAQ Answer Text
+   ---------------------------------------------------------- */
+
+.faq-answer p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  padding-left: 1em;
+  padding-right: 1em;
+
+  color: #004444;
+
+  font-family: 'Ariel', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+
+/* ----------------------------------------------------------
+   Links Inside Answers
+   ---------------------------------------------------------- */
+
+.faq-answer a {
+  color: #53006c;
+  font-weight: 700;
+}
+
+.faq-answer a:hover {
+  color: #007777;
+}
+
+
+/* ----------------------------------------------------------
+   Tablet / Medium Screens
+   ---------------------------------------------------------- */
+
+@media screen and (min-width: 769px) and (max-width: 1280px) {
+
+  .faq-question {
+    font-size: 16pt;
+  }
+
+  .faq-answer p {
+    font-size: 11pt;
+  }
+
+}
+
+
+/* ----------------------------------------------------------
+   Small Screens
+   ---------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+  .faq-question {
+    padding: 10px 12px;
+
+    font-size: 12pt;
+  }
+
+  .faq-answer {
+    padding: 8px 8px 12px 8px;
+  }
+
+  .faq-answer p {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    font-size: 11pt;
+  }
+
+  .faq-question-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+}

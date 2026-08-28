@@ -1,0 +1,315 @@
+/* ==========================================================
+   CONTACT / FORM STYLES
+   ========================================================== */
+
+
+/* ==========================================================
+   CONTACT FORM
+   ========================================================== */
+
+.contact-form {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+
+/* ==========================================================
+   FORM INTRODUCTION
+   ========================================================== */
+
+.form-introduction {
+  width: calc(100% - 200px);
+  margin: 0 0 25px 200px;
+  padding: 0;
+  text-align: center;
+  font-size: 12pt;
+}
+
+
+/* ==========================================================
+   FORM ROW
+   ========================================================== */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  column-gap: 20px;
+  align-items: start;
+  margin-bottom: 15px;
+}
+
+
+/* ==========================================================
+   FORM LABEL
+   ========================================================== */
+
+.form-label {
+  display: grid;
+  grid-template-columns: 1fr 18px 12px;
+  align-items: start;
+  width: 100%;
+  padding-top: 8px;
+  color: #004444;
+  font-weight: bold;
+}
+
+
+/* ==========================================================
+   LABEL TEXT
+   ========================================================== */
+
+.form-label-text {
+  text-align: right;
+  padding-right: 4px;
+}
+
+
+/* ==========================================================
+   REQUIRED MARKER
+   ========================================================== */
+
+.form-required {
+  color: #A52A2A;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* ==========================================================
+   LABEL COLON
+   ========================================================== */
+
+.form-colon {
+  text-align: left;
+}
+
+
+/* ==========================================================
+   FORM INPUTS
+   ========================================================== */
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 2px solid #5C8FB5;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #004444;
+  font-family: Arial, sans-serif;
+  font-size: 12pt;
+}
+
+
+/* ==========================================================
+   INPUT FOCUS
+   ========================================================== */
+
+.form-control:focus {
+  outline: none;
+  border-color: #53006c;
+  box-shadow: 0 0 3px rgba(83, 0, 108, 0.35);
+}
+
+
+/* ==========================================================
+   SELECT BOX
+   ========================================================== */
+
+.form-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 2px solid #5C8FB5;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #004444;
+  font-family: Arial, sans-serif;
+  font-size: 12pt;
+}
+
+
+/* ==========================================================
+   SELECT BOX FOCUS
+   ========================================================== */
+
+.form-select:focus {
+  outline: none;
+  border-color: #53006c;
+  box-shadow: 0 0 3px rgba(83, 0, 108, 0.35);
+}
+
+
+/* ==========================================================
+   MESSAGE / TEXTAREA
+   ========================================================== */
+
+.form-textarea {
+  width: 100%;
+  min-height: 220px;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 2px solid #5C8FB5;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #004444;
+  font-family: Arial, sans-serif;
+  font-size: 12pt;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+
+/* ==========================================================
+   TEXTAREA FOCUS
+   ========================================================== */
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #53006c;
+  box-shadow: 0 0 3px rgba(83, 0, 108, 0.35);
+}
+
+
+/* ==========================================================
+   MESSAGE LABEL
+   ========================================================== */
+
+.form-message-label {
+  padding-top: 0;
+  align-items: start;
+}
+
+
+/* ==========================================================
+   SUBMIT ROW
+   ========================================================== */
+
+.form-submit-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  column-gap: 20px;
+  margin-top: 20px;
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON CONTAINER
+   ========================================================== */
+
+.form-submit {
+  text-align: center;
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON
+   ========================================================== */
+
+.form-submit button {
+  padding: 10px 28px;
+  border: 2px solid #53006c;
+  border-radius: 5px;
+  background-color: #53006c;
+  color: #FFFFFF;
+  font-family: Arial, sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON HOVER
+   ========================================================== */
+
+.form-submit button:hover {
+  opacity: 0.85;
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON FOCUS
+   ========================================================== */
+
+.form-submit button:focus {
+  outline: 2px solid #5C8FB5;
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media screen and (max-width: 768px) {
+
+  .contact-form {
+    width: 95%;
+  }
+
+
+  /* --------------------------------------------------------
+     Introduction
+     -------------------------------------------------------- */
+
+  .form-introduction {
+    width: 100%;
+    margin: 0 0 25px 0;
+    text-align: center;
+  }
+
+
+  /* --------------------------------------------------------
+     Form rows become vertical
+     -------------------------------------------------------- */
+
+  .form-row {
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+  }
+
+
+  /* --------------------------------------------------------
+     Labels
+     -------------------------------------------------------- */
+
+  .form-label {
+    display: grid;
+    grid-template-columns: auto 18px 12px;
+    width: auto;
+    padding-top: 0;
+    justify-content: start;
+  }
+
+
+  .form-label-text {
+    text-align: left;
+    padding-right: 4px;
+  }
+
+
+  /* --------------------------------------------------------
+     Message label
+     -------------------------------------------------------- */
+
+  .form-message-label {
+    padding-top: 0;
+  }
+
+
+  /* --------------------------------------------------------
+     Submit row
+     -------------------------------------------------------- */
+
+  .form-submit-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .form-submit {
+    text-align: center;
+  }
+
+}

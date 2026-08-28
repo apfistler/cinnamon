@@ -1,0 +1,59 @@
+.article_div {
+  float: right;
+  padding: 2px;
+  width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #53006c;
+  margin: 15px 0px 10px 10px;
+  padding: 0px;
+  z-index: 1;
+  background-color: #BCEAFF;
+}
+
+.article h1 {
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.article p {
+  font-size: 10pt;
+  text-align: left;
+  padding-top: 0px;
+  padding-bottom: 20px; /* Add spacing after each paragraph */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  color: #53006c;
+}
+
+.article a.rl {
+  float: right;
+  padding-right: 5px;
+  color: #0000FF;
+  text-decoration: none;
+}
+
+/* Add a border at the bottom of each article to separate them */
+.article {
+  border-bottom: 1px solid #53006c;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (max-width: 1280px) {
+  .article {
+    padding-bottom: 21px;
+  }
+  .article h1 {
+    font-size: 24pt;
+  }
+
+  .article p {
+    font-size: 18pt;
+  }
+}
+

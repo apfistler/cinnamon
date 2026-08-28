@@ -1,0 +1,185 @@
+/* Styles for the main content container */
+#content {
+    top: 115px;
+    position: absolute;
+    padding: 10px;
+    margin-top: 65px; /* Adjusted margin-top to move content 5px below the header */
+    left: 225px;
+    border: 1px solid #000000;
+    width: calc(100% - 260px - 1%);
+    z-index: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 1%;
+    transition: margin-left 0.3s ease; /* Add transition for smooth animation */
+}
+
+/* Styles for content when the menu is hidden */
+#content.hidden-menu {
+  left: 5px; /* Move content to the right by 5px when the menu is hidden */
+  width: 97%;
+}
+
+.content-block,
+.testimonial {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  border-radius: 10px; /* Adds rounded corners */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+  background-image: linear-gradient(to bottom, #E8ECFF, #BCDAFF);
+}
+
+.compact {
+  background-image: linear-gradient(to bottom, #F3F3F3, #BCDAFF);
+  padding: 5px;
+}
+
+.testimonal {
+  min-height: 200px;
+}
+
+.testimonial-image img {
+  float: right;
+  left: calc(100% - 250px);
+  border: 2px solid blue;
+  height: 200px;
+  width: 200px;
+}
+
+.testimonial-content {
+  margin-top: 10px;
+}
+
+.testimonial-content {
+  margin-top: 10px;
+  padding-left: 220px; /* Adjust this value to leave space for the image */
+}
+
+.hypnosis-list-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.hypnosis-issue-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hypnosis-issue {
+    margin: 5px;
+}
+
+.content-img {
+  float: left; /* or right based on your requirement */
+  margin: 25px; /* Adjust the margin as per your design */
+}
+
+.caption {
+  text-align: center;
+}
+
+/* Style for the caption */
+.content-img figcaption {
+  font-family: Arial, sans-serif;
+  font-size: 10pt;
+  color: black;
+  background-color: #f0f0f0;
+  text-align: center; /* Align the caption text as per your design */
+  font-style: italic; /* Apply italic style to the caption */
+}
+
+
+.up60 {
+  margin-top: -60px;
+}
+
+.up15 {
+  margin-top: -15px;
+}
+
+.down30 {
+  margin-bottom: -30px;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.border {
+  border-style: solid;
+  border-width: 2px;
+}
+
+.medical {
+  font-size: 8pt;
+  color: blue;
+}
+
+.one-hundred {
+  font-size: 32pt;
+}
+
+/* Styles for the footer container */
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+
+/* Styles for links within the footer */
+.footer a {
+  color: #ffffff;
+}
+
+/* General styles for text with blue color */
+.blue {
+  color: #7777FF;
+}
+
+/* Small space styles */
+.small-space {
+  font-size: 4pt;
+}
+
+/* Blush color styles */
+.blush {
+  color: #ff0066;
+}
+
+
+/* Aside tag styles */
+aside {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  border-radius: 10px;
+  min-height: 200px;
+  font-size: 12pt;
+}
+
+/* Styles for the content inside the aside tag */
+aside p {
+  margin: 10px 0;
+}
+
+.read-more {
+  text-align: right;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1280px) {
+  aside {
+    padding: 15px;
+    font-size: 10pt;
+  }
+}

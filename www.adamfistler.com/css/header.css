@@ -1,0 +1,113 @@
+/* Styles for the main header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #53366c;
+  color: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 5px;
+  left: 225px;
+  height: 100px;
+  width: calc(100% - 260px - 1%);
+  z-index: 1;
+  margin-left: 1%;
+}
+
+/* Styles for the logo within the header */
+.header .logo {
+  font-size: 46pt;
+}
+
+/* Styles for images within the logo in the header */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .logo img {
+  display: block;
+  margin-top: auto;
+  margin-left: auto;
+  width: auto;
+  height: 110px;
+}
+
+/* Styles for the address within the header */
+.header .address {
+  font-size: 12pt;
+  text-align: right;
+}
+
+/* Styles for a separate logo div */
+.logo_div {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  padding: 0px 0px 0px 5px;
+  width: 500px;
+  color: #53006c;
+  font-size: 46pt;
+}
+
+/* Styles for a separate address div */
+.address_div {
+  position: absolute;
+  left: 1320px;
+  top: 15px;
+  font-weight: bold;
+  font-size: 11pt;
+  font-family: arial;
+  color: #53006c;
+}
+
+.address {
+  font-size: 12pt;
+  text-align: right;
+}
+
+.address p {
+  margin: 0;
+  padding: 0;
+}
+
+.address a {
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .header .logo img { 
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 400px; /* Adjust the width of the logo for mobile devices */
+    height: auto;
+  }
+
+//  .header {
+//    flex-direction: column;
+//    align-items: flex-start;
+//    heigth: 90px;
+//  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .address_div {
+    left: 50px;
+  }
+
+  .address {
+    margin-top: 10px;
+    text-align: left;
+  }
+}

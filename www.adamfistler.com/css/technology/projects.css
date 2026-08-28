@@ -1,0 +1,48 @@
+.code-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.code-block pre {
+  width: 70%;
+  line-height: 1;
+  display: block;
+  background-color: black;
+  margin: 0;       /* Remove default margin */
+  padding: 0px;      /* Remove default padding */
+  white-space: pre-wrap; /* Preserve white spaces and wrap lines */
+  overflow-x: auto;
+}
+
+.code-block code {
+  display: inline;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 10pt;
+  background-color: black;
+  color: green;
+}
+
+.iframe {
+      width: 300px%; /* Set the desired width */
+      height: 300px%; /* Set the desired height */
+      border: none; /* Remove iframe border */
+      transform: scale(0.2); /* Adjust the scale factor as needed */
+      transform-origin: 0 0; /* Set the origin of the scaling */
+}
+
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .code-block pre {
+    width: 90%;
+    line-height: .5;
+    overflow-x: auto;
+    overflow-y: auto;
+  {
+
+  .code-block code {
+    line-height: .5;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+}

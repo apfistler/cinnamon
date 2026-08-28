@@ -1,0 +1,81 @@
+.main {
+  width: 98%;
+  background-color: #BCDAFF;
+  font-family: 'Kalam', sans-serif;
+  line-height: 1.5;
+  font-size: 12pt;
+  font-weight: 700;
+  color: #004444;
+}
+
+/* Styles for heading 1 */
+h1 {
+  font-size: 36pt;
+  color: #53006c;
+  text-align: center;
+  font-family: 'Brush Script MT', cursive;
+} 
+  
+/* Styles for heading 2 */
+h2 {
+  font-size: 18pt;
+  color: #53006c;
+  padding-top: 2px;
+  margin-bottom: 4px;
+} 
+
+h3 {
+  font-size: 14pt;
+  color: #5C8FB5;
+  padding-top: 2px;
+  padding-left: 1em;
+  margin-bottom: 4px;
+} 
+  
+/* General paragraph styles */
+p {
+  padding-left: 2em;
+  padding-right: 15px;
+}   
+  
+/* Body styles */
+body {
+  background-color: #BCDAFF;
+  font-family: arial;
+  font-size: 9pt;
+} 
+
+/* Table cell styles */
+td {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: arial;
+  font-size: 11pt;
+}
+
+strong {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.2em;
+  color: #007777;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1280px) {
+  .main {
+    font-size: 28px; 
+  }
+
+  h1 {
+    font-size: 40pt;
+  }
+
+  h2 {
+    font-size: 32pt;
+  }
+
+  h3 {
+    font-size: 28pt;
+  } 
+  
+}
+
