@@ -4,8 +4,6 @@ venv/
 env/
 ENV/
 
-output/
-
 # Python Bytecode & Cache
 __pycache__/
 *.pyc
