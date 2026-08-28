@@ -7,12 +7,12 @@ import yaml
 class Parser:
 
     def __init__(
-            self,
-            input_dir,
-            template_obj,
-            config_filename,
-            output_obj
-        ):
+        self,
+        input_dir,
+        template_obj,
+        config_filename,
+        output_obj
+    ):
 
         self.input_dir = os.path.normpath(input_dir)
         self.template_obj = template_obj
@@ -337,19 +337,6 @@ class Parser:
 
             # --------------------------------------------------
             # Parent menu item
-            #
-            # Example YAML:
-            #
-            # Hypnosis:
-            #   area: hypnosis
-            #   url: '/html/hypnosis/landing.html'
-            #   children:
-            #     About Hypnosis: '/html/hypnosis/about.html'
-            #
-            # The parser automatically produces:
-            #
-            # /html/hypnosis/landing.html#hypnosis
-            # /html/hypnosis/about.html#hypnosis
             # --------------------------------------------------
 
             if isinstance(item, dict):
@@ -420,11 +407,6 @@ class Parser:
 
             # --------------------------------------------------
             # Normal menu item
-            #
-            # Example:
-            #
-            # Home:
-            #   /html/main/home.html
             # --------------------------------------------------
 
             else:
@@ -544,6 +526,57 @@ class Parser:
                         processed_lines.append(
                             line_indent
                             + faq_line
+                        )
+
+                    else:
+
+                        processed_lines.append(
+                            ''
+                        )
+
+                continue
+
+
+            # --------------------------------------------------
+            # SELECT BOX
+            # --------------------------------------------------
+
+            selectbox_directive = re.search(
+                r'<!--\s*SELECTBOX\s+([A-Za-z0-9_-]+)\s*-->',
+                line,
+                re.IGNORECASE
+            )
+
+            if selectbox_directive:
+
+                selectbox_name = (
+                    selectbox_directive.group(1)
+                )
+
+                selectbox_html = (
+                    self.generate_selectbox(
+                        selectbox_name
+                    )
+                )
+
+                line_indent = (
+                    line[
+                        :len(line)
+                        - len(line.lstrip())
+                    ]
+                )
+
+                selectbox_lines = (
+                    selectbox_html.splitlines()
+                )
+
+                for selectbox_line in selectbox_lines:
+
+                    if selectbox_line.strip():
+
+                        processed_lines.append(
+                            line_indent
+                            + selectbox_line
                         )
 
                     else:
@@ -705,6 +738,75 @@ class Parser:
 
         return ''.join(
             processed_lines
+        )
+
+
+    # ==========================================================
+    # SELECT BOXES
+    # ==========================================================
+
+    def generate_selectbox(self, selectbox_name):
+
+        options = self.metadata.get(
+            selectbox_name,
+            []
+        )
+
+        if not isinstance(
+                options,
+                list
+            ):
+
+            return (
+                '<!-- SELECTBOX: '
+                f'{selectbox_name} is not a list -->'
+            )
+
+        html_output = []
+
+        html_output.append(
+            f'<select '
+            f'class="form-select" '
+            f'id="{selectbox_name}" '
+            f'name="{selectbox_name}" '
+            f'required>'
+        )
+
+        html_output.append(
+            '  <option value="">'
+            'Please select...'
+            '</option>'
+        )
+
+        for option in options:
+
+            option = str(option)
+
+            value = (
+                html.escape(
+                    option,
+                    quote=True
+                )
+            )
+
+            label = (
+                html.escape(
+                    option
+                )
+            )
+
+            html_output.append(
+                f'  <option value="{value}">'
+                f'{label}'
+                f'</option>'
+            )
+
+        html_output.append(
+            '</select>'
+        )
+
+        return '\n'.join(
+            html_output
         )
 
 

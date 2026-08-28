@@ -8,8 +8,9 @@ address:
   state: 'NJ'
   zip: '08000'
 
+contact_adam: '<a href="/html/main/contact_adam.html">Contact me</a>'
 phone: '(609) 200-0230'
-email: 'fistlerap@gmail.com'
+email: 'adam@adamfistler.com'
 
 footer:
   - 'Copyright © 2026 - Adam Fistler Services - Camden, NJ. All Rights Reserved.'
@@ -82,7 +83,7 @@ menu:
     children:
       Scheduling: '/html/parties/scheduling.html'
 
-  Contact Adam: '/html/main/contact_us.html'
+  Contact Adam: '/html/main/contact_adam.html'
 
 hypnosis:
   issue_columns: 4
