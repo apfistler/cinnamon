@@ -25,5 +25,8 @@ output/
 *.swp
 *.swo
 
+sitemap/*
+!sitemap/sitemap.sh
+
 # Environment Variables & Secrets
 .env
