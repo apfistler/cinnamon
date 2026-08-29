@@ -30,8 +30,10 @@ menu:
       About: '/html/hypnosis/about_hypnosis.html'
       FAQ: '/html/hypnosis/hypnosis_faq.html'
       Services: '/html/hypnosis/hypnosis_services.html'
+      Why Can't I Change: '/html/hypnosis/wcic.html'
       Articles: '/html/articles/articles.html'
       Testimonials: '/html/hypnosis/testimonials.html'
+      Addction & Recovery: '/html/hypnosis/addiction_and_recovery.html'
       Anger: '/html/hypnosis/anger.html'
       Weight Loss: '/html/hypnosis/weight_loss.html'
       Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
@@ -47,6 +49,8 @@ menu:
     url: '/html/addiction/landing.html#addiction'
     children:
       Approach & Services: '/html/addiction/addiction_services.html'
+      Why Can't I Change: '/html/hypnosis/wcic.html'
+      Hypnosis: '/html/hypnosis/addiction_and_recovery.html'
       FAQ: '/html/addiction/addiction_faq.html'
 
   Handwriting Analysis:
