@@ -48,4 +48,5 @@ class Input:
         keywords = [word for word, count in word_counts.items() if count > 2]
  
         # Return the keywords
+
         return keywords

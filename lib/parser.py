@@ -57,6 +57,7 @@ class Parser:
         )
 
 
+
     # ==========================================================
     # CONFIGURATION
     # ==========================================================
@@ -83,28 +84,29 @@ class Parser:
 
 
     def merge_config(self, base, override):
-
         result = base.copy()
 
         for key, value in override.items():
-
             if (
                 key in result
                 and isinstance(result[key], dict)
                 and isinstance(value, dict)
             ):
-
                 result[key] = self.merge_config(
                     result[key],
                     value
                 )
-
+            elif (
+                key in result
+                and isinstance(result[key], list)
+                and isinstance(value, list)
+            ):
+                combined = result[key] + value
+                result[key] = list(dict.fromkeys(combined))
             else:
-
                 result[key] = value
 
         return result
-
 
     # ==========================================================
     # INPUT
