@@ -1,5 +1,5 @@
-name: projects 
-category: technology 
+name: projects
+category: technology
 title: "Adam Fistler's Projects"
 css:
   - "/css/technology/projects.css"
@@ -24,24 +24,30 @@ keywords:
   - devops
 display_table:
   projects:
-    -
-      id: "html"
+    - id: "html"
       image: "/img/technology/projects/github_logo_100.png"
-      link: "https://www.github.com/apfistler/html"
-      title: "Adam Fistler Services HTML Pages"
+      link: "https://github.com/apfistler/public_html"
+      title: "Adam Fistler - Mind, Meaning & Transformation"
       content: >
-        This is the repo for the compiled HTML, CSS, and JavaScript files from Adam Fistler Services Website. These files were generated using Cinnamon GitHub - apfistler/cinnamon.
-    -
-      id: "cinnamon"
+        This repository contains the generated static HTML, CSS, and JavaScript files for the Adam Fistler - Mind, Meaning & Transformation website. The site is generated using Cinnamon (GitHub - apfistler/cinnamon) and contains the production-ready static files used for my work as a behavioral change consultant.
+
+    - id: "cinnamon"
       image: "/img/technology/projects/github_logo_100.png"
       link: "https://www.github.com/apfistler/cinnamon"
       title: "Cinnamon - Static Website Generator"
       content: >
-        Cinnamon is a simple static web site generator that started as a basic script designed to replace strings in a page with data from various sources. Over time, the script has evolved to meet specific needs and has grown into a snippet of Python code. This is the script I used to maintain my website at https://www.afistler.us.to
-    -
-      id: "txfx"
+        Cinnamon is a Python-based static website generator and compilation framework that evolved from a simple script for replacing strings in HTML into a system for building and maintaining complete websites. It combines templates, structured YAML configuration and metadata, reusable HTML snippets, content organization, and custom processing logic to generate the finished HTML, CSS, and JavaScript that make up a website. Cinnamon was developed to provide the flexibility and control needed to build and maintain my own website without relying on WordPress, Bootstrap, React, or other large web frameworks. It is currently used to build https://www.adamfistler.com.
+
+    - id: "txfx"
       image: "/img/technology/projects/github_logo_100.png"
       link: "https://www.github.com/apfistler/txfx"
       title: "TxFx - Public Environment Configuration Script"
       content: >
         This PowerShell script is a simple tool designed for setting up development environments on public computers, such as those available in libraries. The script facilitates the installation of local copies of essential tools like Python, Git, and Paint.NET, allowing you to work on projects even when you don't have access to a private computer.
+
+    - id: "cb-helper"
+      image: "/img/technology/projects/github_logo_100.png"
+      link: "https://www.github.com/apfistler/cb-helper"
+      title: "CB Helper - Terminal Clipboard Utility"
+      content: >
+        CB Helper is a Bash clipboard utility that uses the OSC 52 terminal protocol to transfer terminal data directly to the local desktop clipboard. It is designed especially for remote SSH sessions and AI-assisted troubleshooting, allowing command output, files, annotations, and diagnostic transcripts to be collected into a cumulative clipboard without manually scrolling through terminal output and selecting text. It does not require xclip, xsel, Wayland clipboard utilities, or a graphical desktop environment on the remote system.
