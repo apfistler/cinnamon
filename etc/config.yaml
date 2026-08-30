@@ -22,6 +22,13 @@ footer:
 menu:
   Home: '/html/main/home.html'
 
+  About Adam:
+     area: 'adam'
+     url: '/html/adam/landing.html'
+     children:
+       'Shyness / Anxiety': '/html/adam/early_childhood.html'
+       'Addiction' : '/html/adam/addiction_development.html'
+
   Hypnosis:
     area: 'hypnosis'
     url: '/html/hypnosis/landing.html'

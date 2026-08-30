@@ -1,6 +1,6 @@
+import html
 import os
 import re
-import html
 import yaml
 
 
@@ -56,8 +56,6 @@ class Parser:
             self.metadata
         )
 
-
-
     # ==========================================================
     # CONFIGURATION
     # ==========================================================
@@ -81,7 +79,6 @@ class Parser:
             )
 
         return config or {}
-
 
     def merge_config(self, base, override):
         result = base.copy()
@@ -121,7 +118,6 @@ class Parser:
             ) as input_file:
 
             return input_file.readlines()
-
 
     # ==========================================================
     # TEMPLATE
@@ -314,7 +310,6 @@ class Parser:
             output_html
         )
 
-
     # ==========================================================
     # KEYWORDS
     # ==========================================================
@@ -340,7 +335,6 @@ class Parser:
                 )
 
         return keywords
-
 
     # ==========================================================
     # BREADCRUMBS
@@ -419,6 +413,8 @@ class Parser:
                 f'/html/{category}/landing.html'
             )
 
+            display_category = self.breadcrumb_title(category)
+
             # --------------------------------------------------
             # Landing pages:
             #
@@ -428,11 +424,11 @@ class Parser:
 
             if name == 'landing':
 
-                current_label = self.breadcrumb_title(current_label)
+                display_label = self.breadcrumb_title(current_label)
 
                 breadcrumbs.append(
                     (
-                        current_label,
+                        display_label,
                         category_path
                     )
                 )
@@ -446,11 +442,9 @@ class Parser:
 
             else:
 
-                category = self.breadcrumb_title(category)
-
                 breadcrumbs.append(
                     (
-                        category,
+                        display_category,
                         category_path
                     )
                 )
@@ -459,11 +453,11 @@ class Parser:
                     f'/html/{category}/{name}.html'
                 )
 
-                current_label = self.breadcrumb_title(current_label)
+                display_label = self.breadcrumb_title(current_label)
 
                 breadcrumbs.append(
                     (
-                        current_label,
+                        display_label,
                         page_path
                     )
                 )
@@ -484,9 +478,11 @@ class Parser:
                     f'/html/main/{name}.html'
                 )
 
+                display_label = self.breadcrumb_title(current_label)
+
                 breadcrumbs.append(
                     (
-                        current_label,
+                        display_label,
                         page_path
                     )
                 )
@@ -557,7 +553,6 @@ class Parser:
             html_output
         )
 
-
     # ==========================================================
     # MENU
     # ==========================================================
@@ -575,7 +570,6 @@ class Parser:
             return url
 
         return f'{url}#{area}'
-
 
     def generate_menu(self, indent):
 
@@ -676,7 +670,6 @@ class Parser:
             menu_html
         )
 
-
     # ==========================================================
     # CONTENT PROCESSING
     # ==========================================================
@@ -738,7 +731,6 @@ class Parser:
 
                 continue
 
-
             # --------------------------------------------------
             # FAQ
             # --------------------------------------------------
@@ -789,7 +781,6 @@ class Parser:
 
                 continue
 
-
             # --------------------------------------------------
             # SELECT BOX
             # --------------------------------------------------
@@ -839,7 +830,6 @@ class Parser:
 
                 continue
 
-
             # --------------------------------------------------
             # PRACTICE AREAS
             # --------------------------------------------------
@@ -861,7 +851,6 @@ class Parser:
 
                 continue
 
-
             # --------------------------------------------------
             # HYPNOSIS ISSUES
             # --------------------------------------------------
@@ -882,7 +871,6 @@ class Parser:
                 )
 
                 continue
-
 
             # --------------------------------------------------
             # DISPLAY TABLES
@@ -929,7 +917,6 @@ class Parser:
                         )
 
                         continue
-
 
             # --------------------------------------------------
             # GENERIC CONFIGURATION PLACEHOLDERS
@@ -991,7 +978,6 @@ class Parser:
         return ''.join(
             processed_lines
         )
-
 
     # ==========================================================
     # SELECT BOXES
@@ -1060,7 +1046,6 @@ class Parser:
         return '\n'.join(
             html_output
         )
-
 
     # ==========================================================
     # FAQ
@@ -1257,7 +1242,6 @@ class Parser:
             html_output
         )
 
-
     def format_faq_paragraphs(self, text):
 
         if text is None:
@@ -1317,7 +1301,6 @@ class Parser:
 
         return paragraphs
 
-
     # ==========================================================
     # SNIPPETS
     # ==========================================================
@@ -1345,7 +1328,6 @@ class Parser:
             ) as snippet_file:
 
             return snippet_file.read()
-
 
     # ==========================================================
     # PRACTICE AREAS
@@ -1480,7 +1462,6 @@ class Parser:
             html_output
         )
 
-
     # ==========================================================
     # DISPLAY TABLES
     # ==========================================================
@@ -1528,7 +1509,6 @@ class Parser:
         table_html += '</table>'
 
         return table_html
-
 
     def construct_table_cell(self, item):
 
@@ -1620,7 +1600,6 @@ class Parser:
 
         return cell_html
 
-
     # ==========================================================
     # HYPNOSIS ISSUES
     # ==========================================================
@@ -1694,8 +1673,12 @@ class Parser:
         )
 
     def breadcrumb_title(self, value):
-
+        if not value:
+            return ''
+        
+        # Replace underscores and hyphens with spaces before applying Title Case
+        text = str(value).replace('_', ' ').replace('-', ' ')
         return ' '.join(
             word.capitalize()
-            for word in str(value).split()
+            for word in text.split()
         )
