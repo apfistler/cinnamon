@@ -38,7 +38,7 @@ menu:
       FAQ: '/html/hypnosis/hypnosis_faq.html'
       Services: '/html/hypnosis/hypnosis_services.html'
       Why Can't I Change: '/html/hypnosis/wcic.html'
-      Articles: '/html/articles/articles.html'
+      Articles: '/html/articles/hypnosis/articles.html'
       Testimonials: '/html/hypnosis/testimonials.html'
       Addction: '/html/hypnosis/addiction_and_recovery.html'
       Anger: '/html/hypnosis/anger.html'
@@ -59,6 +59,7 @@ menu:
       Why Can't I Change: '/html/hypnosis/wcic.html'
       Hypnosis: '/html/hypnosis/addiction_and_recovery.html'
       FAQ: '/html/addiction/addiction_faq.html'
+      Articles: '/html/articles/addiction/articles.html'
 
   Handwriting Analysis:
     area: 'handwriting_analysis'
