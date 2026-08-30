@@ -28,6 +28,7 @@ menu:
      children:
        'Shyness / Anxiety': '/html/adam/early_childhood.html'
        'Addiction' : '/html/adam/addiction_development.html'
+       'Recovery': '/html/adam/recovery.html'
 
   Hypnosis:
     area: 'hypnosis'
