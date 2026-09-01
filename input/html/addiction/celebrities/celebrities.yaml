@@ -26,8 +26,8 @@ keywords:
 display_table:
   actors:
     - id: "robert_downey_jr"
-      image: "/img/adam/celebrities/robert_downey_jr.png"
-      link: "/html/adam/celebrities/robert_downey_jr.html"
+      image: "/img/addiction/celebrities/robert_downey_jr.png"
+      link: "/html/addiction/celebrities/robert_downey_jr.html"
       title: "Robert Downey Jr."
       content: >
         Robert Downey Jr. experienced years of serious drug addiction, including periods of treatment, arrest, incarceration, and professional collapse. He eventually achieved sustained recovery and rebuilt both his personal life and career.
@@ -37,8 +37,8 @@ display_table:
         Downey has spoken openly about his addiction and recovery and has used his public position to discuss substance use, treatment, and the importance of support.
 
     - id: "jamie_lee_curtis"
-      image: "/img/adam/celebrities/jamie_lee_curtis.png"
-      link: "/html/adam/celebrities/jamie_lee_curtis.html"
+      image: "/img/addiction/celebrities/jamie_lee_curtis.png"
+      link: "/html/addiction/celebrities/jamie_lee_curtis.html"
       title: "Jamie Lee Curtis"
       content: >
         Jamie Lee Curtis has openly discussed her addiction to prescription pain medication and alcohol and has remained in recovery since 1999.
@@ -48,8 +48,8 @@ display_table:
         Curtis has spoken publicly about recovery and has used her visibility to reduce the shame surrounding addiction.
 
     - id: "philip_seymour_hoffman"
-      image: "/img/adam/celebrities/philip_seymour_hoffman.png"
-      link: "/html/adam/celebrities/philip_seymour_hoffman.html"
+      image: "/img/addiction/celebrities/philip_seymour_hoffman.png"
+      link: "/html/addiction/celebrities/philip_seymour_hoffman.html"
       title: "Philip Seymour Hoffman"
       content: >
         Philip Seymour Hoffman maintained sobriety for roughly two decades before relapsing and eventually dying from an accidental overdose in 2014.
@@ -59,8 +59,8 @@ display_table:
         Hoffman's story also illustrates the potentially fatal consequences of relapse after a long period of abstinence, when tolerance may have changed significantly.
 
     - id: "matthew_perry"
-      image: "/img/adam/celebrities/matthew_perry.png"
-      link: "/html/adam/celebrities/matthew_perry.html"
+      image: "/img/addiction/celebrities/matthew_perry.png"
+      link: "/html/addiction/celebrities/matthew_perry.html"
       title: "Matthew Perry"
       content: >
         Matthew Perry openly discussed years of alcohol and opioid addiction, repeated treatment, periods of sobriety, and relapse. He wrote extensively about his experiences and became an outspoken advocate for people struggling with addiction.
@@ -71,8 +71,8 @@ display_table:
 
   musicians:
     - id: "elton_john"
-      image: "/img/adam/celebrities/elton_john.png"
-      link: "/html/adam/celebrities/elton_john.html"
+      image: "/img/addiction/celebrities/elton_john.png"
+      link: "/html/addiction/celebrities/elton_john.html"
       title: "Elton John"
       content: >
         Elton John experienced serious cocaine and alcohol addiction during the height of his career before entering recovery in 1990.
@@ -82,8 +82,8 @@ display_table:
         Through the Elton John AIDS Foundation and other philanthropic work, he has supported public health, harm reduction, treatment access, and efforts to reduce stigma.
 
     - id: "eminem"
-      image: "/img/adam/celebrities/eminem.png"
-      link: "/html/adam/celebrities/eminem.html"
+      image: "/img/addiction/celebrities/eminem.png"
+      link: "/html/addiction/celebrities/eminem.html"
       title: "Eminem"
       content: >
         Eminem developed a serious addiction to prescription drugs and experienced a near-fatal overdose in 2007. He entered recovery and has publicly discussed the difficulties of rebuilding his life afterward.
@@ -93,8 +93,8 @@ display_table:
         His public discussion of addiction has also helped make recovery part of the conversation surrounding his career rather than something that had to remain hidden.
 
     - id: "amy_winehouse"
-      image: "/img/adam/celebrities/amy_winehouse.png"
-      link: "/html/adam/celebrities/amy_winehouse.html"
+      image: "/img/addiction/celebrities/amy_winehouse.png"
+      link: "/html/addiction/celebrities/amy_winehouse.html"
       title: "Amy Winehouse"
       content: >
         Amy Winehouse experienced highly publicized struggles with alcohol and drug use and died in 2011 from alcohol poisoning.
@@ -104,8 +104,8 @@ display_table:
         The Amy Winehouse Foundation was established in her memory and provides programs addressing substance use, emotional wellbeing, resilience, and recovery for young people.
 
     - id: "eric_clapton"
-      image: "/img/adam/celebrities/eric_clapton.png"
-      link: "/html/adam/celebrities/eric_clapton.html"
+      image: "/img/addiction/celebrities/eric_clapton.png"
+      link: "/html/addiction/celebrities/eric_clapton.html"
       title: "Eric Clapton"
       content: >
         Eric Clapton experienced serious addictions to heroin and alcohol during the height of his career. He eventually entered treatment and achieved long-term recovery.
@@ -116,8 +116,8 @@ display_table:
 
   athletes:
     - id: "andre_agassi"
-      image: "/img/adam/celebrities/andre_agassi.png"
-      link: "/html/adam/celebrities/andre_agassi.html"
+      image: "/img/addiction/celebrities/andre_agassi.png"
+      link: "/html/addiction/celebrities/andre_agassi.html"
       title: "Andre Agassi"
       content: >
         Tennis champion Andre Agassi has publicly described developing an addiction to crystal methamphetamine during his younger years and hiding it while continuing his professional career.
@@ -127,8 +127,8 @@ display_table:
         Agassi later became known for extensive philanthropic work through the Andre Agassi Foundation for Education, illustrating how a difficult personal history can coexist with a substantial commitment to helping others.
 
     - id: "josh_hamilton"
-      image: "/img/adam/celebrities/josh_hamilton.png"
-      link: "/html/adam/celebrities/josh_hamilton.html"
+      image: "/img/addiction/celebrities/josh_hamilton.png"
+      link: "/html/addiction/celebrities/josh_hamilton.html"
       title: "Josh Hamilton"
       content: >
         Major League Baseball player Josh Hamilton experienced severe addiction to alcohol and cocaine, entered recovery, returned to professional baseball, and later experienced relapse.
@@ -138,8 +138,8 @@ display_table:
         Hamilton's story has been discussed publicly in the context of addiction, recovery, relapse, faith, and the pressures surrounding professional sports.
 
     - id: "lamar_odom"
-      image: "/img/adam/celebrities/lamar_odom.png"
-      link: "/html/adam/celebrities/lamar_odom.html"
+      image: "/img/addiction/celebrities/lamar_odom.png"
+      link: "/html/addiction/celebrities/lamar_odom.html"
       title: "Lamar Odom"
       content: >
         Former NBA player Lamar Odom experienced serious addiction and nearly died following an overdose in 2015. He subsequently entered recovery and has spoken publicly about addiction and rebuilding his life.
@@ -149,8 +149,8 @@ display_table:
         Odom has since used his public platform to discuss recovery and encourage others struggling with addiction.
 
     - id: "dwight_gooden"
-      image: "/img/adam/celebrities/dwight_gooden.png"
-      link: "/html/adam/celebrities/dwight_gooden.html"
+      image: "/img/addiction/celebrities/dwight_gooden.png"
+      link: "/html/addiction/celebrities/dwight_gooden.html"
       title: "Dwight Gooden"
       content: >
         Major League Baseball pitcher Dwight Gooden experienced serious addiction to cocaine and alcohol during and after an extraordinary professional career.
@@ -161,8 +161,8 @@ display_table:
 
   influential_people:
     - id: "danny_trejo"
-      image: "/img/adam/celebrities/danny_trejo.png"
-      link: "/html/adam/celebrities/danny_trejo.html"
+      image: "/img/addiction/celebrities/danny_trejo.png"
+      link: "/html/addiction/celebrities/danny_trejo.html"
       title: "Danny Trejo"
       content: >
         Actor Danny Trejo has spoken extensively about his history of heroin addiction, incarceration, and recovery. He has remained in recovery for decades and has frequently used his public position to encourage people struggling with addiction.
@@ -172,8 +172,8 @@ display_table:
         He has also worked with recovery communities and people facing addiction and incarceration, using his own history as part of his message of recovery and second chances.
 
     - id: "samuel_l_jackson"
-      image: "/img/adam/celebrities/samuel_l_jackson.png"
-      link: "/html/adam/celebrities/samuel_l_jackson.html"
+      image: "/img/addiction/celebrities/samuel_l_jackson.png"
+      link: "/html/addiction/celebrities/samuel_l_jackson.html"
       title: "Samuel L. Jackson"
       content: >
         Samuel L. Jackson has openly discussed his history of cocaine and heroin addiction and his recovery. He entered treatment in 1991 after his family discovered him unconscious following drug use.
@@ -183,8 +183,8 @@ display_table:
         His story is a powerful example of how addiction can coexist with talent and ambition while also demonstrating that treatment and recovery can provide an opportunity to rebuild a life.
 
     - id: "russell_brand"
-      image: "/img/adam/celebrities/russell_brand.png"
-      link: "/html/adam/celebrities/russell_brand.html"
+      image: "/img/addiction/celebrities/russell_brand.png"
+      link: "/html/addiction/celebrities/russell_brand.html"
       title: "Russell Brand"
       content: >
         Russell Brand has publicly described his history of addiction to heroin, alcohol, and other drugs and his long-term recovery.
@@ -194,8 +194,8 @@ display_table:
         His public advocacy has reached a large audience and demonstrates how personal experience with addiction can become a platform for discussing recovery and changing attitudes toward people struggling with substance use.
 
     - id: "carrie_fisher"
-      image: "/img/adam/celebrities/carrie_fisher.png"
-      link: "/html/adam/celebrities/carrie_fisher.html"
+      image: "/img/addiction/celebrities/carrie_fisher.png"
+      link: "/html/addiction/celebrities/carrie_fisher.html"
       title: "Carrie Fisher"
       content: >
         Carrie Fisher openly discussed her experiences with cocaine, alcohol, and prescription drugs and became an important public voice for reducing the stigma surrounding addiction and mental illness.
@@ -206,8 +206,8 @@ display_table:
 
   babylon_5:
     - id: "jeff_conaway"
-      image: "/img/adam/celebrities/jeff_conaway.png"
-      link: "/html/adam/celebrities/jeff_conaway.html"
+      image: "/img/addiction/celebrities/jeff_conaway.png"
+      link: "/html/addiction/celebrities/jeff_conaway.html"
       title: "Jeff Conaway — Zack Allan"
       content: >
         Jeff Conaway, best known for Grease, Taxi, and Babylon 5, publicly struggled with cocaine, alcohol, and prescription painkillers. His addiction became particularly intertwined with severe back pain and long-term use of pain medication.
@@ -217,8 +217,8 @@ display_table:
         His story illustrates the complicated relationship between chronic pain, prescription medication, physical dependence, addiction, and recovery.
 
     - id: "claudia_christian"
-      image: "/img/adam/celebrities/claudia_christian.png"
-      link: "/html/adam/celebrities/claudia_christian.html"
+      image: "/img/addiction/celebrities/claudia_christian.png"
+      link: "/html/addiction/celebrities/claudia_christian.html"
       title: "Claudia Christian — Susan Ivanova"
       content: >
         Claudia Christian played Susan Ivanova on Babylon 5 and later openly described her struggle with alcohol dependence.
@@ -228,8 +228,8 @@ display_table:
         Her story is especially relevant because it demonstrates how someone can move from addiction and difficulty controlling alcohol use into recovery and then use that experience to educate others about alternative approaches to treatment.
 
     - id: "jerry_doyle"
-      image: "/img/adam/celebrities/jerry_doyle.png"
-      link: "/html/adam/celebrities/jerry_doyle.html"
+      image: "/img/addiction/celebrities/jerry_doyle.png"
+      link: "/html/addiction/celebrities/jerry_doyle.html"
       title: "Jerry Doyle — Michael Garibaldi"
       content: >
         Jerry Doyle played Michael Garibaldi on Babylon 5, one of science fiction television's most sustained portrayals of a recovering and relapsing alcoholic.

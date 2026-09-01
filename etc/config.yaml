@@ -1,6 +1,23 @@
 title: 'Adam Fistler'
 name: 'Adam Fistler'
-tagline: "Adam Fistler - Mind, Meaning & Transformation"
+tagline: "Adam Fistler | South Jersey Hypnosis & Addiction Recovery Consultant"
+
+author: Adam Fistler, BCH - Behavorial Change Consultant (<a href="mailto:adam@adamfistler.com">adam@adamfistler.com</a>)
+
+about_author: >
+  <h2>About The Author</h2>
+  <p>
+    <strong>Adam Fistler</strong> is a Behavioral Change Consultant, Board Certified Hypnotist, Certified 5-PATH® Hypnotist, and former owner of the Baltimore Hypnosis Center. A member of the International 5-PATH® Hypnosis Association and certified by the National Guild of Hypnotists, Adam has studied hypnosis, behavior change, and the relationship between thoughts, beliefs, emotions, and behavior for more than two decades. 
+  </p>
+  <p>
+      His perspective is shaped by more than professional training. Adam has also lived through addiction and recovery firsthand, giving him a unique understanding of the struggle from both sides: as a practitioner who has helped others create change and as someone who has had to confront his own deeply ingrained patterns and beliefs.
+  </p>
+  <p>
+     During his own recovery, Adam returned to the principles of hypnosis, mindfulness, self-talk, and behavioral change that he had studied throughout his career. He discovered that recovery could be about more than simply managing cravings or avoiding relapse—it could also be an opportunity to understand the beliefs, emotional patterns, and experiences that had shaped his behavior.
+  </p> 
+  <p>
+     Today, Adam combines his professional experience with the lessons of his own journey to help others explore the possibility of meaningful, lasting change. His approach is grounded in empathy, curiosity, practical tools, and the belief that people are more than the behaviors they are trying to overcome.
+  </p>
 
 address:
   street: 'New Office Coming Soon'
@@ -29,7 +46,8 @@ menu:
        'Shyness / Anxiety': '/html/adam/early_childhood.html'
        'Addiction' : '/html/adam/addiction_development.html'
        'Recovery': '/html/adam/recovery.html'
-       'Celebrities': '/html/adam/celebrities.html'
+       'Reclaming Identity': '/html/adam/reclaim.html'
+       'Professional Hypnotist': '/html/articles/hypnosis/bhc.html'
 
   Hypnosis:
     area: 'hypnosis'
@@ -61,6 +79,7 @@ menu:
       Why Can't I Change: '/html/hypnosis/wcic.html'
       Hypnosis: '/html/hypnosis/addiction_and_recovery.html'
       Sinclair Method: '/html/addiction/sinclair_method.html'
+      Celebrities: '/html/addiction/celebrities.html'
       FAQ: '/html/addiction/addiction_faq.html'
       Articles: '/html/articles/addiction/articles.html'
 
@@ -92,6 +111,7 @@ menu:
     url: '/html/groups/landing.html#groups'
     children:
       Upcoming Events: '/html/groups/upcoming_events.html'
+      Resources: '/html/groups/resources/resources.html'
 
   Parties & Events:
     area: 'parties'

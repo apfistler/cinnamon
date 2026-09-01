@@ -1,0 +1,49 @@
+name: resources
+category: groups_and_events
+title: "Groups & Events: Resources"
+abstract: "Educational materials and resources from groups, workshops, and events conducted throughout the South Jersey and Philadelphia areas."
+keywords:
+  - handouts
+  - materials
+  - resources
+  - groups
+  - workshops
+  - events
+  - addiction
+  - recovery
+  - self-talk
+  - affirmations
+
+display_table:
+  resources:
+    -
+      id: "self_talk"
+      image: "/img/groups/resources/self_talk/self_talk.png"
+      link: "/html/groups/resources/self_talk.html"
+      title: "Positive Self-Talk & Affirmations"
+      content: >
+        This resource explores the relationship between positive and negative self-talk,
+        belief systems, emotions, and behavior. It explains how limiting beliefs and
+        habitual internal dialogue can influence recovery and provides practical
+        guidelines for creating effective affirmations. The material also includes
+        examples of recovery-focused affirmations, techniques for incorporating them
+        into meditation and daily practice, and exercises that can be used in groups
+        and workshops.
+    -
+      id: "meditation"
+      image: "/img/groups/resources/meditation/meditation.png"
+      link: "/html/groups/resources/meditation.html"
+      title: "Learning to Sit With Yourself - Building Inner Strength & Resilience (Meditation)"
+      content: >
+        A practical guide to meditation that explores the core techniques, benefits,
+        and universal layers of meditation. It helps build inner strength, emotional
+        regulation, and resilience by teaching how to create space between triggers
+        and responses through breath awareness, mantras, and structured breathing
+        exercises.
+    -
+      id: "forgiveness"
+      image: "/img/groups/resources/forgiveness/forgiveness.png"
+      link: "/html/groups/resources/forgiveness.html"
+      title: "The Freedom of Forgiveness - Understanding, Processing, and Releasing Emotional Burdens"
+      content: >
+        An in-depth guide exploring forgivenesss not as approval or forgetting, but as an essential process of understanding, processing, and releasing emotional burdens. It examines the emotional cost of holding onto anger, the difference between the memory and the pain, and practical steps to resolve past emotional patterns and achieve lasting emotional freedom.
