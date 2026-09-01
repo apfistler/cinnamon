@@ -9,14 +9,14 @@ display_table:
     -
       id: "bhc"
       image: "/img/articles/hypnosis/bhc/bhc_logo.png"
-      link: "/html/articles/hypnosis/bhc.html"
+      link: "/html/articles/hypnosis/bhc.html#hypnosis"
       title: "Baltimore Hypnosis Center: A Journey of Personal and Professional Transformation"
       content: >
         Adam Fistler's journey into hypnosis began in 2005, sparked by his early experiences using hypnosis techniques to overcome shyness. Seeking professional training, he attended the Banyan Hypnosis Center, earning certification as a Hypnotist. Operating the Baltimore Hypnosis Center, he collaborated with experts, established the Central Maryland Chapter of the NGH, and navigated transformative experiences. Despite a temporary hiatus in 2009, his evolution continued, shaping him into a compassionate and insightful guide, helping others through positive change and transformation.
     - 
       id: "10_things_choosing_a_hypnotist"
       image: "/img/articles/hypnosis/10_things_choosing_a_hypnotist/hypnotist.png"
-      link: "/html/articles/hypnosis/10_things_choosing_a_hypnotist.html"
+      link: "/html/articles/hypnosis/10_things_choosing_a_hypnotist.html#hypnosis"
       title: "10 Things to Consider When Choosing a Hypnotist"
         #      caption: "10 Things to Consider When Choosing a Hypnotist"
       content: >
@@ -25,7 +25,7 @@ display_table:
     - 
       id: "10_things_weight_loss"
       image: "/img/articles/hypnosis/10_things_weight_loss/weight_loss_tape_measure.png"
-      link: "/html/articles/hypnosis/10_things_weight_loss.html"
+      link: "/html/articles/hypnosis/10_things_weight_loss.html#hypnosis"
       title: "10 Ways Hypnosis Can Help You Lose Weight"
         #      caption: "10 Ways Hypnosis Can Help You Lose Weight"
       content: >
@@ -34,7 +34,7 @@ display_table:
     - 
       id: "attract_your_ideal_partner"
       image: "/img/articles/hypnosis/attract_your_ideal_partner/partners.png"
-      link: "/html/articles/hypnosis/attract_your_ideal_partner.html"
+      link: "/html/articles/hypnosis/attract_your_ideal_partner.html#hypnosis"
       title: "Attract Your Ideal Partner by Focusing Your Mind"
         #      caption: "Attract Your Ideal Partner by Focusing Your Mind"
       content: >
@@ -43,7 +43,7 @@ display_table:
     - 
       id: "chronic_pain"
       image: "/img/articles/hypnosis/chronic_pain/doubled_over_in_pain.png"
-      link: "/html/articles/hypnosis/chronic_pain.html"
+      link: "/html/articles/hypnosis/chronic_pain.html#hypnosis"
       title: "Unlocking Freedom from Chronic Pain: Harnessing the Power of Hypnosis"
         #      caption: "5 Ways Hypnosis Can Help Relieve Chronic Pain"
       content: >
@@ -52,7 +52,7 @@ display_table:
     - 
       id: "eoc"
       image: "/img/articles/hypnosis/eoc/problem.png"
-      link: "/html/articles/hypnosis/eoc.html"
+      link: "/html/articles/hypnosis/eoc.html#hypnosis"
       title: "The Essence of Change: Empowering Transformation Through Hypnosis"
         #      caption: "The Essence of Change: Empowering Transformation Through Hypnosis"
       content: >
@@ -61,7 +61,7 @@ display_table:
     - 
       id: "evolution_of_hypnosis"
       image: "/img/articles/hypnosis/evolution_of_hypnosis/pocketwatch.png"
-      link: "/html/articles/hypnosis/evolution_of_hypnosis.html"
+      link: "/html/articles/hypnosis/evolution_of_hypnosis.html#hypnosis"
       title: "Beyond Mesmerism: Navigating the Evolution of Hypnosis and Empowering Self-Transformation in the Modern Era"
         #      caption: "Beyond Mesmerism: Navigating the Evolution of Hypnosis and Empowering Self-Transformation in the Modern Era"
       content: >
@@ -70,7 +70,7 @@ display_table:
     - 
       id: "how_long_does_hypnosis_last"
       image: "/img/articles/hypnosis/how_long_does_hypnosis_last/conversation.png"
-      link: "/html/articles/hypnosis/how_long_does_hypnosis_last.html"
+      link: "/html/articles/hypnosis/how_long_does_hypnosis_last.html#hypnosis"
       title: "How Long Does Hypnosis Last"
         #      caption: "How Long Does Hypnosis Last"
       content: >
@@ -79,7 +79,7 @@ display_table:
     - 
       id: "hrlrwl"
       image: "/img/articles/hypnosis/hrlrwl/bathroom_scale.png"
-      link: "/html/articles/hypnosis/hrlrwl.html"
+      link: "/html/articles/hypnosis/hrlrwl.html#hypnosis"
       title: "Should You Use Hypnosis to Lose Weight?"
         #      caption: "Should You Use Hypnosis to Lose Weight?"
       content: >
@@ -88,7 +88,7 @@ display_table:
     - 
       id: "hrlrss"
       image: "/img/articles/hypnosis/hrlrss/smushed_cigarette.png"
-      link: "/html/articles/hypnosis/hrlrss.html"
+      link: "/html/articles/hypnosis/hrlrss.html#hypnosis"
       title: "Should You Use Hypnosis to Stop Smoking?"
         #      caption: "Should You Use Hypnosis to Stop Smoking?"
       content: >
@@ -97,7 +97,7 @@ display_table:
     - 
       id: "nice_guy"
       image: "/img/articles/hypnosis/nice_guy/mask.png"
-      link: "/html/articles/hypnosis/nice_guy.html"
+      link: "/html/articles/hypnosis/nice_guy.html#hypnosis"
       title: "Breaking Free: The Nice Guy's Journey to Authenticity"
         #      caption: "Breaking Free: The Nice Guy's Journey to Authenticity"
       content: >
@@ -106,7 +106,7 @@ display_table:
     - 
       id: "winning_the_battle_within"
       image: "/img/articles/hypnosis/winning_the_battle_within/uphill_battle.png"
-      link: "/html/articles/hypnosis/winning_the_battle_within.html"
+      link: "/html/articles/hypnosis/winning_the_battle_within.html#hypnosis"
       title: "Winning the Battle Within: Overcoming the Urge"
         #      caption: "Winning the Battle Within: Overcoming the Urge"
       content: >
@@ -115,7 +115,7 @@ display_table:
     - 
       id: "hypnosis_myths"
       image: "/img/articles/hypnosis/hypnosis_myths/myths_vs_facts.png"
-      link: "/html/articles/hypnosis/hypnosis_myths.html"
+      link: "/html/articles/hypnosis/hypnosis_myths.html#hypnosis"
       title: "Debunking Hypnosis Myths: Unveiling the Truth Behind Common Misconceptions"
         #      caption: "Winning the Battle Within: Overcoming the Urge"
       content: >
@@ -124,7 +124,7 @@ display_table:
     - 
       id: "mind_body"
       image: "/img/articles/hypnosis/mind_body/mind_body_connection.png"
-      link: "/html/articles/hypnosis/mind_body.html"
+      link: "/html/articles/hypnosis/mind_body.html#hypnosis"
       title: "Unlocking Wellness: The Profound Influence of the Mind-Body Connection in Healing"
         #      caption: "Winning the Battle Within: Overcoming the Urge"
       content: >
@@ -133,7 +133,7 @@ display_table:
     - 
       id: "subconcious"
       image: "/img/articles/hypnosis/subconcious/subconcious_mind.png"
-      link: "/html/articles/hypnosis/subconcious.html"
+      link: "/html/articles/hypnosis/subconcious.html#hypnosis"
       title: "Exploring the Subconscious Mind: Unveiling the Depths of Your Mental Landscape"
         #      caption: "Winning the Battle Within: Overcoming the Urge"
       content: >
@@ -142,7 +142,7 @@ display_table:
     - 
       id: "gratitude"
       image: "/img/articles/hypnosis/gratitude/greatful_woman.png"
-      link: "/html/articles/hypnosis/gratitude.html"
+      link: "/html/articles/hypnosis/gratitude.html#hypnosis"
       title: "Exploring the Benefits of Gratitude Practices"
         #      caption: "Winning the Battle Within: Overcoming the Urge"
       content: >
@@ -151,7 +151,7 @@ display_table:
     - 
       id: "stress"
       image: "/img/articles/hypnosis/stress/jill_stressed_web.png"
-      link: "/html/articles/hypnosis/stress.html"
+      link: "/html/articles/hypnosis/stress.html#hypnosis"
       title: "The Surprising Link Between Hypnosis and Stress Reduction: A Comprehensive Guide"
       content: >
         Explore the profound connection between hypnosis and stress reduction in this comprehensive guide. Delve into the physiological and psychological aspects of stress and how hypnosis can serve as a powerful tool to alleviate its impact. The article will cover practical insights, case studies, and specific hypnosis techniques that individuals can use to manage stress effectively. From understanding the role of the subconscious mind in stress responses to providing step-by-step instructions for self-hypnosis exercises, readers will gain valuable knowledge on incorporating hypnosis into their stress management routines. Additionally, the article will address common misconceptions about hypnosis and highlight its potential as a holistic approach to fostering mental and emotional well-being.
