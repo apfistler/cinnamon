@@ -9,14 +9,14 @@ display_table:
     -
       id: "neurochemistry"
       image: "/img/articles/addiction/neurochemistry.png"
-      link: "/html/articles/addiction/neurochemistry.html#addiction"
+      link: "/articles/addiction/neurochemistry.html#addiction"
       title: "Neurotransmitters and Neurochemistry in Addiction"
       content: >
         Addiction involves a complex interaction among neurotransmitters, brain circuits, stress, and learning, far beyond dopamine alone. This article explores how systems like GABA, glutamate, serotonin, endorphins, and endocannabinoids shape motivation, pain, and emotional regulation. Understanding the biological adaptations of tolerance, physical dependence, and withdrawal helps shift the focus from moral failure to science-based recovery, neuroplasticity, and effective treatment.
     -
       id: "endomorphine"
       image: "/img/articles/addiction/endorphins.png"
-      link: "/html/articles/addiction/endorphins.html#addiction"
+      link: "/articles/addiction/endorphins.html#addiction"
       title: "Endorphins, Pain, Mood, and Addiction: Understanding the Endogenous Opioid System"
       content: >
         Endorphins play a critical role in pain regulation, stress, mood, and reward, leading many to question whether an "endorphin deficiency" contributes to addiction, chronic pain, or mood disorders. While not an officially recognized medical diagnosis, examining the endogenous opioid system offers valuable insights into physical dependence, anhedonia, and withdrawal. Understanding the complex neurobiology of endorphins helps shift the narrative from shame to science, emphasizing holistic and evidence-based approaches to recovery.

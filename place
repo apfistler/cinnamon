@@ -58,7 +58,12 @@ get_page_files() {
   HTML="$INPUT/$NAME.html"
   YAML="$INPUT/$NAME.yaml"
 
+  # Strip leading 'input/'
   RELATIVE="${INPUT#input/}"
+
+  # Strip leading 'html/' or 'html' if present to match cinnamon.py
+  RELATIVE="${RELATIVE#html/}"
+  RELATIVE="${RELATIVE#html}"
 
   DEST="$WEBROOT/${RELATIVE}.html"
 }

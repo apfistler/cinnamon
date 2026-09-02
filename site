@@ -21,3 +21,22 @@ while IFS= read -r -d '' HTML; do
   fi
 
 done
+
+# ==========================================================
+# POST-PROCESSING: Move output/main/* to output/
+# ==========================================================
+
+if [ -d "output/main" ]; then
+  echo
+  echo "========================================"
+  echo "Flattening output/main into output/"
+  echo "========================================"
+
+  # Enable dotglob to include hidden files if any exist
+  shopt -s dotglob nullglob
+  
+  mv output/main/* output/ 2>/dev/null
+  rmdir output/main 2>/dev/null
+
+  shopt -u dotglob nullglob
+fi

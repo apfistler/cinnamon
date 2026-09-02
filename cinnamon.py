@@ -76,15 +76,20 @@ def main():
             f'input file does not exist: {input_filename}'
         )
 
-    # Preserve the directory structure beneath input/
+    # Preserve the directory structure beneath input/, stripping leading 'html'
     #
     # input/html/main/home/
-    #        ↓
-    # output/html/main/home.html
+    #         ↓
+    # output/main/home.html
     relative_dir = os.path.relpath(
         input_dir,
         input_root
     )
+
+    # Strip top-level 'html' component if present
+    parts = os.path.normpath(relative_dir).split(os.sep)
+    if parts and parts[0] == 'html':
+        relative_dir = os.path.join(*parts[1:]) if len(parts) > 1 else ''
 
     output_filename = os.path.join(
         args.output_dir,

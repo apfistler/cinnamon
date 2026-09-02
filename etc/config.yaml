@@ -25,8 +25,8 @@ address:
   state: 'NJ'
   zip: '08000'
 
-bcc: '<a href="/html/main/contact_adam.html">Adam Fistler - Behavioral Change Consultant</a>'
-contact_adam: '<a href="/html/main/contact_adam.html">Contact me</a>'
+bcc: '<a href="/main/contact_adam.html">Adam Fistler - Behavioral Change Consultant</a>'
+contact_adam: '<a href="/main/contact_adam.html">Contact me</a>'
 phone: '(609) 200-0230'
 email: 'adam@adamfistler.com'
 
@@ -37,92 +37,92 @@ footer:
   - "South Jersey's Choice for Holistic Healing."
 
 menu:
-  Home: '/html/main/home.html'
+  Home: '/main/home.html'
 
   About Adam:
      area: 'adam'
-     url: '/html/adam/landing.html'
+     url: '/adam/landing.html'
      children:
-       'Shyness / Anxiety': '/html/adam/early_childhood.html'
-       'Addiction' : '/html/adam/addiction_development.html'
-       'Recovery': '/html/adam/recovery.html'
-       'Reclaming Identity': '/html/adam/reclaim.html'
-       'Professional Hypnotist': '/html/articles/hypnosis/bhc.html'
+       'Shyness / Anxiety': '/adam/early_childhood.html'
+       'Addiction' : '/adam/addiction_development.html'
+       'Recovery': '/adam/recovery.html'
+       'Reclaming Identity': '/adam/reclaim.html'
+       'Professional Hypnotist': '/articles/hypnosis/bhc.html'
 
   Hypnosis:
     area: 'hypnosis'
-    url: '/html/hypnosis/landing.html'
+    url: '/hypnosis/landing.html'
     children:
-      Professional Experience: '/html/articles/hypnosis/bhc.html'
-      About: '/html/hypnosis/about_hypnosis.html'
-      FAQ: '/html/hypnosis/hypnosis_faq.html'
-      Services: '/html/hypnosis/hypnosis_services.html'
-      Why Can't I Change: '/html/hypnosis/wcic.html'
-      Articles: '/html/articles/hypnosis/articles.html'
-      Testimonials: '/html/hypnosis/testimonials.html'
-      Addction: '/html/hypnosis/addiction_and_recovery.html'
-      Anger: '/html/hypnosis/anger.html'
-      Weight Loss: '/html/hypnosis/weight_loss.html'
-      Smoking Cessation: '/html/hypnosis/smoking_cessation.html'
+      Professional Experience: '/articles/hypnosis/bhc.html'
+      About: '/hypnosis/about_hypnosis.html'
+      FAQ: '/hypnosis/hypnosis_faq.html'
+      Services: '/hypnosis/hypnosis_services.html'
+      Why Can't I Change: '/hypnosis/wcic.html'
+      Articles: '/articles/hypnosis/articles.html'
+      Testimonials: '/hypnosis/testimonials.html'
+      Addction: '/hypnosis/addiction_and_recovery.html'
+      Anger: '/hypnosis/anger.html'
+      Weight Loss: '/hypnosis/weight_loss.html'
+      Smoking Cessation: '/hypnosis/smoking_cessation.html'
 
   Mindfulness:
     area: 'mindfulness'
-    url: '/html/mindfulness/landing.html#mindfulness'
+    url: '/mindfulness/landing.html#mindfulness'
     children:
-      FAQ: '/html/mindfulness/mindfulness_faq.html'
+      FAQ: '/mindfulness/mindfulness_faq.html'
 
   Addiction & Recovery:
     area: 'addiction'
-    url: '/html/addiction/landing.html#addiction'
+    url: '/addiction/landing.html#addiction'
     children:
-      Approach & Services: '/html/addiction/addiction_services.html'
-      Why Can't I Change: '/html/hypnosis/wcic.html'
-      'How / Why': '/html/addiction/how_why.html'
-      Hypnosis: '/html/hypnosis/addiction_and_recovery.html'
-      Sinclair Method: '/html/addiction/sinclair_method.html'
-      Celebrities: '/html/addiction/celebrities.html'
-      FAQ: '/html/addiction/addiction_faq.html'
-      Articles: '/html/articles/addiction/articles.html'
+      Approach & Services: '/addiction/addiction_services.html'
+      Why Can't I Change: '/hypnosis/wcic.html'
+      'How / Why': '/addiction/how_why.html'
+      Hypnosis: '/hypnosis/addiction_and_recovery.html'
+      Sinclair Method: '/addiction/sinclair_method.html'
+      Celebrities: '/addiction/celebrities.html'
+      FAQ: '/addiction/addiction_faq.html'
+      Articles: '/articles/addiction/articles.html'
 
   Handwriting Analysis:
     area: 'handwriting_analysis'
-    url: '/html/graphology/landing.html#handwriting_analysis'
+    url: '/graphology/landing.html#handwriting_analysis'
     children:
-      About: '/html/graphology/graphology.html'
-      FAQ: '/html/graphology/graphology_faq.html'
+      About: '/graphology/graphology.html'
+      FAQ: '/graphology/graphology_faq.html'
 
   Astrology:
     area: 'astrology'
-    url: '/html/astrology/landing.html#astrology'
+    url: '/astrology/landing.html#astrology'
     children:
-      About: '/html/astrology/astrology.html'
-      FAQ: '/html/astrology/astrology_faq.html'
+      About: '/astrology/astrology.html'
+      FAQ: '/astrology/astrology_faq.html'
 
   Technology:
     area: 'technology'
-    url: '/html/technology/landing.html#technology'
+    url: '/technology/landing.html#technology'
     children:
-      Projects: '/html/technology/projects.html'
-      Artwork: '/html/technology/artwork.html'
-      Resume: '/html/technology/resume.html'
-      FAQ: '/html/technology/technology_faq.html'
+      Projects: '/technology/projects.html'
+      Artwork: '/technology/artwork.html'
+      Resume: '/technology/resume.html'
+      FAQ: '/technology/technology_faq.html'
 
   Groups & Workshops:
     area: 'groups'
-    url: '/html/groups/landing.html#groups'
+    url: '/groups/landing.html#groups'
     children:
-      Upcoming Events: '/html/groups/upcoming_events.html'
-      Register: '/html/groups/register.html'
-      Resources: '/html/groups/resources/resources.html'
+      Upcoming Events: '/groups/upcoming_events.html'
+      Register: '/groups/register.html'
+      Resources: '/groups/resources/resources.html'
       
 
   Parties & Events:
     area: 'parties'
-    url: '/html/parties/landing.html#parties'
+    url: '/parties/landing.html#parties'
     children:
-      Scheduling: '/html/parties/scheduling.html'
+      Scheduling: '/parties/scheduling.html'
 
-  Contact Adam: '/html/main/contact_adam.html'
+  Contact Adam: '/main/contact_adam.html'
 
 hypnosis:
   issue_columns: 4
