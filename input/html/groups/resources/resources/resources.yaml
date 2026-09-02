@@ -19,7 +19,7 @@ display_table:
     -
       id: "self_talk"
       image: "/img/groups/resources/self_talk/self_talk.png"
-      link: "/html/groups/resources/self_talk/html#groups"
+      link: "/html/groups/resources/self_talk.html#groups"
       title: "Positive Self-Talk & Affirmations"
       content: >
         This resource explores the relationship between positive and negative self-talk,
@@ -32,7 +32,7 @@ display_table:
     -
       id: "meditation"
       image: "/img/groups/resources/meditation/meditation.png"
-      link: "/html/groups/resources/meditation/html#groups"
+      link: "/html/groups/resources/meditation.html#groups"
       title: "Learning to Sit With Yourself - Building Inner Strength & Resilience (Meditation)"
       content: >
         A practical guide to meditation that explores the core techniques, benefits,
@@ -43,14 +43,14 @@ display_table:
     -
       id: "forgiveness"
       image: "/img/groups/resources/forgiveness/forgiveness.png"
-      link: "/html/groups/resources/forgiveness/html#groups"
+      link: "/html/groups/resources/forgiveness.html#groups"
       title: "The Freedom of Forgiveness - Understanding, Processing, and Releasing Emotional Burdens"
       content: >
         An in-depth guide exploring forgivenesss not as approval or forgetting, but as an essential process of understanding, processing, and releasing emotional burdens. It examines the emotional cost of holding onto anger, the difference between the memory and the pain, and practical steps to resolve past emotional patterns and achieve lasting emotional freedom.
     -
       id: "anger"
       image: "/img/groups/resources/anger/anger.png"
-      link: "/html/groups/resources/anger/html#groups"
+      link: "/html/groups/resources/anger.html#groups"
       title: "When Anger Speaks - Understand the Message Behind Your Emotions"
       content: >
         Anger is not the enemy—it is information signaling a need, value, boundary, or sense of safety. Understanding its message allows us to respond effectively rather than react automatically. By recognizing underlying emotions, understanding protective brain responses, and creating a pause between feeling and reaction, we gain the freedom to choose outcomes that truly serve us.

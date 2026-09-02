@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 BASE_INPUT_DIR = Path("/home/apfistler/cinnamon/input/html")
-SNIPPET_BLOCK = "\n<!-- SNIPPET pages -->\n<!-- SNIPPET articles -->\n"
+SNIPPET_BLOCK = "<!-- ABOUT_AUTHOR -->\n<!-- SNIPPET pages -->\n<!-- SNIPPET articles -->\n"
 
 def resolve_target_dir(category_dir: Path, subdir: str | None) -> Path:
     """Resolves target directory, stripping duplicate BASE_INPUT_DIR prefixes if passed in $2."""
