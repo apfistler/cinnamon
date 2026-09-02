@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 BASE_INPUT_DIR = Path("/home/apfistler/cinnamon/input/html")
-SNIPPET_BLOCK = "<!-- ABOUT_AUTHOR -->\n<!-- SNIPPET pages -->\n<!-- SNIPPET articles -->\n"
+SNIPPET_BLOCK = "<!-- SNIPPET pages -->\n<!-- SNIPPET articles -->\n"
 
 def resolve_target_dir(category_dir: Path, subdir: str | None) -> Path:
     """Resolves target directory, stripping duplicate BASE_INPUT_DIR prefixes if passed in $2."""
@@ -58,13 +58,33 @@ def ensure_symlinks_in_tree(start_dir: Path, shared_snippet_dir: Path) -> None:
 
 
 def append_snippets_if_missing(file_path: Path) -> None:
-    """Appends the required snippet comments to an HTML file if absent at the end."""
+    """
+    Appends snippet tags and optionally <!-- ABOUT_AUTHOR --> to an HTML file if absent.
+    If 'about_author' is missing, places <!-- ABOUT_AUTHOR --> directly above the snippet blocks.
+    """
     content = file_path.read_text(encoding="utf-8")
+    
+    has_about_author = "about_author" in content.lower()
+    has_snippet_articles = content.rstrip().endswith("<!-- SNIPPET articles -->")
 
-    if not content.rstrip().endswith("<!-- SNIPPET articles -->"):
-        new_content = content.rstrip() + SNIPPET_BLOCK
-        file_path.write_text(new_content, encoding="utf-8")
-        print(f"[UPDATED] {file_path}")
+    # If both are already present, do nothing
+    if has_about_author and has_snippet_articles:
+        return
+
+    new_content = content.rstrip()
+
+    # Append ABOUT_AUTHOR comment if missing
+    if not has_about_author:
+        new_content += "\n<!-- ABOUT_AUTHOR -->"
+
+    # Append SNIPPET block if missing
+    if not has_snippet_articles:
+        new_content += f"\n{SNIPPET_BLOCK.strip()}"
+
+    new_content += "\n"
+    
+    file_path.write_text(new_content, encoding="utf-8")
+    print(f"[UPDATED] {file_path}")
 
 
 def process_html_files(root_dir: Path, shared_snippet_dir: Path) -> None:

@@ -1,0 +1,84 @@
+<div class="groups-page-wrapper">
+    <h1>Workshop Registration</h1>
+
+<div class="groups-page-wrapper">
+    <section class="container">
+
+        <form action="/cgi-bin/contact.py" method="POST" class="contact-form">
+           <input type="hidden" name="form_type" value="registration">
+            
+            <!-- SELECT EVENT -->
+            <div class="form-row">
+                <label for="event" class="form-label">
+                    <span class="form-label-text">Select Event</span>
+                    <span class="form-required">*</span>
+                    <span class="form-colon">:</span>
+                </label>
+                <div class="form-field">
+                    <!-- SELECTBOX event -->
+                </div>
+            </div>
+
+            <!-- FULL NAME -->
+            <div class="form-row">
+                <label for="name" class="form-label">
+                    <span class="form-label-text">Full Name</span>
+                    <span class="form-required">*</span>
+                    <span class="form-colon">:</span>
+                </label>
+                <div class="form-field">
+                    <input type="text" id="name" name="name" class="form-control" required placeholder="John Doe">
+                </div>
+            </div>
+
+            <!-- EMAIL ADDRESS -->
+            <div class="form-row">
+                <label for="email" class="form-label">
+                    <span class="form-label-text">Email Address</span>
+                    <span class="form-required">*</span>
+                    <span class="form-colon">:</span>
+                </label>
+                <div class="form-field">
+                    <input type="email" id="email" name="email" class="form-control" required placeholder="john@example.com">
+                </div>
+            </div>
+
+            <!-- PHONE NUMBER -->
+            <div class="form-row">
+                <label for="phone" class="form-label">
+                    <span class="form-label-text">Phone Number</span>
+                    <span class="form-colon">:</span>
+                </label>
+                <div class="form-field">
+                    <input type="tel" id="phone" name="phone" class="form-control" required placeholder="(609) 000-0000">
+                </div>
+            </div>
+
+            <!-- NUMBER OF ATTENDEES -->
+            <div class="form-row">
+                <label for="attendees" class="form-label">
+                    <span class="form-label-text">Attendees</span>
+                    <span class="form-required">*</span>
+                    <span class="form-colon">:</span>
+                </label>
+                <div class="form-field">
+                    <input type="number" id="attendees" name="attendees" class="form-control" min="1" max="10" value="1" required>
+                </div>
+            </div>
+
+            <!-- SUBMIT ROW -->
+            <div class="form-submit-row">
+                <div></div> <!-- Empty column to align with grid offset -->
+                <div class="form-submit">
+                    <button type="submit">Complete Registration</button>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="cta-box">
+            <p>Questions about registration or upcoming sessions? &nbsp;&nbsp;&nbsp;&nbsp;<!-- CONTACT_ADAM --></p>
+        </div>
+    </section>
+</div>
+

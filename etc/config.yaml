@@ -112,7 +112,9 @@ menu:
     url: '/html/groups/landing.html#groups'
     children:
       Upcoming Events: '/html/groups/upcoming_events.html'
+      Register: '/html/groups/register.html'
       Resources: '/html/groups/resources/resources.html'
+      
 
   Parties & Events:
     area: 'parties'
