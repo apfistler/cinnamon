@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 WEB_DIR="/var/www/adamfistler.com/public_html"
@@ -15,22 +14,24 @@ INPUT_PATH="$1"
 # 1. Clean trailing slash
 INPUT_PATH="${INPUT_PATH%/}"
 
-# 2. Resolve relative path under input/html/
-RELATIVE="${INPUT_PATH}"
-RELATIVE="${RELATIVE#input/html/}"
-RELATIVE="${RELATIVE#html/}"
-RELATIVE="${RELATIVE#input/}"
+# 2. Derive relative path under input/ for output targeting
+# Handles both absolute (/home/.../cinnamon/input/...) and relative (input/...)
+# Flattens EVERY "html/" segment wherever it occurs, not just a leading one.
+RELATIVE="${INPUT_PATH#*input/}"
+RELATIVE="${RELATIVE//html\//}"
 RELATIVE="${RELATIVE#/}"
 
-# 3. Handle directory vs file target resolution
+# 3. Locate the source HTML stub and directory
 if [ -d "$INPUT_PATH" ]; then
+  DIR_PATH="$INPUT_PATH"
   DIR_NAME=$(basename "$INPUT_PATH")
   HTML_STUB="${INPUT_PATH}/${DIR_NAME}.html"
-  
+
   if [ ! -f "$HTML_STUB" ]; then
     HTML_STUB=$(find "$INPUT_PATH" -maxdepth 1 -name "*.html" | head -n 1)
   fi
 else
+  DIR_PATH=$(dirname "$INPUT_PATH")
   HTML_STUB="$INPUT_PATH"
 fi
 
@@ -39,7 +40,7 @@ if [ -z "$HTML_STUB" ] || [ ! -f "$HTML_STUB" ]; then
   exit 1
 fi
 
-# 4. Locate generated JSON-LD payload (<name>-ld.json)
+# 4. Locate source JSON-LD payload (<name>-ld.json)
 BASE_NAME="${HTML_STUB%.html}"
 JSON_LD_FILE="${BASE_NAME}-ld.json"
 
@@ -49,76 +50,91 @@ if [ ! -f "$JSON_LD_FILE" ]; then
   exit 1
 fi
 
-# 5. Extract <category> and <name> from the last two directory components
-# Handles both direct folder paths and file paths
-if [ -d "$INPUT_PATH" ]; then
-  DIR_PATH="$INPUT_PATH"
-else
-  DIR_PATH=$(dirname "$INPUT_PATH")
-fi
-
+# 5. Extract <category> and <name>
 NAME=$(basename "$DIR_PATH")
 CATEGORY=$(basename "$(dirname "$DIR_PATH")")
 
-# 6. Copy JSON-LD payload to web root's structured_data directory
-TARGET_STRUCTURED_DIR="${WEB_DIR}/structured_data"
+# 6. COPY LOGIC: Copy JSON-LD payload to /js/ (served path referenced by the <script src> tag)
+TARGET_STRUCTURED_DIR="${WEB_DIR}/js"
 TARGET_LD_FILE="${TARGET_STRUCTURED_DIR}/${CATEGORY}_${NAME}-ld.json"
-
 echo "==> Copying JSON-LD payload to '${TARGET_LD_FILE}'..."
 mkdir -p "$TARGET_STRUCTURED_DIR"
 cp "$JSON_LD_FILE" "$TARGET_LD_FILE"
 
-# 7. Determine Cinnamon output HTML location
+# 7. RESOLVE OUTPUT HTML TARGET
 CLEAN_REL="${RELATIVE%.html}"
 OUTPUT_HTML_FILE="output/${CLEAN_REL}.html"
 
-if [ ! -f "$OUTPUT_HTML_FILE" ]; then
-  echo "Error: Target built file not found at '$OUTPUT_HTML_FILE'." >&2
-  echo "Ensure Cinnamon has built the output site first." >&2
+# Fallback: Check if file is stored as output/.../<name>/<name>.html
+if [ ! -f "$OUTPUT_HTML_FILE" ] && [ -f "output/${CLEAN_REL}/${NAME}.html" ]; then
+  OUTPUT_HTML_FILE="output/${CLEAN_REL}/${NAME}.html"
+fi
+
+# Safety guard — never let an empty/garbage path fall through silently
+if [ -z "$OUTPUT_HTML_FILE" ] || [ "$OUTPUT_HTML_FILE" = "output/.html" ]; then
+  echo "Error: Could not resolve output HTML path from INPUT_PATH='$INPUT_PATH' (RELATIVE='$RELATIVE')." >&2
   exit 1
 fi
 
-# 8. Check if JSON-LD script tag is already injected
-if grep -q 'application/ld+json' "$OUTPUT_HTML_FILE"; then
-  echo "Skipping inline injection: JSON-LD block already present in '$OUTPUT_HTML_FILE'"
+echo "--> Target Output File: ${OUTPUT_HTML_FILE}"
+if [ ! -f "$OUTPUT_HTML_FILE" ]; then
+  echo "Error: Target output HTML file does not exist at '${OUTPUT_HTML_FILE}'." >&2
+  echo "Make sure you are running inject_ld.sh from your Cinnamon repository root (where output/ is located)." >&2
+  exit 1
+fi
+
+# Capture original permissions so temp-file swaps below don't leave the file
+# at mktemp's default 600 — mv preserves the SOURCE (temp file) permissions,
+# not the destination's, when replacing an existing file.
+ORIG_PERMS=$(stat -c '%a' "$OUTPUT_HTML_FILE" 2>/dev/null || stat -f '%Lp' "$OUTPUT_HTML_FILE")
+
+# 7b. CLEANUP: strip stray invalid </meta> closing tags (meta is a void element
+# and should never have a closing tag). Runs every time, case-insensitive,
+# regardless of whether JSON-LD injection below is skipped.
+if grep -qi '</meta>' "$OUTPUT_HTML_FILE"; then
+  echo "==> Removing stray </meta> tag(s) from '$OUTPUT_HTML_FILE'..."
+  TMP_CLEAN=$(mktemp)
+  sed -E 's#</[Mm][Ee][Tt][Aa]>##g' "$OUTPUT_HTML_FILE" > "$TMP_CLEAN"
+  mv "$TMP_CLEAN" "$OUTPUT_HTML_FILE"
+  chmod "$ORIG_PERMS" "$OUTPUT_HTML_FILE"
+fi
+
+# 8. Check if already injected (check for this page's specific src reference)
+LD_SRC="/js/${CATEGORY}_${NAME}-ld.json"
+if grep -qF "$LD_SRC" "$OUTPUT_HTML_FILE"; then
+  echo "Skipping injection: JSON-LD reference already present in '$OUTPUT_HTML_FILE'"
   exit 0
 fi
 
-# 9. Inject JSON-LD directly into HTML using pure Bash/awk
-echo "==> Injecting JSON-LD inline into '$OUTPUT_HTML_FILE'..."
-
-# Create wrapped block in temporary file
-TMP_BLOCK=$(mktemp)
-echo '<script type="application/ld+json">' > "$TMP_BLOCK"
-cat "$JSON_LD_FILE" >> "$TMP_BLOCK"
-echo '</script>' >> "$TMP_BLOCK"
+# 9. INJECT LOGIC: Inject a <script src="..."> reference before </head>
+# (case-insensitive match, safe against & and \ since we build the line ourselves)
+echo "==> Injecting JSON-LD reference into '$OUTPUT_HTML_FILE'..."
+INJECT_LINE="<script src=\"${LD_SRC}\" type=\"application/ld+json\"></script>"
 
 TMP_OUT=$(mktemp)
+echo "This is the output file its trying to modify: $OUTPUT_HTML_FILE"
 
-# Insert before </head> ignoring case, or prepend if missing
 if grep -qi "</head>" "$OUTPUT_HTML_FILE"; then
-  awk -v block_file="$TMP_BLOCK" '
-    BEGIN {
-      while ((getline line < block_file) > 0) {
-        block = block line "\n"
-      }
-      close(block_file)
-      injected = 0
-    }
+  awk -v inject_line="$INJECT_LINE" '
     {
-      if (!injected && index(tolower($0), "</head>") > 0) {
-        sub(/<\/head>/, block "</head>", $0)
-        sub(/<\/HEAD>/, block "</HEAD>", $0)
-        injected = 1
+      if (!injected) {
+        lower = tolower($0)
+        pos = index(lower, "</head>")
+        if (pos > 0) {
+          pre  = substr($0, 1, pos - 1)
+          post = substr($0, pos)
+          printf "%s%s\n%s\n", pre, inject_line, post
+          injected = 1
+          next
+        }
       }
       print $0
     }
   ' "$OUTPUT_HTML_FILE" > "$TMP_OUT"
-  mv "$TMP_OUT" "$OUTPUT_HTML_FILE"
 else
-  cat "$TMP_BLOCK" "$OUTPUT_HTML_FILE" > "$TMP_OUT"
-  mv "$TMP_OUT" "$OUTPUT_HTML_FILE"
+  { echo "$INJECT_LINE"; cat "$OUTPUT_HTML_FILE"; } > "$TMP_OUT"
 fi
 
-rm -f "$TMP_BLOCK" "$TMP_OUT"
-echo "Successfully injected JSON-LD into $OUTPUT_HTML_FILE"
+mv "$TMP_OUT" "$OUTPUT_HTML_FILE"
+chmod "$ORIG_PERMS" "$OUTPUT_HTML_FILE"
+echo "Successfully injected JSON-LD reference into $OUTPUT_HTML_FILE"

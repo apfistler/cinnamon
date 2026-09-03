@@ -40,3 +40,5 @@ if [ -d "output/main" ]; then
 
   shopt -u dotglob nullglob
 fi
+
+find /var/www/adamfistler.com -type f -exec chmod 644 {} +
