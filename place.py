@@ -37,27 +37,26 @@ def strip_backticks(file_path):
         print(f"Error sanitizing {file_path}: {e}", file=sys.stderr)
         sys.exit(1)
 
-def run_ld_pipeline(abs_target_path, script_dir):
-    """Executes generate_ld.py followed by inject_ld.sh."""
+def run_generate_ld(target_input_path, script_dir):
+    """Step 1: Executes generate_ld.py with target_input_path."""
     generate_script = os.path.join(script_dir, "generate_ld.py")
-    inject_script = os.path.join(script_dir, "inject_ld.sh")
-
-    # Step 1: Generate JSON-LD Schema
     if os.path.exists(generate_script):
-        print(f"--> [1/2] Generating JSON-LD for: {abs_target_path}")
-        res_gen = subprocess.run([sys.executable, generate_script, abs_target_path])
+        print(f"--> [1/3] Generating JSON-LD for: {target_input_path}")
+        res_gen = subprocess.run([sys.executable, generate_script, target_input_path])
         if res_gen.returncode != 0:
             print(f"Error: generate_ld.py failed (exit code {res_gen.returncode})", file=sys.stderr)
             sys.exit(1)
     else:
         print(f"Warning: '{generate_script}' not found. Skipping generation.", file=sys.stderr)
 
-    # Step 2: Inject JSON-LD
+def run_inject_ld(target_input_path, script_dir):
+    """Step 3: Executes inject_ld.sh via Bash using the identical input path."""
+    inject_script = os.path.join(script_dir, "inject_ld.sh")
     if os.path.exists(inject_script):
-        print(f"--> [2/2] Injecting JSON-LD for: {abs_target_path}")
-        res_inj = subprocess.run([sys.executable, inject_script, abs_target_path])
+        print(f"--> [3/3] Injecting JSON-LD for: {target_input_path}")
+        res_inj = subprocess.run(["/usr/bin/env", "bash", inject_script, target_input_path])
         if res_inj.returncode != 0:
-            print(f"Error: inject_ld.py failed (exit code {res_inj.returncode})", file=sys.stderr)
+            print(f"Error: inject_ld.sh failed (exit code {res_inj.returncode})", file=sys.stderr)
             sys.exit(1)
     else:
         print(f"Warning: '{inject_script}' not found. Skipping injection.", file=sys.stderr)
@@ -68,9 +67,7 @@ def derive_clean_relative_path(raw_input):
     Example: 'input/html/articles/hypnosis/10_things' -> 'articles/hypnosis/10_things'
     Example: 'input/hypnosis/about' -> 'hypnosis/about'
     """
-    # Remove leading input/ or input
     rel = re.sub(r"^input/?", "", raw_input)
-    # Strip html/ if present at start of relative path
     rel = re.sub(r"^html/?", "", rel)
     return rel
 
@@ -83,9 +80,8 @@ def main():
 
     args, _ = parser.parse_known_args()
     
-    # Clean up input path string
+    # Clean up input path string - preserve relative input/ path across tools
     raw_input = args.input_dir.rstrip("/")
-    abs_input = os.path.abspath(raw_input)
 
     # 1. Validation
     if not raw_input.startswith("input/"):
@@ -115,28 +111,35 @@ def main():
         sys.exit(1)
 
     # 2. Sanitization
+    print(f"Processing: {raw_input}")
     print("Sanitizing files...")
     strip_backticks(html_file)
     strip_backticks(yaml_file)
 
-    # 3. JSON-LD Pipeline (Conditional / Optional)
-    if should_generate_ld(raw_input, args.generate_ld):
-        run_ld_pipeline(abs_input, script_dir)
-    else:
-        print("Skipping JSON-LD pipeline (no '/article/' in path and -l flag not set).")
+    ld_enabled = should_generate_ld(raw_input, args.generate_ld)
 
-    # 4. Build (cinnamon.py)
+    # 3. Pipeline Step 1: Generate JSON-LD Schema
+    if ld_enabled:
+        run_generate_ld(raw_input, script_dir)
+    else:
+        print("Skipping JSON-LD generation (no '/article/' in path and -l flag not set).")
+
+    # 4. Pipeline Step 2: Cinnamon Build
     cinnamon_bin = os.path.join(script_dir, "cinnamon.py")
     if not os.path.exists(cinnamon_bin):
         cinnamon_bin = "./cinnamon.py"
 
-    print("Running Cinnamon...")
+    print("--> [2/3] Running Cinnamon...")
     res_cin = subprocess.run([sys.executable, cinnamon_bin, raw_input])
     if res_cin.returncode != 0:
         print("Error: Cinnamon build failed.", file=sys.stderr)
         sys.exit(1)
 
-    # 5. Install to WEBROOT (stripping /html/ segment)
+    # 5. Pipeline Step 3: Inject JSON-LD Schema
+    if ld_enabled:
+        run_inject_ld(raw_input, script_dir)
+
+    # 6. Install to WEBROOT
     clean_relative = derive_clean_relative_path(raw_input)
     dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")
     compiled_output = os.path.join("output", f"{clean_relative}.html")

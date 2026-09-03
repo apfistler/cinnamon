@@ -123,6 +123,14 @@ def main():
     # Infer input locations automatically
     site_config_path, page_meta_path, html_stub_path = resolve_paths(target_input)
 
+    # Check for existing output file early to avoid unnecessary processing
+    base_name, _ = os.path.splitext(html_stub_path)
+    output_path = f"{base_name}-ld.json"
+
+    if os.path.exists(output_path):
+        print(f"Skipping: JSON-LD file already exists at '{output_path}'")
+        sys.exit(0)
+
     # Load data sources
     site_config = load_yaml(site_config_path)
     page_meta = load_yaml(page_meta_path)
@@ -188,10 +196,6 @@ def main():
             }
         ]
     }
-
-    # Generate output file at <name>-ld.json inside the directory
-    base_name, _ = os.path.splitext(html_stub_path)
-    output_path = f"{base_name}-ld.json"
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(json_ld_graph, f, indent=2)
