@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/attract_your_ideal_partner/attract_your_ideal_partner.html#webpage",
+      "url": "https://www.adamfistler.com/articles/hypnosis/attract_your_ideal_partner/attract_your_ideal_partner.html",
+      "name": "Attract Your Ideal Partner by Focusing Your Mind",
+      "description": "Many people express their desire to find a partner without truly understanding what they seek. If you're in this position, you might overlook the right person even if they're right in front of you. This exercise aims to focus your mind, guiding your intent towards attracting your ideal partner. Approach this with openness and playfulness for the best results. Grab a piece of paper and indulge in this exercise.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com",
+        "email": "adam@adamfistler.com",
+        "telephone": "(609) 200-0230"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/attract_your_ideal_partner/attract_your_ideal_partner.html#article",
+      "isPartOf": {
+        "@id": "https://www.adamfistler.com/articles/hypnosis/attract_your_ideal_partner/attract_your_ideal_partner.html#webpage"
+      },
+      "headline": "Attract Your Ideal Partner by Focusing Your Mind",
+      "description": "Many people express their desire to find a partner without truly understanding what they seek. If you're in this position, you might overlook the right person even if they're right in front of you. This exercise aims to focus your mind, guiding your intent towards attracting your ideal partner. Approach this with openness and playfulness for the best results. Grab a piece of paper and indulge in this exercise.",
+      "articleBody": "Many people express their desire to find a partner without truly understanding what they seek. If you're in this position, you might overlook the right person even if they're right in front of you. This exercise aims to focus your mind, guiding your intent towards attracting your ideal partner. Approach this with openness and playfulness for the best results. Grab a piece of paper and indulge in this exercise. Be honest with yourself. List the physical qualities you find important, such as age group, hair color, or height. State these qualities in the positive. Instead of focusing on what you don't want, frame it positively. For example, say you want someone who is fit, not someone who is not fat. Think about the qualities you seek in a person. Consider attributes like humor, honesty, or loyalty\u2014qualities that the person offers to others. State these qualities positively as well. Decide what kind of connection you wish to establish. Whether it's fun and playful or open and sincere, keep it reasonable and enjoyable. Avoid overly intense intentions, as they might deter potential partners. Reflect on your positive qualities. Are you smart, funny, or caring? Consider what the other person would gain by meeting you. List all the qualities and values you possess. Think about how others, including your friends or businesses, would benefit from your connection with this person. Envision a positive ripple effect. Review your list of desired qualities and values. Ask yourself if you truly believe you deserve someone like this. If you encounter inner conflicts or doubt, hypnosis can help overcome these obstacles. Find a quiet, comfortable space where you won't be disturbed. Clear your mind and let go of any critical thoughts. Count backward from ten to one, allowing yourself to relax deeply. Visualize the person's physical qualities one by one. Imagine their aura changing as you add qualities and values. Connect with them through a cord of light, feeling the energy exchange. Look through their eyes at yourself, adding the qualities and values you offer. Express gratitude for their presence in your life. Observe your surroundings and pay attention to any hunches or intuitions guiding you. Have faith in the process and allow it to unfold naturally. Remember, the key is to have fun and stay open to the possibilities. Share your experiences with me at",
+      "image": [
+        "https://www.adamfistler.com/img/articles/hypnosis/attract_your_ideal_partner/finding_love.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/attract_your_ideal_partner/love_connection.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/attract_your_ideal_partner/partners.png"
+      ],
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.adamfistler.com/#adamfistler",
+        "name": "Adam Fistler, BCH",
+        "jobTitle": "Behavioral Change Consultant & Board Certified Hypnotist",
+        "url": "https://www.adamfistler.com/adam/index.html",
+        "email": "adam@adamfistler.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com"
+      }
+    }
+  ]
+}

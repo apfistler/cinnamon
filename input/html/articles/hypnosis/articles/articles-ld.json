@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/articles/articles.html#webpage",
+      "url": "https://www.adamfistler.com/articles/hypnosis/articles/articles.html",
+      "name": "Adam Fistler",
+      "description": "Adam Fistler | South Jersey Hypnosis & Addiction Recovery Consultant",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com",
+        "email": "adam@adamfistler.com",
+        "telephone": "(609) 200-0230"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/articles/articles.html#article",
+      "isPartOf": {
+        "@id": "https://www.adamfistler.com/articles/hypnosis/articles/articles.html#webpage"
+      },
+      "headline": "Adam Fistler",
+      "description": "Adam Fistler | South Jersey Hypnosis & Addiction Recovery Consultant",
+      "articleBody": "",
+      "image": [],
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.adamfistler.com/#adamfistler",
+        "name": "Adam Fistler, BCH",
+        "jobTitle": "Behavioral Change Consultant & Board Certified Hypnotist",
+        "url": "https://www.adamfistler.com/adam/index.html",
+        "email": "adam@adamfistler.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com"
+      }
+    }
+  ]
+}

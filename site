@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PLACE="./place"
+PLACE="./place.py"
 
 find input -type f -name '*.html' -print0 |
 while IFS= read -r -d '' HTML; do

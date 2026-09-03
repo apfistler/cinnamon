@@ -1,0 +1,55 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.adamfistler.com/#adamfistler",
+      "name": "Adam Fistler, BCH",
+      "jobTitle": "Behavioral Change Consultant & Board Certified Hypnotist",
+      "url": "https://www.adamfistler.com/adam/index.html",
+      "email": "adam@adamfistler.com"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.adamfistler.com/#organization",
+      "name": "Adam Fistler",
+      "url": "https://www.adamfistler.com",
+      "email": "adam@adamfistler.com",
+      "telephone": "(609) 200-0230",
+      "logo": "https://www.adamfistler.com/logo.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/subconcious/subconcious.html#webpage",
+      "url": "https://www.adamfistler.com/articles/hypnosis/subconcious/subconcious.html",
+      "name": "Exploring the Subconscious Mind: Unveiling the Depths of Your Mental Landscape",
+      "description": "The human mind is a vast and intricate landscape, and within its depths lies the enigmatic realm of the subconscious...",
+      "publisher": {
+        "@id": "https://www.adamfistler.com/#organization"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/subconcious/subconcious.html#article",
+      "isPartOf": {
+        "@id": "https://www.adamfistler.com/articles/hypnosis/subconcious/subconcious.html#webpage"
+      },
+      "headline": "Exploring the Subconscious Mind: Unveiling the Depths of Your Mental Landscape",
+      "description": "The human mind is a vast and intricate landscape, and within its depths lies the enigmatic realm of the subconscious...",
+      "datePublished": "2024-01-01T08:00:00+00:00",
+      "dateModified": "2024-01-01T08:00:00+00:00",
+      "articleBody": "The human mind is a vast and intricate landscape...",
+      "image": [
+        "https://www.adamfistler.com/img/articles/hypnosis/subconcious/subconcious_mind.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/subconcious/dreams.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/subconcious/self_discovery.png"
+      ],
+      "author": {
+        "@id": "https://www.adamfistler.com/#adamfistler"
+      },
+      "publisher": {
+        "@id": "https://www.adamfistler.com/#organization"
+      }
+    }
+  ]
+}

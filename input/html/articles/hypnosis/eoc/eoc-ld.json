@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/eoc/eoc.html#webpage",
+      "url": "https://www.adamfistler.com/articles/hypnosis/eoc/eoc.html",
+      "name": "The Essence of Change: Empowering Transformation through Hypnosis",
+      "description": "In the journey of personal growth, the concept of change often poses profound questions. What does it truly mean to make a change? As I delved into the realms of hypnosis and Neuro Linguistic Programming (NLP) to overcome my own shyness, I unearthed a profound truth: change is about choice. In this article, let's explore the transformative power of change, particularly in the context of hypnnosis.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com",
+        "email": "adam@adamfistler.com",
+        "telephone": "(609) 200-0230"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://www.adamfistler.com/articles/hypnosis/eoc/eoc.html#article",
+      "isPartOf": {
+        "@id": "https://www.adamfistler.com/articles/hypnosis/eoc/eoc.html#webpage"
+      },
+      "headline": "The Essence of Change: Empowering Transformation through Hypnosis",
+      "description": "In the journey of personal growth, the concept of change often poses profound questions. What does it truly mean to make a change? As I delved into the realms of hypnosis and Neuro Linguistic Programming (NLP) to overcome my own shyness, I unearthed a profound truth: change is about choice. In this article, let's explore the transformative power of change, particularly in the context of hypnnosis.",
+      "articleBody": "In the journey of personal growth, the concept of change often poses profound questions. What does it truly mean to make a change? As I delved into the realms of hypnosis and Neuro Linguistic Programming (NLP) to overcome my own shyness, I unearthed a profound truth: change is about choice. In this article, let's explore the transformative power of change, particularly in the context of hypnnosis. Have you ever wondered why problems exist? From my personal odyssey battling shyness, I learned that problems serve as catalysts for personal evolution. They drive us to explore uncharted territories within ourselves, fostering resilience and newfound strengths. Even amidst my own struggles, I discovered resilience, the ability to learn, and a deep desire to assist others on their journeys. Problems, in a twisted sense, become our greatest teachers, revealing facets of ourselves we never knew existed. Clients often approach me with diverse interpretations of change. Many believe it involves adopting polar opposite behaviors or exchanging one problem for another. For instance, shyness may lead someone to desire boundless extroversion, while a smoker might seek solace in chewing gum. But is this radical shift truly the answer? Change, as I've come to realize, is not about swapping one issue for another; it's about reclaiming control. It's about having the freedom to choose without feeling confined to extremes. Various methods attempt to force change, relying on willpower, motivational speeches, affirmations, and NLP techniques. While effective momentarily, these approaches lack longevity. Willpower, akin to a temporary fix, crumbles under pressure. Motivational speeches create ephemeral excitement but fade in the face of ingrained beliefs. Affirmations and NLP techniques overpower rather than neutralize underlying emotions. Trained in 5-PATH Hypnosis, I comprehend that problems stem from beliefs, emotions, and misperceptions. Unbalanced emotions trigger false hunger, unwarranted fears, or destructive habits. By eliminating these emotions and misconceptions, we restore control to our clients. Through hypnnosis, we neutralize driving forces, allowing authentic choices to emerge. Hypnosis offers rapid solutions, yet misconceptions persist regarding its duration. While some experience profound changes in one session, others require 4-6 sessions. The duration hinges on the depth of beliefs and emotions fueling the problem. Each layer peeled away offers relief, guiding clients toward lasting transformation. What does change truly feel like? After the emotional clutter dissipates, change feels natural, like rediscovering one's essence. It's about returning control to the client, allowing them to make choices aligned with their authentic selves. Change, ultimately, feels liberating and timeless, fading problems into distant memories. In embracing hypnnosis, we embrace the essence of change \u2014 a journey back to the self, where control, choice, and freedom reign supreme. Explore this transformative path; your authentic self awaits.",
+      "image": [
+        "https://www.adamfistler.com/img/articles/hypnosis/eoc/problem.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/eoc/journey.png",
+        "https://www.adamfistler.com/img/articles/hypnosis/eoc/hypnosis_session.png"
+      ],
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.adamfistler.com/#adamfistler",
+        "name": "Adam Fistler, BCH",
+        "jobTitle": "Behavioral Change Consultant & Board Certified Hypnotist",
+        "url": "https://www.adamfistler.com/adam/index.html",
+        "email": "adam@adamfistler.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adam Fistler",
+        "url": "https://www.adamfistler.com"
+      }
+    }
+  ]
+}

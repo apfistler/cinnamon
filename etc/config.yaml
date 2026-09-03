@@ -25,7 +25,7 @@ address:
   state: 'NJ'
   zip: '08000'
 
-bcc: '<a href="/main/contact_adam.html">Adam Fistler - Behavioral Change Consultant</a>'
+bcc: '<a href="/contact_adam.html">Adam Fistler - Behavioral Change Consultant</a>'
 contact_adam: '<a href="/main/contact_adam.html">Contact me</a>'
 phone: '(609) 200-0230'
 email: 'adam@adamfistler.com'
@@ -37,11 +37,11 @@ footer:
   - "South Jersey's Choice for Holistic Healing."
 
 menu:
-  Home: '/main/home.html'
+  Home: '/index.html'
 
   About Adam:
      area: 'adam'
-     url: '/adam/landing.html'
+     url: '/adam/index.html'
      children:
        'Shyness / Anxiety': '/adam/early_childhood.html'
        'Addiction' : '/adam/addiction_development.html'
@@ -51,7 +51,7 @@ menu:
 
   Hypnosis:
     area: 'hypnosis'
-    url: '/hypnosis/landing.html'
+    url: '/hypnosis/index.html'
     children:
       Professional Experience: '/articles/hypnosis/bhc.html'
       About: '/hypnosis/about_hypnosis.html'
@@ -67,13 +67,13 @@ menu:
 
   Mindfulness:
     area: 'mindfulness'
-    url: '/mindfulness/landing.html#mindfulness'
+    url: '/mindfulness/index.html#mindfulness'
     children:
       FAQ: '/mindfulness/mindfulness_faq.html'
 
   Addiction & Recovery:
     area: 'addiction'
-    url: '/addiction/landing.html#addiction'
+    url: '/addiction/index.html#addiction'
     children:
       Approach & Services: '/addiction/addiction_services.html'
       Why Can't I Change: '/hypnosis/wcic.html'
@@ -86,21 +86,21 @@ menu:
 
   Handwriting Analysis:
     area: 'handwriting_analysis'
-    url: '/graphology/landing.html#handwriting_analysis'
+    url: '/graphology/index.html#handwriting_analysis'
     children:
       About: '/graphology/graphology.html'
       FAQ: '/graphology/graphology_faq.html'
 
   Astrology:
     area: 'astrology'
-    url: '/astrology/landing.html#astrology'
+    url: '/astrology/index.html#astrology'
     children:
       About: '/astrology/astrology.html'
       FAQ: '/astrology/astrology_faq.html'
 
   Technology:
     area: 'technology'
-    url: '/technology/landing.html#technology'
+    url: '/technology/index.html#technology'
     children:
       Projects: '/technology/projects.html'
       Artwork: '/technology/artwork.html'
@@ -109,7 +109,7 @@ menu:
 
   Groups & Workshops:
     area: 'groups'
-    url: '/groups/landing.html#groups'
+    url: '/groups/index.html#groups'
     children:
       Upcoming Events: '/groups/upcoming_events.html'
       Register: '/groups/register.html'
@@ -118,11 +118,11 @@ menu:
 
   Parties & Events:
     area: 'parties'
-    url: '/parties/landing.html#parties'
+    url: '/parties/index.html#parties'
     children:
       Scheduling: '/parties/scheduling.html'
 
-  Contact Adam: '/main/contact_adam.html'
+  Contact Adam: '/contact_adam.html'
 
 hypnosis:
   issue_columns: 4
@@ -221,239 +221,3 @@ keywords:
   - 'South Jersey'
   - 'New Jersey'
   - 'Philadelphia'
-  - "Absecon"
-  - "08201"
-  - "Alloway"
-  - "08001"
-  - "Ambler"
-  - "19002"
-  - "Ardmore"
-  - "19003"
-  - "Atco"
-  - "08004"
-  - "Atlantic City"
-  - "08401"
-  - "Audubon"
-  - "08106"
-  - "Bala Cynwyd"
-  - "19004"
-  - "Barrington"
-  - "08007"
-  - "Bellmawr"
-  - "08031"
-  - "Bensalem"
-  - "19020"
-  - "Berlin"
-  - "08009"
-  - "Beverly"
-  - "08010"
-  - "Blackwood"
-  - "08012"
-  - "Bordentown"
-  - "08505"
-  - "Bridgeport"
-  - "08014"
-  - "Bridgeton"
-  - "08302"
-  - "Bristol"
-  - "19007"
-  - "Broomall"
-  - "19008"
-  - "Bryn Mawr"
-  - "19010"
-  - "Burlington"
-  - "08016"
-  - "Camden"
-  - "08102"
-  - "Cedar Brook"
-  - "08018"
-  - "Chatsworth"
-  - "08019"
-  - "Cherry Hill"
-  - "08002"
-  - "Chesilhurst"
-  - "08089"
-  - "Chester"
-  - "19013"
-  - "Clarksboro"
-  - "08020"
-  - "Clayton"
-  - "08312"
-  - "Clementon"
-  - "08021"
-  - "Collingswood"
-  - "08108"
-  - "Columbus"
-  - "08022"
-  - "Conshohocken"
-  - "19428"
-  - "Croydon"
-  - "19021"
-  - "Darby"
-  - "19023"
-  - "Delran"
-  - "08075"
-  - "Deptford"
-  - "08096"
-  - "Doylestown"
-  - "18901"
-  - "Drexel Hill"
-  - "19026"
-  - "Egg Harbor City"
-  - "08215"
-  - "Egg Harbor Township"
-  - "08234"
-  - "Elkins Park"
-  - "19027"
-  - "Elmer"
-  - "08318"
-  - "Fairless Hills"
-  - "19030"
-  - "Florence"
-  - "08518"
-  - "Franklinville"
-  - "08322"
-  - "Gibbstown"
-  - "08027"
-  - "Glassboro"
-  - "08028"
-  - "Glendora"
-  - "08029"
-  - "Glenolden"
-  - "19036"
-  - "Gloucester City"
-  - "08030"
-  - "Haddonfield"
-  - "08033"
-  - "Haddon Heights"
-  - "08035"
-  - "Hammonton"
-  - "08037"
-  - "Havertown"
-  - "19083"
-  - "Jenkintown"
-  - "19046"
-  - "King of Prussia"
-  - "19406"
-  - "Lafayette Hill"
-  - "19444"
-  - "Lansdowne"
-  - "19050"
-  - "Levittown"
-  - "19054"
-  - "Lindenwold"
-  - "08021"
-  - "Lumberton"
-  - "08048"
-  - "Magnolia"
-  - "08049"
-  - "Mantua"
-  - "08051"
-  - "Marlton"
-  - "08053"
-  - "Media"
-  - "19063"
-  - "Medford"
-  - "08055"
-  - "Merchantville"
-  - "08109"
-  - "Mickleton"
-  - "08056"
-  - "Millville"
-  - "08332"
-  - "Moorestown"
-  - "08057"
-  - "Morrisville"
-  - "19067"
-  - "Mount Holly"
-  - "08060"
-  - "Mount Laurel"
-  - "08054"
-  - "Mullica Hill"
-  - "08062"
-  - "National Park"
-  - "08063"
-  - "New Castle"
-  - "19720"
-  - "New Lisbon"
-  - "08064"
-  - "Newtown"
-  - "18940"
-  - "Norristown"
-  - "19401"
-  - "Palmyra"
-  - "08065"
-  - "Paulsboro"
-  - "08066"
-  - "Pemberton"
-  - "08068"
-  - "Penndel"
-  - "19047"
-  - "Penns Grove"
-  - "08069"
-  - "Pennsauken"
-  - "08110"
-  - "Pennsville"
-  - "08070"
-  - "Philadelphia"
-  - "19102"
-  - "Pine Hill"
-  - "08021"
-  - "Pitman"
-  - "08071"
-  - "Plymouth Meeting"
-  - "19462"
-  - "Richwood"
-  - "08074"
-  - "Riverside"
-  - "08075"
-  - "Riverton"
-  - "08077"
-  - "Runnemede"
-  - "08078"
-  - "Salem"
-  - "08079"
-  - "Sewell"
-  - "08080"
-  - "Sicklerville"
-  - "08081"
-  - "Somerdale"
-  - "08083"
-  - "Southampton"
-  - "08088"
-  - "Springfield"
-  - "19064"
-  - "Swedesboro"
-  - "08085"
-  - "Thorofare"
-  - "08086"
-  - "Trenton"
-  - "08608"
-  - "Upper Darby"
-  - "19082"
-  - "Vineland"
-  - "08360"
-  - "Voorhees"
-  - "08043"
-  - "Wayne"
-  - "19087"
-  - "Wenonah"
-  - "08090"
-  - "West Chester"
-  - "19380"
-  - "Westville"
-  - "08093"
-  - "Williamstown"
-  - "08094"
-  - "Willingboro"
-  - "08046"
-  - "Wilmington"
-  - "19801"
-  - "Winslow"
-  - "08095"
-  - "Woodbury"
-  - "08096"
-  - "Woodbury Heights"
-  - "08097"
-  - "Woodstown"
-  - "08098"

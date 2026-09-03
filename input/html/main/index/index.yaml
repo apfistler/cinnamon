@@ -53,40 +53,40 @@ practice_areas:
   - id: hypnosis
     title: "Hypnosis"
     description: "Change begins beneath the surface."
-    url: "/hypnosis/landing.html#hypnosis"
+    url: "/html/hypnosis/landing.html#hypnosis"
 
   - id: mindfulness
     title: "Mindfulness"
     description: "Attention is where transformation begins."
-    url: "/mindfulness/landing.html#mindfulness"
+    url: "/html/mindfulness/landing.html#mindfulness"
 
   - id: addiction-recovery
     title: "Addiction & Recovery"
     description: "Understanding change, choice, and recovery."
-    url: "/addiction/landing.html#addiction"
+    url: "/html/addiction/landing.html#addiction"
 
   - id: handwriting-analysis
     title: "Handwriting Analysis"
     description: "Your handwriting tells a story."
-    url: "/graphology/landing.html#handwriting_analysis"
+    url: "/html/graphology/landing.html#handwriting_analysis"
 
   - id: astrology
     title: "Astrology"
     description: "Explore yourself through a symbolic lens."
-    url: "/astrology/landing.html#astrology"
+    url: "/html/astrology/landing.html#astrology"
 
   - id: technology
     title: "Technology"
     description: "Exploring systems, software, automation, and the ideas behind technology."
-    url: "/technology/landing.html#technology"
+    url: "/html/technology/landing.html#technology"
 
   - id: groups
     title: "Groups & Workshops"
     description: "Learn, practice, and explore together."
-    url: "/groups/landing.html#groups"
+    url: "/html/groups/landing.html#groups"
 
   - id: parties
     title: "Parties & Events"
     description: "Bring handwriting analysis and astrology to your next gathering."
-    url: "/parties/landing.html#parties"
+    url: "/html/parties/landing.html#parties"
 
