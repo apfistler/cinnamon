@@ -1,0 +1,15 @@
+name: articles 
+category: articles
+title: "Technology Artciles"
+abstract: "This page is the container for articles."
+keywords:
+  - technology
+display_table:
+  technology_articles:
+    -
+      id: "radio_shack"
+      image: "/img/articles/technology/radio_shack/radio_shack.png"
+      link: "/articles/technology/radio_shack.html#addiction"
+      title: "Everything is Radio Shack Now: How Big Tech Is Like RadioShack Asking for Your Name and Address to Buy Batteries"
+      content: >
+          How Big Tech mirrors the classic RadioShack trope by forcing users to create accounts, submit data, and trade privacy for simple everyday tasks.

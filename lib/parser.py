@@ -975,7 +975,7 @@ class Parser:
                 f'{padding}{line}'
             )
 
-        return ''.join(
+        return '\n'.join(
             processed_lines
         )
 

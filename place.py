@@ -151,6 +151,7 @@ def main():
     print("Installing output...")
     os.makedirs(os.path.dirname(dest_file), exist_ok=True)
     shutil.copy2(compiled_output, dest_file)
+    os.chmod(dest_file, 0o644)
 
     print(f"Placed: {dest_file}")
 

@@ -1,0 +1,6 @@
+paths:
+  cinnamon: /home/apfistler/cinnamon
+  input: input/html
+  webroot: /var/www/adamfistler.com/public_html
+  image_root: /var/www/adamfistler.com/public_html/img
+  staging: /tmp/html-image-annotator

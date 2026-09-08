@@ -20,3 +20,17 @@ display_table:
       title: "Endorphins, Pain, Mood, and Addiction: Understanding the Endogenous Opioid System"
       content: >
         Endorphins play a critical role in pain regulation, stress, mood, and reward, leading many to question whether an "endorphin deficiency" contributes to addiction, chronic pain, or mood disorders. While not an officially recognized medical diagnosis, examining the endogenous opioid system offers valuable insights into physical dependence, anhedonia, and withdrawal. Understanding the complex neurobiology of endorphins helps shift the narrative from shame to science, emphasizing holistic and evidence-based approaches to recovery.
+    - id: 'addiction_legacy_code' 
+      image: '/img/articles/addiction/addiction_legacy_code/addiction_legacy_code.png'
+      link: '/articles/addiction/addiction_legacy_code.html#addiction'
+      title: "Your Addiction Isn't Broken Code - It's Legacy Code"
+      content: >
+        Addictions often start as necessary emergency workarounds to past emotional stress.
+        By treating these patterns as legacy software code rather than personal flaws, you can systematically
+        map their dependencies, preserve underlying functions, and refactor your responses safely
+    - id: societal-lockout
+      image: '/img/articles/addiction/lockout/lockout.png'
+      link: '/articles/addiction/lockout.html#addiction'
+      title: "Societal Lockout: When Rebuilding a Life Becomes One Roadblock After Another"
+      content: >
+        Modern life relies on continuous connectivity, but when a person loses technology, documents, and money all at once, administrative and digital systems create a circular lockout that makes recovery and reintegration nearly impossible.

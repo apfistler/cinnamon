@@ -104,6 +104,7 @@ menu:
     children:
       Projects: '/technology/projects.html'
       Artwork: '/technology/artwork.html'
+      Articles: '/articles/technology/articles.html'
       Resume: '/technology/resume.html'
       FAQ: '/technology/technology_faq.html'
 
