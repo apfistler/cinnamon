@@ -8,6 +8,7 @@ import shutil
 
 # Configuration
 WEBROOT = "/var/www/adamfistler.com/public_html"
+SUBSTACK_FLAG_FILENAME = ".substack_published"
 
 def should_generate_ld(target_path, force_ld_flag):
     """
@@ -61,8 +62,18 @@ def run_inject_ld(target_input_path, script_dir):
     else:
         print(f"Warning: '{inject_script}' not found. Skipping injection.", file=sys.stderr)
 
-def run_substack_publisher(compiled_output_path, script_dir):
-    """Executes pss.py to publish the compiled output file to Substack."""
+def run_substack_publisher(compiled_output_path, raw_input_path, script_dir):
+    """
+    Executes pss.py to publish the compiled output file to Substack, 
+    provided the publication flag file does not already exist inside raw_input_path.
+    Creates the flag file inside raw_input_path only upon a successful exit code (0).
+    """
+    flag_path = os.path.join(raw_input_path, SUBSTACK_FLAG_FILENAME)
+    
+    if os.path.exists(flag_path):
+        print(f"--> Substack publication flag found at '{flag_path}'. Skipping Substack publishing.")
+        return
+
     pss_script = os.path.join(script_dir, "pss.py")
     if os.path.exists(pss_script):
         print(f"--> Publishing to Substack via pss.py: {compiled_output_path}")
@@ -70,6 +81,14 @@ def run_substack_publisher(compiled_output_path, script_dir):
         if res_pss.returncode != 0:
             print(f"Error: pss.py failed (exit code {res_pss.returncode})", file=sys.stderr)
             sys.exit(1)
+        
+        # Create flag file only on exit code 0
+        try:
+            with open(flag_path, "w", encoding="utf-8") as f:
+                f.write("published\n")
+            print(f"--> Substack publication successful. Created flag file: {flag_path}")
+        except Exception as e:
+            print(f"Warning: Failed to create Substack flag file '{flag_path}': {e}", file=sys.stderr)
     else:
         print(f"Warning: '{pss_script}' not found. Skipping Substack publishing.", file=sys.stderr)
 
@@ -189,7 +208,7 @@ def main():
     # 5. Pipeline Step 3: Inject JSON-LD Schema & Substack Publishing
     if ld_enabled:
         run_inject_ld(raw_input, script_dir)
-        run_substack_publisher(compiled_output, script_dir)
+        run_substack_publisher(compiled_output, raw_input, script_dir)
 
     # 6. Install to WEBROOT
     dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")
