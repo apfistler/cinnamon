@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 publish_to_substack.py — turn a rendered HTML page (or a plain Markdown
-file) into a Substack draft.
+file) into a Substack draft with automated 16:9 solid-white banner formatting.
 """
 
 import argparse
@@ -88,15 +88,15 @@ def extract_category(content):
 
 def process_and_ai_upscale_thumbnail(thumbnail_url):
     """
-    Downloads the thumbnail, upscales it using local Real-ESRGAN (if installed)
-    or falls back safely to Lanczos high-quality scaling, saves it to WEB_ROOT/substack_img,
-    and returns the public absolute URL for social preview usage.
+    Downloads the thumbnail, upscales it via Real-ESRGAN or high-grade Lanczos scaling,
+    and formats it into a strict 16:9 widescreen banner layout with a clean solid-white 
+    background padding so transparent cutouts or odd shapes never create dark/blurry artifacts.
     """
     if not thumbnail_url:
         return None
 
     try:
-        dbg(f"Downloading thumbnail for AI upscaling: {thumbnail_url}")
+        dbg(f"Downloading thumbnail for 16:9 solid-white banner formatting: {thumbnail_url}")
         response = requests.get(thumbnail_url, timeout=20)
         response.raise_for_status()
 
@@ -116,28 +116,52 @@ def process_and_ai_upscale_thumbnail(thumbnail_url):
             new_height = image.height * 2
             image = image.resize((new_width, new_height), Image.LANCZOS)
 
+        if image.mode not in ("RGB", "RGBA"):
+            image = image.convert("RGBA")
+
+        # Force a strict 16:9 widescreen banner format (e.g. 1456x816 Substack standard)
+        target_width = 1456
+        target_height = 816
+
+        # 1. Scale main foreground image to fit inside 16:9 cleanly without cropping
+        fg_ratio = min(target_width / image.width, target_height / image.height)
+        fg_width = int(image.width * fg_ratio)
+        fg_height = int(image.height * fg_ratio)
+        foreground = image.resize((fg_width, fg_height), Image.LANCZOS)
+
+        # 2. Create a clean, solid white 16:9 widescreen canvas
+        background = Image.new("RGB", (target_width, target_height), (255, 255, 255))
+
+        # 3. Paste foreground centered onto the white canvas (using alpha mask if transparent)
+        paste_x = (target_width - fg_width) // 2
+        paste_y = (target_height - fg_height) // 2
+
+        if foreground.mode == "RGBA":
+            background.paste(foreground, (paste_x, paste_y), foreground)
+        else:
+            background.paste(foreground, (paste_x, paste_y))
+
+        final_banner = background
+
         relative_path = urlparse(thumbnail_url).path.lstrip("/")
         if not relative_path:
             relative_path = hashlib.sha1(thumbnail_url.encode("utf-8")).hexdigest() + ".jpg"
 
         ext = os.path.splitext(relative_path)[1].lower()
-        if not ext:
+        if not ext or ext not in (".jpg", ".jpeg", ".png"):
             relative_path += ".jpg"
-            ext = ".jpg"
-        if ext in (".jpg", ".jpeg") and image.mode in ("RGBA", "P"):
-            image = image.convert("RGB")
 
         # Save to web root folder structure
         disk_path = os.path.join(WEB_ROOT, SUBSTACK_IMG_SUBDIR, "thumbnails", relative_path)
         os.makedirs(os.path.dirname(disk_path), exist_ok=True)
-        image.save(disk_path, quality=95)
+        final_banner.save(disk_path, quality=95)
 
         public_url = urljoin(PUBLIC_IMG_BASE_URL, f"thumbnails/{relative_path}")
-        print(f"Thumbnail processed and upscaled -> {public_url}")
+        print(f"Thumbnail processed and formatted to 16:9 white banner -> {public_url}")
         return public_url
 
     except Exception as error:
-        print(f"Warning: Could not upscale thumbnail, using original URL ({error})", file=sys.stderr)
+        print(f"Warning: Could not format thumbnail banner, using original URL ({error})", file=sys.stderr)
         return thumbnail_url
 
 
@@ -387,8 +411,21 @@ def convert_html_file(input_filename):
 
     soup = BeautifulSoup(html, "html.parser")
     title = extract_html_title(soup)
-    content, category, extracted_subtitle = clean_content(soup)
+    
+    # Extract & format thumbnail to 16:9 solid-white banner first
     thumbnail_url = extract_thumbnail_from_yaml(relative_path)
+
+    # Replace the src of the first <img> tag inside the content div with the formatted banner URL
+    if thumbnail_url:
+        content_div = soup.find("div", id="content")
+        if content_div:
+            first_img = content_div.find("img")
+            if first_img:
+                old_src = first_img.get("src")
+                first_img["src"] = thumbnail_url
+                dbg(f"Replaced first image src ('{old_src}') with formatted 16:9 white banner: {thumbnail_url}")
+
+    content, category, extracted_subtitle = clean_content(soup)
 
     html_output = generate_html(content)
     markdown_output = generate_markdown(content)
@@ -457,8 +494,6 @@ def scale_down_images(markdown_text, scale):
 WEBSITE_LINK_LINE = "Adam Fistler Web Site: [https://www.adamfistler.com](https://www.adamfistler.com)\n\n"
 
 def prepend_source_and_website_header(markdown_text, title, source_url, thumbnail_url=None):
-    # Thumbnail line is suppressed from the top of the article body per previous update,
-    # but the upscaled thumbnail_url is ready for social previews or metadata handling.
     if thumbnail_url:
         dbg(f"Upscaled thumbnail available for social context: {thumbnail_url}")
 
@@ -471,6 +506,20 @@ def prepend_source_and_website_header(markdown_text, title, source_url, thumbnai
         return markdown_text[:insert_at] + header_block + markdown_text[insert_at:]
 
     return header_block + markdown_text
+
+
+def append_subscribe_cta(markdown_text, publication_url):
+    """
+    Automatically appends a subscribe call-to-action footer to the post body.
+    """
+    clean_pub_url = publication_url.rstrip("/")
+    cta_block = (
+        "\n\n---\n\n"
+        "### Support & Updates\n"
+        f"If you want to read more pieces like this, consider subscribing directly: "
+        f"[Subscribe on Substack]({clean_pub_url}/subscribe)\n"
+    )
+    return markdown_text + cta_block
 
 
 def extract_title_subtitle(md_text):
@@ -587,10 +636,11 @@ def main():
         print(f"Scaling embedded images to {int(args.image_scale * 100)}%...")
         body_md = scale_down_images(body_md, args.image_scale)
 
+    # Automatically add the subscribe CTA footer
+    body_md = append_subscribe_cta(body_md, publication_url)
+
     dbg("Calling Substack API create_draft_from_markdown...")
     try:
-        # Note: If your underlying Substack API library wrapper supports passing a cover_image_url 
-        # or social preview image parameter directly, you can pass `cover_image_url=thumbnail_url` here.
         result = api.create_draft_from_markdown(
             title=title,
             subtitle=subtitle,
