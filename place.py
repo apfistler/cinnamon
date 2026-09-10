@@ -71,25 +71,56 @@ def derive_clean_relative_path(raw_input):
     rel = re.sub(r"^html/?", "", rel)
     return rel
 
+def resolve_input_dir(query_path, base_dir="input"):
+    """
+    Checks if query_path is an exact existing directory.
+    If not, performs a top-down partial search starting from base_dir outward.
+    Returns the resolved path if found, or exits with an error.
+    """
+    clean_query = query_path.rstrip("/")
+    
+    # 1. Direct validation check
+    if os.path.isdir(clean_query):
+        return clean_query
+
+    print(f"Path '{clean_query}' not directly found. Searching from highest level outward...")
+
+    # Ensure base search directory exists
+    if not os.path.exists(base_dir):
+        print(f"Error: Base search directory '{base_dir}' does not exist.", file=sys.stderr)
+        sys.exit(1)
+
+    # 2. Top-down traversal (highest-level / shallowest directories evaluated first)
+    target_lower = os.path.basename(clean_query).lower()
+    
+    for root, dirs, _ in os.walk(base_dir, topdown=True):
+        # Sort directories alphabetically to maintain deterministic search behavior
+        dirs.sort()
+        for d in dirs:
+            if target_lower in d.lower():
+                matched_path = os.path.join(root, d)
+                print(f"--> Match found: {matched_path}")
+                return matched_path
+
+    # 3. Fail if no direct match or partial match was found
+    print(f"Error: Could not resolve input directory for '{query_path}'", file=sys.stderr)
+    sys.exit(1)
+
 def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
 
     parser = argparse.ArgumentParser(description="Cinnamon 'place' placement and build utility.")
     parser.add_argument("-l", "--generate-ld", action="store_true", help="Force JSON-LD generation and injection")
-    parser.add_argument("input_dir", help="Path to input directory (e.g., input/html/articles/...)")
+    parser.add_argument("input_dir", help="Path or partial query to input directory (e.g., input/html/articles/... or 'shack')")
 
     args, _ = parser.parse_known_args()
     
-    # Clean up input path string - preserve relative input/ path across tools
-    raw_input = args.input_dir.rstrip("/")
+    # Resolve exact or top-down fuzzy path
+    raw_input = resolve_input_dir(args.input_dir)
 
-    # 1. Validation
+    # Validation check after resolution
     if not raw_input.startswith("input/"):
         print(f"Error: directory must be inside input/ (got '{raw_input}')", file=sys.stderr)
-        sys.exit(1)
-
-    if not os.path.isdir(raw_input):
-        print(f"Error: input directory does not exist: {raw_input}", file=sys.stderr)
         sys.exit(1)
 
     name = os.path.basename(raw_input)

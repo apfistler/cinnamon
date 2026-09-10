@@ -42,3 +42,7 @@ if [ -d "output/main" ]; then
 fi
 
 find /var/www/adamfistler.com -type f -exec chmod 644 {} +
+
+echo "Fixing Relative Paths"
+./fix_paths.py
+
