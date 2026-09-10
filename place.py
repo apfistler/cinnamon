@@ -61,6 +61,18 @@ def run_inject_ld(target_input_path, script_dir):
     else:
         print(f"Warning: '{inject_script}' not found. Skipping injection.", file=sys.stderr)
 
+def run_substack_publisher(compiled_output_path, script_dir):
+    """Executes pss.py to publish the compiled output file to Substack."""
+    pss_script = os.path.join(script_dir, "pss.py")
+    if os.path.exists(pss_script):
+        print(f"--> Publishing to Substack via pss.py: {compiled_output_path}")
+        res_pss = subprocess.run([sys.executable, pss_script, compiled_output_path])
+        if res_pss.returncode != 0:
+            print(f"Error: pss.py failed (exit code {res_pss.returncode})", file=sys.stderr)
+            sys.exit(1)
+    else:
+        print(f"Warning: '{pss_script}' not found. Skipping Substack publishing.", file=sys.stderr)
+
 def derive_clean_relative_path(raw_input):
     """
     Strips leading 'input/' AND any leading 'html/' or '/html/' segment.
@@ -149,6 +161,10 @@ def main():
 
     ld_enabled = should_generate_ld(raw_input, args.generate_ld)
 
+    # Pre-compute relative and compiled output paths so they are available for downstream steps
+    clean_relative = derive_clean_relative_path(raw_input)
+    compiled_output = os.path.join("output", f"{clean_relative}.html")
+
     # 3. Pipeline Step 1: Generate JSON-LD Schema
     if ld_enabled:
         run_generate_ld(raw_input, script_dir)
@@ -166,18 +182,17 @@ def main():
         print("Error: Cinnamon build failed.", file=sys.stderr)
         sys.exit(1)
 
-    # 5. Pipeline Step 3: Inject JSON-LD Schema
-    if ld_enabled:
-        run_inject_ld(raw_input, script_dir)
-
-    # 6. Install to WEBROOT
-    clean_relative = derive_clean_relative_path(raw_input)
-    dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")
-    compiled_output = os.path.join("output", f"{clean_relative}.html")
-
     if not os.path.exists(compiled_output):
         print(f"Error: Compiled output file '{compiled_output}' not found.", file=sys.stderr)
         sys.exit(1)
+
+    # 5. Pipeline Step 3: Inject JSON-LD Schema & Substack Publishing
+    if ld_enabled:
+        run_inject_ld(raw_input, script_dir)
+        run_substack_publisher(compiled_output, script_dir)
+
+    # 6. Install to WEBROOT
+    dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")
 
     print("Installing output...")
     os.makedirs(os.path.dirname(dest_file), exist_ok=True)
