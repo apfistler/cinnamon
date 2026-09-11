@@ -142,6 +142,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="Cinnamon 'place' placement and build utility.")
     parser.add_argument("-l", "--generate-ld", action="store_true", help="Force JSON-LD generation and injection")
+    parser.add_argument("-n", "--no-substack", action="store_true", help="Skip Substack publishing execution")
     parser.add_argument("input_dir", help="Path or partial query to input directory (e.g., input/html/articles/... or 'shack')")
 
     args, _ = parser.parse_known_args()
@@ -208,7 +209,10 @@ def main():
     # 5. Pipeline Step 3: Inject JSON-LD Schema & Substack Publishing
     if ld_enabled:
         run_inject_ld(raw_input, script_dir)
-        run_substack_publisher(compiled_output, raw_input, script_dir)
+        if args.no_substack:
+            print("--> Skipping Substack publishing (-n flag active).")
+        else:
+            run_substack_publisher(compiled_output, raw_input, script_dir)
 
     # 6. Install to WEBROOT
     dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")

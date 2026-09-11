@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 publish_to_substack.py — turn a rendered HTML page (or a plain Markdown
-file) into a Substack draft with automated 16:9 solid-white banner formatting.
+file) into a Substack draft with automated 16:9 solid-white banner formatting
+and automatic YAML keyword extraction.
 """
 
 import argparse
@@ -86,6 +87,45 @@ def extract_category(content):
     return category or None
 
 
+def extract_keywords_from_page_yaml(input_filename):
+    """
+    Looks up the corresponding page YAML file under input/html/<relative_path_without_ext>/<filename_without_ext>.yaml
+    and extracts any entries found under the 'keywords:' key.
+    """
+    try:
+        input_path = Path(input_filename).resolve()
+        output_dir = Path("output").resolve()
+        
+        try:
+            relative_path = input_path.relative_to(output_dir)
+        except ValueError:
+            relative_path = Path(input_filename)
+
+        stem_path = relative_path.with_suffix("")
+        yaml_path = Path("input/html") / stem_path / f"{stem_path.name}.yaml"
+        
+        print(f"[KEYWORD DEBUG] Trying to open page YAML file: {yaml_path.resolve()}", file=sys.stderr)
+        print(f"[KEYWORD DEBUG] Does target YAML file exist? {yaml_path.exists()}", file=sys.stderr)
+
+        if yaml_path.exists():
+            with open(yaml_path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+            if isinstance(data, dict):
+                keywords = data.get("keywords", [])
+                if isinstance(keywords, str):
+                    keywords = [kw.strip() for kw in keywords.split(",") if kw.strip()]
+                elif isinstance(keywords, list):
+                    keywords = [str(kw).strip() for kw in keywords if str(kw).strip()]
+                
+                print(f"[KEYWORD DEBUG] Successfully extracted keywords: {keywords}", file=sys.stderr)
+                return keywords
+        else:
+            print(f"[KEYWORD DEBUG] Page YAML file not found at {yaml_path.resolve()}", file=sys.stderr)
+    except Exception as e:
+        print(f"[KEYWORD DEBUG] Error extracting keywords from page YAML: {e}", file=sys.stderr)
+    return []
+
+
 def process_and_ai_upscale_thumbnail(thumbnail_url):
     """
     Downloads the thumbnail, upscales it via Real-ESRGAN or high-grade Lanczos scaling,
@@ -103,11 +143,10 @@ def process_and_ai_upscale_thumbnail(thumbnail_url):
         from PIL import Image
         image = Image.open(BytesIO(response.content))
         
-        # Try upscaling via real-esrgan-ncnn-py if available, else high-grade Lanczos fallback
         try:
             from realesrgan_ncnn_py import Realesrgan
             dbg("Initializing local Real-ESRGAN AI model for crystal-clear upscaling...")
-            upscaler = Realesrgan(gpuid=0, model=0) # Model 0 = RealESRGAN_x4plus
+            upscaler = Realesrgan(gpuid=0, model=0)
             image = upscaler.process_pil(image)
             dbg("AI upscaling completed successfully.")
         except (ImportError, Exception) as ai_err:
@@ -119,20 +158,16 @@ def process_and_ai_upscale_thumbnail(thumbnail_url):
         if image.mode not in ("RGB", "RGBA"):
             image = image.convert("RGBA")
 
-        # Force a strict 16:9 widescreen banner format (e.g. 1456x816 Substack standard)
         target_width = 1456
         target_height = 816
 
-        # 1. Scale main foreground image to fit inside 16:9 cleanly without cropping
         fg_ratio = min(target_width / image.width, target_height / image.height)
         fg_width = int(image.width * fg_ratio)
         fg_height = int(image.height * fg_ratio)
         foreground = image.resize((fg_width, fg_height), Image.LANCZOS)
 
-        # 2. Create a clean, solid white 16:9 widescreen canvas
         background = Image.new("RGB", (target_width, target_height), (255, 255, 255))
 
-        # 3. Paste foreground centered onto the white canvas (using alpha mask if transparent)
         paste_x = (target_width - fg_width) // 2
         paste_y = (target_height - fg_height) // 2
 
@@ -151,7 +186,6 @@ def process_and_ai_upscale_thumbnail(thumbnail_url):
         if not ext or ext not in (".jpg", ".jpeg", ".png"):
             relative_path += ".jpg"
 
-        # Save to web root folder structure
         disk_path = os.path.join(WEB_ROOT, SUBSTACK_IMG_SUBDIR, "thumbnails", relative_path)
         os.makedirs(os.path.dirname(disk_path), exist_ok=True)
         final_banner.save(disk_path, quality=95)
@@ -412,10 +446,8 @@ def convert_html_file(input_filename):
     soup = BeautifulSoup(html, "html.parser")
     title = extract_html_title(soup)
     
-    # Extract & format thumbnail to 16:9 solid-white banner first
     thumbnail_url = extract_thumbnail_from_yaml(relative_path)
 
-    # Replace the src of the first <img> tag inside the content div with the formatted banner URL
     if thumbnail_url:
         content_div = soup.find("div", id="content")
         if content_div:
@@ -497,7 +529,7 @@ def prepend_source_and_website_header(markdown_text, title, source_url, thumbnai
     if thumbnail_url:
         dbg(f"Upscaled thumbnail available for social context: {thumbnail_url}")
 
-    source_line = f"Original Source: [{title}]({source_url})\n\n"
+    source_line = f"Original Source (Canonical): [{title}]({source_url})\n\n"
     header_block = source_line + WEBSITE_LINK_LINE
 
     heading_match = re.match(r"^#[^\n]*\n+", markdown_text)
@@ -507,20 +539,15 @@ def prepend_source_and_website_header(markdown_text, title, source_url, thumbnai
 
     return header_block + markdown_text
 
-
 def append_subscribe_cta(markdown_text, publication_url):
-    """
-    Automatically appends a subscribe call-to-action footer to the post body.
-    """
     clean_pub_url = publication_url.rstrip("/")
+    cleaned_base = markdown_text.strip()
+    
+    # Markdown-native subscription widget block
     cta_block = (
-        "\n\n---\n\n"
-        "### Support & Updates\n"
-        f"If you want to read more pieces like this, consider subscribing directly: "
-        f"[Subscribe on Substack]({clean_pub_url}/subscribe)\n"
+        "\n\n"
     )
-    return markdown_text + cta_block
-
+    return cleaned_base + cta_block
 
 def extract_title_subtitle(md_text):
     lines = md_text.lstrip("\n").split("\n")
@@ -604,13 +631,19 @@ def main():
     tags = list(args.tag)
     thumbnail_url = None
 
+    yaml_keywords = extract_keywords_from_page_yaml(str(args.input_file))
+    if yaml_keywords:
+        for kw in yaml_keywords:
+            if kw not in tags:
+                tags.append(kw)
+
     if suffix in (".html", ".htm"):
         try:
             detected_title, category, detected_subtitle, thumbnail_url, body_md = convert_html_file(str(args.input_file))
         except ValueError as error:
             sys.exit(str(error))
-        if category:
-            tags = [category] + tags
+        if category and category not in tags:
+            tags.insert(0, category)
     else:
         raw_md = args.input_file.read_text(encoding="utf-8")
         detected_title, detected_subtitle, body_md = extract_title_subtitle(raw_md)
@@ -636,7 +669,6 @@ def main():
         print(f"Scaling embedded images to {int(args.image_scale * 100)}%...")
         body_md = scale_down_images(body_md, args.image_scale)
 
-    # Automatically add the subscribe CTA footer
     body_md = append_subscribe_cta(body_md, publication_url)
 
     dbg("Calling Substack API create_draft_from_markdown...")
