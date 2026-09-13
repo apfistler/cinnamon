@@ -24,10 +24,10 @@ pick or reference an image, and inserts the appropriate HTML tag
 
 INTERACTIVE PROMPTS & ACTIONS:
 --------------------------------------------------------------------
-  s          - Skip the current subheading.
-  q          - Quit the script immediately.
-  h          - Display this help message.
-  <num>d     - Delete image #<num> from /tmp/articles (with confirmation).
+  s         - Skip the current subheading.
+  q         - Quit the script immediately.
+  h         - Display this help message.
+  <num>d    - Delete image #<num> from /tmp/articles (with confirmation).
 
 SHORTHAND SYNTAX FOR INSERTION:
 --------------------------------------------------------------------
@@ -46,28 +46,33 @@ QUOTED ARGUMENTS:
 
 EXAMPLES:
   1il "Close up of Cathy Green"
-      -> Uses image #1, <div> tag, left aligned, with alt text.
+     -> Uses image #1, <div> tag, left aligned, with alt text.
 
   2fr "Adam at work" "Reflecting on system architecture"
-      -> Uses image #2, <figure> tag, right aligned, with alt 
-         text and a figure caption.
+     -> Uses image #2, <figure> tag, right aligned, with alt 
+        text and a figure caption.
 
   ori "A custom diagram" "/home/user/images/diagram.png"
-      -> Uses an external image path not in /tmp/articles, right 
-         aligned, with a <div> tag and alt text.
+     -> Uses an external image path not in /tmp/articles, right 
+        aligned, with a <div> tag and alt text.
 
   ocr "Custom figure" "Caption text" "/home/user/images/chart.png"
-      -> Uses an external image path, right aligned, <figure> tag,
-         alt text, and caption.
+     -> Uses an external image path, right aligned, <figure> tag,
+        alt text, and caption.
 ====================================================================
 """
     print(help_text)
 
-def run_cb_script():
+def debug_print(msg, debug_mode):
+    if debug_mode:
+        print(f"[DEBUG] {msg}")
+
+def run_cb_script(debug_mode):
     script_path = os.path.join(CINNAMON_DIR, "cp_from_cb.sh")
     if not os.path.exists(script_path):
         script_path = "./cp_from_cb.sh"
     
+    debug_print(f"Resolved cp_from_cb.sh path to: {script_path}", debug_mode)
     print("Executing cp_from_cb.sh...")
     try:
         subprocess.run([script_path], check=True)
@@ -78,10 +83,12 @@ def run_cb_script():
         print("Error: cp_from_cb.sh script not found.", file=sys.stderr)
         sys.exit(1)
 
-def resolve_input_dir(query_path, base_dir=INPUT_BASE_DIR):
+def resolve_input_dir(query_path, base_dir=INPUT_BASE_DIR, debug_mode=False):
     clean_query = query_path.rstrip("/")
+    debug_print(f"Resolving input directory for query: {clean_query}", debug_mode)
 
     if os.path.isdir(clean_query):
+        debug_print(f"Found direct directory match: {clean_query}", debug_mode)
         return clean_query
 
     print(f"Path '{clean_query}' not directly found. Searching from highest level outward...")
@@ -103,13 +110,17 @@ def resolve_input_dir(query_path, base_dir=INPUT_BASE_DIR):
     print(f"Error: Could not resolve input directory for '{query_path}'", file=sys.stderr)
     sys.exit(1)
 
-def get_temp_images():
+def get_temp_images(debug_mode=False):
     if not os.path.exists(TMP_ARTICLES):
+        debug_print(f"Temp articles directory {TMP_ARTICLES} does not exist.", debug_mode)
         return []
-    return sorted([f for f in os.listdir(TMP_ARTICLES) if os.path.isfile(os.path.join(TMP_ARTICLES, f))])
+    images = sorted([f for f in os.listdir(TMP_ARTICLES) if os.path.isfile(os.path.join(TMP_ARTICLES, f))])
+    debug_print(f"Found temp images: {images}", debug_mode)
+    return images
 
-def parse_shorthand(user_input, available_images):
+def parse_shorthand(user_input, available_images, debug_mode=False):
     user_input = user_input.strip()
+    debug_print(f"Parsing user input shorthand: '{user_input}'", debug_mode)
     if user_input in ['s', 'q', 'h']:
         return {'action': user_input}
 
@@ -148,7 +159,7 @@ def parse_shorthand(user_input, available_images):
     elif img_idx is not None and 0 <= img_idx < len(available_images):
         img_source = os.path.join(TMP_ARTICLES, available_images[img_idx])
 
-    return {
+    parsed_result = {
         'action': 'insert',
         'tag_type': tag_type,
         'orientation': orientation,
@@ -157,19 +168,32 @@ def parse_shorthand(user_input, available_images):
         'source': img_source,
         'img_name': os.path.basename(img_source) if img_source else None
     }
+    debug_print(f"Parsed result: {parsed_result}", debug_mode)
+    return parsed_result
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python annotate_articles.py <input_container>")
+    # Parse command line arguments manually to check for -d flag
+    debug_mode = False
+    args = []
+    for arg in sys.argv[1:]:
+        if arg == '-d':
+            debug_mode = True
+        else:
+            args.append(arg)
+
+    if len(args) < 1:
+        print("Usage: python annotate_articles.py [-d] <input_container>")
         sys.exit(1)
 
-    query_path = sys.argv[1]
+    query_path = args[0]
+    debug_print("Debug mode enabled.", debug_mode)
 
-    run_cb_script()
+    run_cb_script(debug_mode)
 
-    resolved_input = resolve_input_dir(query_path)
+    resolved_input = resolve_input_dir(query_path, debug_mode=debug_mode)
     name = os.path.basename(resolved_input)
     html_file_path = os.path.join(resolved_input, f"{name}.html")
+    debug_print(f"Target HTML file path: {html_file_path}", debug_mode)
 
     if not os.path.exists(html_file_path):
         print(f"Error: HTML file '{html_file_path}' not found.", file=sys.stderr)
@@ -185,8 +209,13 @@ def main():
         print(f"No <h2> subheadings found in {html_file_path}.")
         sys.exit(0)
 
-    target_img_dir = os.path.join(IMG_DIR, os.path.relpath(resolved_input, INPUT_BASE_DIR))
-    os.makedirs(target_img_dir, exist_ok=True)
+    # Compute relative path and strip out 'html' container folder segment
+    raw_rel_path = os.path.relpath(resolved_input, INPUT_BASE_DIR)
+    path_parts = [p for p in raw_rel_path.split(os.sep) if p != 'html']
+    flattened_rel_path = os.path.join(*path_parts) if path_parts else ""
+
+    target_img_dir = os.path.join(IMG_DIR, flattened_rel_path)
+    debug_print(f"Target image destination directory (flattened): {target_img_dir}", debug_mode)
 
     total_h2 = len(h2_tags)
     for idx, h2 in enumerate(h2_tags, 1):
@@ -207,7 +236,7 @@ def main():
             print(f"\n--- Subheading [{idx}/{total_h2}]: {heading_text} ---")
             print(f"  Context snippet: {context_text or '[No paragraph context found]'}")
             
-            images = get_temp_images()
+            images = get_temp_images(debug_mode)
             print("  Available images in /tmp/articles:")
             if not images:
                 print("    (None)")
@@ -217,7 +246,7 @@ def main():
 
             user_choice = input("  Action: [s]kip, [q]uit, [h]elp, or shorthand (e.g., 1il \"Alt\", 2fr \"Alt\" \"Cap\"): ").strip()
             
-            parsed = parse_shorthand(user_choice, images)
+            parsed = parse_shorthand(user_choice, images, debug_mode)
             
             if parsed['action'] == 'q':
                 print("Exiting annotation script.")
@@ -244,23 +273,34 @@ def main():
                 
                 final_img_filename = parsed['img_name']
                 dest_img_path = os.path.join(target_img_dir, final_img_filename)
+
+                # Ensure destination directory exists before copying
+                if not os.path.exists(target_img_dir):
+                    debug_print(f"Destination directory '{target_img_dir}' does not exist. Creating it now...", debug_mode)
+                    os.makedirs(target_img_dir, exist_ok=True)
+                else:
+                    debug_print(f"Destination directory '{target_img_dir}' already exists.", debug_mode)
+
+                debug_print(f"Copying '{parsed['source']}' to '{dest_img_path}'", debug_mode)
                 shutil.copy2(parsed['source'], dest_img_path)
 
-                rel_web_path = f"/img/{os.path.relpath(dest_img_path, WEB_DIR)}"
+                # Fix path calculation to avoid duplicating /img/
+                rel_subpath = os.path.relpath(dest_img_path, IMG_DIR).replace(os.sep, '/')
+                rel_web_path = f"/img/{rel_subpath}"
                 
                 orientation = parsed['orientation']
                 alt = parsed['alt']
                 
                 if parsed['tag_type'] == 'f':
                     caption = parsed['caption']
-                    new_tag_html = f'''<figure class="content-img caption {orientation}">
-  <img src="{rel_web_path}" alt="{alt}" />
-  <figcaption>{caption}</figcaption>
-</figure>'''
+                    new_tag_html = f'''\n\n<figure class="content-img caption {orientation}">
+    <img src="{rel_web_path}" alt="{alt}" />
+    <figcaption>{caption}</figcaption>
+</figure>\n\n'''
                 else:
-                    new_tag_html = f'''<div class="content-img {orientation}">
-   <img src="{rel_web_path}" alt="{alt}" />
-</div>'''
+                    new_tag_html = f'''\n<div class="content-img {orientation}">
+     <img src="{rel_web_path}" alt="{alt}" />
+</div>\n\n'''
 
                 new_soup_fragment = BeautifulSoup(new_tag_html, 'html.parser')
                 h2.insert_after(new_soup_fragment)
