@@ -150,7 +150,7 @@ display_table:
 
     - 
       id: "stress"
-      image: "/img/articles/hypnosis/stress/jill_stressed_web.png"
+      image: "/img/articles/hypnosis/stress/jill_stressed.png"
       link: "/articles/hypnosis/stress.html#hypnosis"
       title: "The Surprising Link Between Hypnosis and Stress Reduction: A Comprehensive Guide"
       content: >

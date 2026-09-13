@@ -2,6 +2,7 @@
 import sys
 import os
 import re
+import time
 import argparse
 import subprocess
 import shutil
@@ -212,7 +213,8 @@ def main():
         if args.no_substack:
             print("--> Skipping Substack publishing (-n flag active).")
         else:
-            run_substack_publisher(compiled_output, raw_input, script_dir)
+            run_substack_publisher(compiled_output, raw_input, script_dir) 
+            time.sleep(1)
 
     # 6. Install to WEBROOT
     dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")

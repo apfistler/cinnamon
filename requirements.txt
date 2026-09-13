@@ -1,3 +1,7 @@
 beautifulsoup4
-nltk
-pyyaml
+python-dotenv
+requests
+PyYAML
+Pillow
+realesrgan-ncnn-py
+substack

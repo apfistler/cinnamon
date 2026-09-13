@@ -20,3 +20,10 @@ display_table:
       title: "Outsourcing Your Agency: The Platform wants to be Your Higher Power"
       content: >
          An examination of how modern technological systems, restrictive platforms, and automated algorithms demand the surrender of personal judgment and independence.
+    -
+      id: "family_systems"
+      image: "/img/articles/technology/family_systems/family_systems.png"
+      link: "/articles/technology/family_systems.html#technology"
+      title: "When the Machine Becomes the Scapegoat: Applying the Family Systems Model to Corporate America"
+      content: >
+         Exploring how corporations and technological systems, particularly AI, mirror family system dynamics by using scapegoats to hide structural problems and institutional failures.

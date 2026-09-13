@@ -1,41 +1,95 @@
 #!/usr/bin/env python3
-"""
-CLI tool to annotate HTML articles with Gemini-assisted image suggestions, 
-optional instructions.txt context, free image generation, chafa terminal previews, 
-and saving directly to the web root: /var/www/adamfistler.com/annotated/<reference_to_input>/
-"""
 
 import os
 import sys
 import subprocess
-import argparse
-from pathlib import Path
-from bs4 import BeautifulSoup, Tag
-from google import genai
-from google.genai import types
-from PIL import Image
-import io
+import shutil
+import re
+from bs4 import BeautifulSoup
 
-def resolve_input_dir(query_path, base_dir="input"):
-    """
-    Checks if query_path is an exact existing directory.
-    If not, performs a top-down partial search starting from base_dir outward.
-    Returns the resolved path if found, or exits with an error.
-    """
+CINNAMON_DIR = os.path.expanduser("~/cinnamon")
+INPUT_BASE_DIR = os.path.join(CINNAMON_DIR, "input")
+WEB_DIR = "/var/www/adamfistler.com/public_html"
+IMG_DIR = os.path.join(WEB_DIR, "img")
+TMP_ARTICLES = "/tmp/articles"
+
+def print_help():
+    help_text = """
+====================================================================
+ ARTICLE ANNOTATION TOOL - HELP & USAGE GUIDE
+====================================================================
+This script steps through each <h2> subheading of an article, lets you
+pick or reference an image, and inserts the appropriate HTML tag 
+(<div class="content-img"> or <figure>) directly into the file.
+
+INTERACTIVE PROMPTS & ACTIONS:
+--------------------------------------------------------------------
+  s          - Skip the current subheading.
+  q          - Quit the script immediately.
+  h          - Display this help message.
+  <num>d     - Delete image #<num> from /tmp/articles (with confirmation).
+
+SHORTHAND SYNTAX FOR INSERTION:
+--------------------------------------------------------------------
+Combine numbers, tags, orientation, and quotes in any order!
+
+  # : Image number from the list (e.g., 1, 2)
+  i : Insert as a simple <div> tag (default)
+  f : Insert as a <figure> tag with caption support
+  l : Left-align the image (default)
+  r : Right-align the image
+
+QUOTED ARGUMENTS:
+  - First quoted string: Alt text for the image ("Alt Tag")
+  - Second quoted string (if <f> or custom path used): Caption or path
+  - Third quoted string (if custom path used): Path to external image
+
+EXAMPLES:
+  1il "Close up of Cathy Green"
+      -> Uses image #1, <div> tag, left aligned, with alt text.
+
+  2fr "Adam at work" "Reflecting on system architecture"
+      -> Uses image #2, <figure> tag, right aligned, with alt 
+         text and a figure caption.
+
+  ori "A custom diagram" "/home/user/images/diagram.png"
+      -> Uses an external image path not in /tmp/articles, right 
+         aligned, with a <div> tag and alt text.
+
+  ocr "Custom figure" "Caption text" "/home/user/images/chart.png"
+      -> Uses an external image path, right aligned, <figure> tag,
+         alt text, and caption.
+====================================================================
+"""
+    print(help_text)
+
+def run_cb_script():
+    script_path = os.path.join(CINNAMON_DIR, "cp_from_cb.sh")
+    if not os.path.exists(script_path):
+        script_path = "./cp_from_cb.sh"
+    
+    print("Executing cp_from_cb.sh...")
+    try:
+        subprocess.run([script_path], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: cp_from_cb.sh failed with exit code {e.returncode}", file=sys.stderr)
+        sys.exit(1)
+    except FileNotFoundError:
+        print("Error: cp_from_cb.sh script not found.", file=sys.stderr)
+        sys.exit(1)
+
+def resolve_input_dir(query_path, base_dir=INPUT_BASE_DIR):
     clean_query = query_path.rstrip("/")
 
-    # 1. Direct validation check
     if os.path.isdir(clean_query):
         return clean_query
 
     print(f"Path '{clean_query}' not directly found. Searching from highest level outward...")
 
-    # Ensure base search directory exists
     if not os.path.exists(base_dir):
         print(f"Error: Base search directory '{base_dir}' does not exist.", file=sys.stderr)
         sys.exit(1)
 
-    # 2. Top-down traversal (highest-level / shallowest directories evaluated first)
     target_lower = os.path.basename(clean_query).lower()
 
     for root, dirs, _ in os.walk(base_dir, topdown=True):
@@ -46,258 +100,178 @@ def resolve_input_dir(query_path, base_dir="input"):
                 print(f"--> Match found: {matched_path}")
                 return matched_path
 
-    # 3. Fail if no direct match or partial match was found
     print(f"Error: Could not resolve input directory for '{query_path}'", file=sys.stderr)
     sys.exit(1)
 
-def preview_image_in_terminal(image_path):
-    """Renders an image preview in the SSH terminal using chafa."""
-    try:
-        subprocess.run(["chafa", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-        print("\n  [Terminal Image Preview (chafa)]:")
-        subprocess.run(["chafa", "-s", "80x30", str(image_path)])
-        print()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        print("\n  [Note] 'chafa' is not installed. Run: sudo apt install chafa")
-        print(f"  Image saved at: {image_path}\n")
+def get_temp_images():
+    if not os.path.exists(TMP_ARTICLES):
+        return []
+    return sorted([f for f in os.listdir(TMP_ARTICLES) if os.path.isfile(os.path.join(TMP_ARTICLES, f))])
+
+def parse_shorthand(user_input, available_images):
+    user_input = user_input.strip()
+    if user_input in ['s', 'q', 'h']:
+        return {'action': user_input}
+
+    quotes = re.findall(r'"([^"]*)"', user_input)
+    unquoted = re.sub(r'"[^"]*"', '', user_input).strip()
+
+    delete_match = re.search(r'^(\d+)d$', unquoted)
+    if delete_match:
+        img_idx = int(delete_match.group(1)) - 1
+        return {'action': 'delete', 'index': img_idx}
+
+    num_match = re.search(r'^\d+', unquoted)
+    img_idx = int(num_match.group()) - 1 if num_match else None
+    
+    tag_type = 'f' if 'f' in unquoted else 'i'
+    orientation = 'right' if 'r' in unquoted else 'left'
+
+    custom_path = None
+    alt_tag = ""
+    caption = ""
+
+    if len(quotes) >= 1:
+        alt_tag = quotes[0]
+    if len(quotes) >= 2:
+        if tag_type == 'f' or len(quotes) == 3:
+            caption = quotes[1]
+        if len(quotes) == 3:
+            custom_path = quotes[2]
+        elif len(quotes) == 2 and ('/' in quotes[1] or '.' in quotes[1]):
+            custom_path = quotes[1]
+            caption = ""
+
+    img_source = None
+    if custom_path:
+        img_source = custom_path
+    elif img_idx is not None and 0 <= img_idx < len(available_images):
+        img_source = os.path.join(TMP_ARTICLES, available_images[img_idx])
+
+    return {
+        'action': 'insert',
+        'tag_type': tag_type,
+        'orientation': orientation,
+        'alt': alt_tag,
+        'caption': caption,
+        'source': img_source,
+        'img_name': os.path.basename(img_source) if img_source else None
+    }
 
 def main():
-    parser = argparse.ArgumentParser(description="Annotate HTML articles with Gemini AI and generated images.")
-    parser.add_argument("input_dir", type=str, help="Path or partial name to the input article directory")
-    args = parser.parse_args()
-
-    # Initialize Gemini Client (reads GEMINI_API_KEY environment variable)
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: GEMINI_API_KEY environment variable is not set.", file=sys.stderr)
-        print("Run: export GEMINI_API_KEY='your_key' before executing.", file=sys.stderr)
-        sys.exit(1)
-    
-    client = genai.Client(api_key=api_key)
-
-    # Resolve input directory using custom search logic
-    resolved_str = resolve_input_dir(args.input_dir, base_dir="input")
-    input_path = Path(resolved_str).resolve()
-
-    last_level = input_path.name
-    html_filename = f"{last_level}.html"
-    html_path = input_path / html_filename
-
-    if not html_path.exists():
-        html_files = list(input_path.glob("*.html"))
-        if not html_files:
-            print(f"Error: Could not find {html_filename} or any .html file in {input_path}", file=sys.stderr)
-            sys.exit(1)
-        html_path = html_files[0]
-
-    print(f"Processing article: {html_path}")
-
-    # Check for instructions.txt in the input folder
-    instructions_file = input_path / "instructions.txt"
-    global_instructions = ""
-    if instructions_file.exists():
-        try:
-            with open(instructions_file, "r", encoding="utf-8") as f:
-                global_instructions = f.read().strip()
-            print(f"  [Info] Loaded instructions from {instructions_file.name}")
-        except Exception as e:
-            print(f"  [Note] Could not read instructions.txt: {e}")
-
-    # Resolve output structure under web root: /var/www/adamfistler.com/annotated/
-    web_base = Path("/var/www/adamfistler.com/annotated")
-    try:
-        parts = input_path.parts
-        if len(parts) >= 2:
-            reference_to_input = Path(*parts[-2:])
-        else:
-            reference_to_input = Path(last_level)
-    except Exception:
-        reference_to_input = Path(last_level)
-
-    output_dir = web_base / reference_to_input
-    img_output_dir = output_dir / "img"
-    
-    try:
-        img_output_dir.mkdir(parents=True, exist_ok=True)
-    except PermissionError:
-        print(f"Error: Permission denied writing to {output_dir}. Ensure you have write access or run with appropriate permissions.", file=sys.stderr)
+    if len(sys.argv) < 2:
+        print("Usage: python annotate_articles.py <input_container>")
         sys.exit(1)
 
-    with open(html_path, "r", encoding="utf-8") as f:
-        soup = BeautifulSoup(f.read(), "html.parser")
+    query_path = sys.argv[1]
 
-    subheadings = soup.find_all(["h2", "h3"])
-    print(f"Found {len(subheadings)} subheadings in {html_path.name}.\n")
+    run_cb_script()
 
-    alignment_toggle = True  # True = right, False = left
+    resolved_input = resolve_input_dir(query_path)
+    name = os.path.basename(resolved_input)
+    html_file_path = os.path.join(resolved_input, f"{name}.html")
 
-    for idx, heading in enumerate(subheadings):
-        heading_text = heading.get_text(strip=True)
-        print(f"\n==========================================")
-        print(f"Subheading [{idx+1}/{len(subheadings)}]: {heading_text}")
-        print(f"==========================================")
+    if not os.path.exists(html_file_path):
+        print(f"Error: HTML file '{html_file_path}' not found.", file=sys.stderr)
+        sys.exit(1)
 
-        # Check if an image already exists anywhere in the section before the next heading
-        has_image = False
-        for sibling in heading.next_siblings:
-            if isinstance(sibling, Tag) and sibling.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
-                break
-            if isinstance(sibling, Tag) and (sibling.name == "img" or sibling.find("img")):
-                has_image = True
-                break
+    with open(html_file_path, 'r', encoding='utf-8') as f:
+        html_content = f.read()
 
-        if has_image:
-            print("  [Skipped] Image already present in this section.\n")
-            continue
+    soup = BeautifulSoup(html_content, 'html.parser')
+    h2_tags = soup.find_all('h2')
 
-        # Gather surrounding context for the section
+    if not h2_tags:
+        print(f"No <h2> subheadings found in {html_file_path}.")
+        sys.exit(0)
+
+    target_img_dir = os.path.join(IMG_DIR, os.path.relpath(resolved_input, INPUT_BASE_DIR))
+    os.makedirs(target_img_dir, exist_ok=True)
+
+    total_h2 = len(h2_tags)
+    for idx, h2 in enumerate(h2_tags, 1):
+        heading_text = h2.get_text(strip=True)
+        
         context_snippets = []
-        for sibling in heading.next_siblings:
-            if isinstance(sibling, Tag) and sibling.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
-                break
-            if hasattr(sibling, "get_text"):
-                txt = sibling.get_text(strip=True)
-                if txt:
-                    context_snippets.append(txt)
-        context_text = " ".join(context_snippets[:5])
+        sibling = h2.find_next_sibling()
+        while sibling and sibling.name != 'h2':
+            if sibling.name == 'p':
+                context_snippets.append(sibling.get_text(strip=True))
+            sibling = sibling.find_next_sibling()
+        
+        context_text = " ".join(context_snippets)
+        if len(context_text) > 120:
+            context_text = context_text[:117] + "..."
 
-        print("  Consulting Gemini for image concept suggestion...")
-        
-        # Build prompt incorporating instructions.txt if available
-        prompt_text = "I am writing a web article.\n"
-        if global_instructions:
-            prompt_text += f"Overarching style/project instructions: '{global_instructions}'\n\n"
-        
-        prompt_text += (
-            f"Under the subheading '{heading_text}', the context is: '{context_text}'. "
-            f"Suggest a clean, conceptual vector illustration or diagram that would visually anchor this section, "
-            f"adhering strictly to any provided project instructions. Keep your suggestion concise."
-        )
-        
-        try:
-            chat_response = client.models.generate_content(
-                model="gemini-3.6-flash",
-                contents=prompt_text,
-            )
-            ai_suggestion = chat_response.text.strip()
-        except Exception as e:
-            ai_suggestion = f"Illustration representing {heading_text}"
-            print(f"  [Note] Error reaching text model: {e}")
-
-        print(f"\n  [Gemini Suggestion]:\n  {ai_suggestion}\n")
-        
-        choice = input("  Action: [s]kip, [c]reate image via AI & insert, [d]iscuss/tweak prompt, [q]uit? [s/c/d/q]: ").strip().lower()
-        
-        if choice == 'q':
-            print("Exiting.")
-            break
-        elif choice == 's':
-            print("  Skipping section.\n")
-            continue
-        
-        image_prompt = ai_suggestion
-        while choice == 'd':
-            custom_tweak = input("  Enter your adjustment or chat instruction for the image prompt: ").strip()
-            if not custom_tweak:
-                break
+        while True:
+            print(f"\n--- Subheading [{idx}/{total_h2}]: {heading_text} ---")
+            print(f"  Context snippet: {context_text or '[No paragraph context found]'}")
             
-            refining_prompt = f"Based on previous concept '{image_prompt}', apply this adjustment: {custom_tweak}. Output only the final refined visual description for an image generator."
-            ref_resp = client.models.generate_content(
-                model="gemini-3.6-flash",
-                contents=refining_prompt,
-            )
-            image_prompt = ref_resp.text.strip()
-            print(f"\n  [Updated Image Prompt]:\n  {image_prompt}\n")
-            
-            choice = input("  Action: [s]kip, [c]reate image & insert, [d]iscuss further, [q]uit? [s/c/d/q]: ").strip().lower()
-            if choice == 'q':
-                sys.exit(0)
-            elif choice == 's':
-                break
-
-        if choice == 's':
-            continue
-
-        if choice == 'c':
-            img_filename = input("  Enter output image filename (e.g., behavior.png): ").strip()
-            if not img_filename:
-                img_filename = f"section_{idx+1}.png"
-            
-            use_caption = input("  Use figure with caption? (y/N): ").strip().lower() == 'y'
-            alt_text = input(f"  Enter alt text [{heading_text}]: ").strip()
-            if not alt_text:
-                alt_text = heading_text
-
-            print("  Generating image via Gemini Free Tier (gemini-3.1-flash-image)...")
-            try:
-                img_response = client.models.generate_content(
-                    model="gemini-3.1-flash-image",
-                    contents=f"Create a clean technical or editorial vector illustration for a web article: {image_prompt}",
-                    config=types.GenerateContentConfig(
-                        response_modalities=["TEXT", "IMAGE"],
-                    ),
-                )
-                
-                saved_successfully = False
-                target_img_path = img_output_dir / img_filename
-                for part in img_response.candidates[0].content.parts:
-                    if part.inline_data is not None:
-                        image_data = part.inline_data.data
-                        image = Image.open(io.BytesIO(image_data))
-                        image.save(target_img_path)
-                        print(f"  [Success] Image saved to {target_img_path}")
-                        saved_successfully = True
-                        break
-                
-                if not saved_successfully:
-                    print("  [Error] Model response did not contain image data. Skipping insertion.\n")
-                    continue
-
-                preview_image_in_terminal(target_img_path)
-
-            except Exception as e:
-                print(f"  [Error] Failed to generate image: {e}\n")
-                continue
-
-            commit_choice = input("  Keep this image and insert into HTML? ([y]/n): ").strip().lower()
-            if commit_choice == 'n':
-                print("  Discarded insertion for this section.\n")
-                if target_img_path.exists():
-                    target_img_path.unlink()
-                continue
-
-            align = "right" if alignment_toggle else "left"
-            alignment_toggle = not alignment_toggle
-
-            web_img_path = f"/annotated/{reference_to_input.as_posix()}/img/{img_filename}"
-
-            if use_caption:
-                caption_text = input(f"  Enter caption [{heading_text}]: ").strip()
-                if not caption_text:
-                    caption_text = heading_text
-                
-                fig_tag = soup.new_tag("figure", **{"class": f"content-img caption {align}"})
-                img_tag = soup.new_tag("img", src=web_img_path, alt=alt_text)
-                figcaption_tag = soup.new_tag("figcaption")
-                figcaption_tag.string = caption_text
-                fig_tag.append(img_tag)
-                fig_tag.append(figcaption_tag)
-                insert_node = fig_tag
+            images = get_temp_images()
+            print("  Available images in /tmp/articles:")
+            if not images:
+                print("    (None)")
             else:
-                div_tag = soup.new_tag("div", **{"class": f"content-img {align}"})
-                img_tag = soup.new_tag("img", src=web_img_path, alt=alt_text)
-                div_tag.append(img_tag)
-                insert_node = div_tag
+                for img_i, img_name in enumerate(images, 1):
+                    print(f"    {img_i}) {img_name}")
 
-            heading.insert_after(insert_node)
-            print("  [Saved] Layout inserted into article HTML tree.\n")
+            user_choice = input("  Action: [s]kip, [q]uit, [h]elp, or shorthand (e.g., 1il \"Alt\", 2fr \"Alt\" \"Cap\"): ").strip()
+            
+            parsed = parse_shorthand(user_choice, images)
+            
+            if parsed['action'] == 'q':
+                print("Exiting annotation script.")
+                sys.exit(0)
+            elif parsed['action'] == 'h':
+                print_help()
+                continue
+            elif parsed['action'] == 's':
+                print("Skipping subheading.")
+                break
+            elif parsed['action'] == 'delete':
+                del_idx = parsed['index']
+                if 0 <= del_idx < len(images):
+                    target_to_del = os.path.join(TMP_ARTICLES, images[del_idx])
+                    confirm = input(f"  Confirm deletion of '{images[del_idx]}' from /tmp/articles? [y/N]: ").strip().lower()
+                    if confirm == 'y':
+                        os.remove(target_to_del)
+                        print("  Deleted successfully.")
+                continue
+            elif parsed['action'] == 'insert':
+                if not parsed['source'] or not os.path.exists(parsed['source']):
+                    print("  Error: Selected image source does not exist. Try again.")
+                    continue
+                
+                final_img_filename = parsed['img_name']
+                dest_img_path = os.path.join(target_img_dir, final_img_filename)
+                shutil.copy2(parsed['source'], dest_img_path)
 
-    output_html_path = output_dir / html_path.name
-    with open(output_html_path, "w", encoding="utf-8") as f:
-        f.write(str(soup))
+                rel_web_path = f"/img/{os.path.relpath(dest_img_path, WEB_DIR)}"
+                
+                orientation = parsed['orientation']
+                alt = parsed['alt']
+                
+                if parsed['tag_type'] == 'f':
+                    caption = parsed['caption']
+                    new_tag_html = f'''<figure class="content-img caption {orientation}">
+  <img src="{rel_web_path}" alt="{alt}" />
+  <figcaption>{caption}</figcaption>
+</figure>'''
+                else:
+                    new_tag_html = f'''<div class="content-img {orientation}">
+   <img src="{rel_web_path}" alt="{alt}" />
+</div>'''
 
-    print(f"\nProcessing complete! Annotated HTML saved to: {output_html_path}")
-    print(f"View it live in your browser at: https://adamfistler.com/annotated/{reference_to_input.as_posix()}/{html_path.name}")
+                new_soup_fragment = BeautifulSoup(new_tag_html, 'html.parser')
+                h2.insert_after(new_soup_fragment)
 
-if __name__ == "__main__":
+                with open(html_file_path, 'w', encoding='utf-8') as f:
+                    f.write(str(soup))
+
+                print(f"  Successfully inserted annotation and copied image to {target_img_dir}")
+                break
+
+    print(f"\nAnnotation complete for {html_file_path}!")
+
+if __name__ == '__main__':
     main()
