@@ -254,6 +254,37 @@ def make_urls_absolute(content):
     dbg(f"Converted {count} relative URLs to absolute.")
 
 
+def extract_and_format_nav_sections(content):
+    nav_markdown_blocks = []
+    
+    for section in content.find_all("section"):
+        heading = section.find(["h2", "h3"])
+        heading_text = heading.get_text(strip=True) if heading else ""
+        
+        links = section.find_all("a", class_="area_pages") or (heading and "Explore my" in heading_text)
+        if links:
+            dbg(f"Intercepted navigation/recommendation section: '{heading_text}'")
+            
+            items = []
+            for a in section.find_all("a"):
+                href = a.get("href", "")
+                if href:
+                    absolute_href = urljoin(BASE_URL, href)
+                    text = a.get_text(strip=True)
+                    items.append((text, absolute_href))
+            
+            if items:
+                block_lines = ["---\n", f"### {heading_text}\n"]
+                for text, href in items:
+                    block_lines.append(f"- [{text}]({href})")
+                nav_markdown_blocks.append("\n".join(block_lines) + "\n")
+            
+            section.decompose()
+            dbg(f"Decomposed and removed intercepted section: '{heading_text}'")
+            
+    return "\n".join(nav_markdown_blocks)
+
+
 def clean_content(soup):
     content = soup.find("div", id="content")
     if content is None:
@@ -270,6 +301,8 @@ def clean_content(soup):
     if footer:
         footer.decompose()
         dbg("Decomposed footer.")
+
+    nav_markdown = extract_and_format_nav_sections(content)
 
     for section in content.find_all("section"):
         heading = section.find(["h2", "h3"])
@@ -327,7 +360,7 @@ def clean_content(soup):
         break
 
     make_urls_absolute(content)
-    return content, category, extracted_subtitle
+    return content, category, extracted_subtitle, nav_markdown
 
 
 def generate_html(content):
@@ -457,11 +490,14 @@ def convert_html_file(input_filename):
                 first_img["src"] = thumbnail_url
                 dbg(f"Replaced first image src ('{old_src}') with formatted 16:9 white banner: {thumbnail_url}")
 
-    content, category, extracted_subtitle = clean_content(soup)
+    content, category, extracted_subtitle, nav_markdown = clean_content(soup)
 
     html_output = generate_html(content)
     markdown_output = generate_markdown(content)
     markdown_output = prepend_source_and_website_header(markdown_output, title, source_url, thumbnail_url)
+
+    if nav_markdown:
+        markdown_output = markdown_output.strip() + "\n\n" + nav_markdown
 
     os.makedirs(os.path.dirname(html_path), exist_ok=True)
     with open(html_path, "w", encoding="utf-8") as f:
@@ -543,7 +579,6 @@ def append_subscribe_cta(markdown_text, publication_url):
     clean_pub_url = publication_url.rstrip("/")
     cleaned_base = markdown_text.strip()
     
-    # Markdown-native subscription widget block
     cta_block = (
         "\n\n"
     )

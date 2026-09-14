@@ -1,0 +1,32 @@
+<!-- BEGIN COMMENTS SECTION -->
+
+<link rel="stylesheet" href="/css/comments.css">
+
+<section id="comments-container" class="comments-section">
+    <h1>Discussion</h1>
+    
+    <div id="comments-list">
+        <!-- Dynamically populated by comments.js -->
+    </div>
+
+    <form id="comment-form">
+        <h4>Leave a Comment</h4>
+        <div class="field-group">
+            <label for="author-name">Name *</label>
+            <input type="text" id="author-name" required maxlength="50">
+        </div>
+        <div class="field-group">
+            <label for="author-email">Email (optional)</label>
+            <input type="email" id="author-email">
+        </div>
+        <div class="field-group">
+            <label for="comment-body">Comment *</label>
+            <textarea id="comment-body" rows="4" required maxlength="1000"></textarea>
+        </div>
+        <button type="submit" id="submit-comment">Post Comment</button>
+    </form>
+</section>
+
+<script src="/js/comments.js" defer></script>
+
+<!-- END COMMENTS SECTION -->
