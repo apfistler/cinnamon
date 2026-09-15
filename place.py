@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import sys
 import os
 import re
@@ -6,10 +7,110 @@ import time
 import argparse
 import subprocess
 import shutil
+import json
+from html.parser import HTMLParser
 
 # Configuration
 WEBROOT = "/var/www/adamfistler.com/public_html"
 SUBSTACK_FLAG_FILENAME = ".substack_published"
+
+class SimpleHTMLParser(HTMLParser):
+    """Lightweight HTML parser to extract title, description, and body text."""
+    def __init__(self):
+        super().__init__()
+        self.text_parts = []
+        self.title_parts = []
+        self.description = ""
+        self._in_title = False
+        self._skip = False
+        self._skip_tags = {'script', 'style', 'nav', 'footer', 'header'}
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        if tag == 'title':
+            self._in_title = True
+        elif tag == 'meta':
+            attr_dict = dict(attrs)
+            if attr_dict.get('name') == 'description':
+                self.description = attr_dict.get('content', '')
+        elif tag in self._skip_tags:
+            self._skip = True
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag == 'title':
+            self._in_title = False
+        elif tag in self._skip_tags:
+            self._skip = False
+
+    def handle_data(self, data):
+        if self._in_title:
+            self.title_parts.append(data)
+        elif not self._skip:
+            cleaned = data.strip()
+            if cleaned:
+                self.text_parts.append(cleaned)
+
+    def get_data(self):
+        title = "".join(self.title_parts).strip()
+        content = " ".join(self.text_parts)
+        return title, self.description, content
+
+def update_search_index_entry(clean_relative, output_dir, db_filename="search.json"):
+    """
+    Reads a single compiled HTML file from WEBROOT, removes any old entry for it from the 
+    search database, parses the new content, and appends the updated entry.
+    """
+    html_path = os.path.join(output_dir, clean_relative + ".html")
+
+    if not os.path.exists(html_path):
+        print(f"Search Index Warning: Compiled HTML not found at {html_path}")
+        return
+
+    # 1. Parse the HTML file
+    with open(html_path, 'r', encoding='utf-8') as f:
+        html_content = f.read()
+
+    parser = SimpleHTMLParser()
+    parser.feed(html_content)
+    title, description, body_text = parser.get_data()
+
+    # 2. Determine the clean public URL path
+    web_url = '/' + clean_relative + '.html'
+    if web_url.endswith('/index.html'):
+        web_url = web_url[:-10] + '/'
+
+    db_path = os.path.join(output_dir, db_filename)
+
+    # 3. Load the existing database JSON file (or start fresh)
+    database = []
+    if os.path.exists(db_path):
+        try:
+            with open(db_path, 'r', encoding='utf-8') as f:
+                database = json.load(f)
+        except json.JSONDecodeError:
+            database = []
+
+    # 4. Remove any pre-existing entry for this exact URL
+    database = [item for item in database if item.get('url') != web_url]
+
+    # 5. Assign an ID (increment from max existing or default to 1)
+    new_id = max([item.get('id', 0) for item in database], default=0) + 1
+
+    # 6. Append the fresh entry
+    database.append({
+        "id": new_id,
+        "url": web_url,
+        "title": title or os.path.basename(clean_relative),
+        "description": description,
+        "content": body_text
+    })
+
+    # 7. Write the updated database back to disk
+    with open(db_path, 'w', encoding='utf-8') as f:
+        json.dump(database, f, indent=2)
+
+    print(f"--> Search index updated for: {web_url}")
 
 def should_generate_ld(target_path, force_ld_flag):
     """
@@ -212,9 +313,9 @@ def main():
         run_inject_ld(raw_input, script_dir)
         if args.no_substack:
             print("--> Skipping Substack publishing (-n flag active).")
-        else:
-            run_substack_publisher(compiled_output, raw_input, script_dir) 
-            time.sleep(1)
+#       else:
+            #run_substack_publisher(compiled_output, raw_input, script_dir) 
+            #time.sleep(1)
 
     # 6. Install to WEBROOT
     dest_file = os.path.join(WEBROOT, f"{clean_relative}.html")
@@ -225,6 +326,10 @@ def main():
     os.chmod(dest_file, 0o644)
 
     print(f"Placed: {dest_file}")
+
+    # 7. Update Search Database
+    print("Updating search index...")
+    update_search_index_entry(clean_relative, WEBROOT)
 
 if __name__ == "__main__":
     main()
