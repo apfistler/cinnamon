@@ -18,7 +18,7 @@ display_table:
   resources:
     -
       id: "self_talk"
-      image: "/img/groups/resources/self_talk/self_talk.png"
+      image: "/img/groups/resources/self_talk/self_talk.avif"
       link: "/groups/resources/self_talk.html#groups"
       title: "Positive Self-Talk & Affirmations"
       content: >
@@ -31,7 +31,7 @@ display_table:
         and workshops.
     -
       id: "meditation"
-      image: "/img/groups/resources/meditation/meditation.png"
+      image: "/img/groups/resources/meditation/meditation.avif"
       link: "/groups/resources/meditation.html#groups"
       title: "Learning to Sit With Yourself - Building Inner Strength & Resilience (Meditation)"
       content: >
@@ -42,14 +42,14 @@ display_table:
         exercises.
     -
       id: "forgiveness"
-      image: "/img/groups/resources/forgiveness/forgiveness.png"
+      image: "/img/groups/resources/forgiveness/forgiveness.avif"
       link: "/groups/resources/forgiveness.html#groups"
       title: "The Freedom of Forgiveness - Understanding, Processing, and Releasing Emotional Burdens"
       content: >
         An in-depth guide exploring forgivenesss not as approval or forgetting, but as an essential process of understanding, processing, and releasing emotional burdens. It examines the emotional cost of holding onto anger, the difference between the memory and the pain, and practical steps to resolve past emotional patterns and achieve lasting emotional freedom.
     -
       id: "anger"
-      image: "/img/groups/resources/anger/anger.png"
+      image: "/img/groups/resources/anger/anger.avif"
       link: "/groups/resources/anger.html#groups"
       title: "When Anger Speaks - Understand the Message Behind Your Emotions"
       content: >

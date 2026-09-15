@@ -14,7 +14,7 @@ display_table:
       id: "franz_mesmer"
       title: "Franz Mesmer (1734 - 1815)" 
       caption: "Franz Mesmer (1734 - 1815)"
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/franz_mesmer.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/franz_mesmer.avif"
       content: |
         Franz Mesmer was an Austrian physician who developed the theory of "animal magnetism,"
         which later became known as mesmerism. He believed that there was a magnetic force within the body
@@ -26,7 +26,7 @@ display_table:
       id: "james_braid"
       title: "James Braid (1795 - 1860)" 
       caption: "James Braid (1795 - 1860)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/james_braid.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/james_braid.avif"
       content: |
         James Braid was a Scottish surgeon who is often credited with coining the term "hypnosis."
         He conducted extensive research on mesmerism and found that the effects were due to suggestion and not
@@ -37,7 +37,7 @@ display_table:
       id: "john_elliotson"
       title: "John Elliotson (1791 - 1868)"
       caption: "John Elliotson (1791 - 1868)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/john_elliotson.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/john_elliotson.avif"
       content: |
         John Elliotson was a British physician and a professor of medicine. He used mesmerism in his
         medical practice and believed in its therapeutic potential. He conducted public demonstrations of mesmerism
@@ -48,7 +48,7 @@ display_table:
       id: "jean_martin_charcot"
       title: "Jean-Martin Charcot (1825 - 1893)"
       caption: "Jean-Martin Charcot (1825 - 1893)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/jean_martin_charcot.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/jean_martin_charcot.avif"
       content: |
         Jean-Martin Charcot was a French neurologist who conducted research on hypnosis and its
         relationship to hysteria. He used hypnosis as a tool to study various neurological disorders. Charcot's work
@@ -59,7 +59,7 @@ display_table:
       id: "hippolyte_bernheim"
       title: "Hippolyte Bernheim (1840 - 1919)"
       caption: "Hippolyte Bernheim (1840 - 1919)"
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/hippolyte_bernheim.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/hippolyte_bernheim.avif"
       content: |
         Hippolyte Bernheim, a French physician, furthered the scientific study of hypnosis. He rejected
         the idea of mesmerism and focused on the power of suggestion and the patient's suggestibility. Bernheim's research
@@ -70,7 +70,7 @@ display_table:
       id: "sigmund_freud"
       title: "Sigmund Freud (1856 - 1939)"
       caption: "Sigmund Freud (1856 - 1939)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/sigmund_freud.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/sigmund_freud.avif"
       content: |
         Sigmund Freud, an Austrian neurologist and the founder of psychoanalysis, initially explored hypnosis
         in his early career under the influence of Jean-Martin Charcot. While he moved away from formal hypnotic techniques,
@@ -80,7 +80,7 @@ display_table:
       id: "dave_elman"
       title: "Dave Elman (1900 - 1967)"
       caption: "Dave Elman (1900 - 1967)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dave_elman.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dave_elman.avif"
       content: |
         Dave Elman was a renowned American hypnotist, radio host, and author, widely regarded as a pioneer
         in the field of hypnotherapy. He developed the "Elman Induction," a rapid and effective hypnosis induction method
@@ -92,7 +92,7 @@ display_table:
       id: "milton_erickson"
       title: "Milton Erikson (1901 - 1980)"
       caption: "Milton Erikson (1901 - 1980)"
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/milton_erikson.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/milton_erikson.avif"
       content: |
         Milton Erickson, an American psychiatrist and psychologist, made significant contributions to the field
         of psychotherapy and hypnosis. He developed innovative therapeutic approaches, often referred to as Ericksonian hypnotherapy
@@ -102,7 +102,7 @@ display_table:
       id: "dr_john_sarno"
       title: "Dr. John Sarno (1923 - 2017)"
       caption: "Dr. John Sarno (1923 - 2017)"
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_john_sarno.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_john_sarno.avif"
       content: |
         Dr. John Sarno was a physician known for his work on Tension Myositis Syndrome (TMS). Asserting that
         many conditions, especially chronic pain, were psychosomatic, he believed repressed emotions, particularly anger and stress,
@@ -113,7 +113,7 @@ display_table:
       id: "dr_ernest_rossi"
       title: "Dr. Ernest Rossi (1933 - 2020)"
       caption: "Dr. Ernest Rossi (1933 - 2020)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_ernest_rossi.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_ernest_rossi.avif"
       content: |
         Dr. Ernest Rossi, a psychologist, has been a key figure in the development of psychobiology and psychosocial genomics.
         He has extensively written about the therapeutic applications of hypnosis, integrating hypnosis into his work on mind-body healing
@@ -123,7 +123,7 @@ display_table:
       id: "dr_marlene_hunter"
       title: "Dr. Marlene Hunter (1942 - Present)"
       caption: "Dr. Marlene Hunter (1942 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_marlene_hunter.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_marlene_hunter.avif"
       content: |
         Dr. Marlene Hunter, a psychologist renowned for her work in medical hypnosis, has conducted groundbreaking research
         on the applications of hypnosis in pain management, stress reduction, and coping with chronic illnesses.
@@ -132,7 +132,7 @@ display_table:
       id: "dr_david_spiegel"
       title: "Dr. David Spiegel (1942 - Present)"
       caption: "Dr. David Spiegel (1942 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_david_spiegel.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_david_spiegel.avif"
       content: |
         Dr. David Spiegel, a renowned psychiatrist, is recognized for his expertise in psychosocial oncology and hypnosis.
         His groundbreaking research explores the effects of mental state on cancer patients' recovery.
@@ -141,7 +141,7 @@ display_table:
       id: "dr_assen_alladin"
       title: "Dr. Assen Alladin (1946 - Present)"
       caption: "Dr. Assen Alladin (1946 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_assen_alladin.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_assen_alladin.avif"
       content: |
         Dr. Assen Alladin is a prominent clinical psychologist and psychotherapist known for his expertise in cognitive hypnotherapy.
         He has extensively researched and written about the applications of hypnosis in cognitive-behavioral therapy (CBT).
@@ -150,7 +150,7 @@ display_table:
       id: "dr_jeffrey_zeig"
       title: "Dr. Jeffrey Zeig (1947 - Present)"
       caption: "Dr. Jeffrey Zeig (1947 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_jeffrey_zeig.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_jeffrey_zeig.avif"
       content: |
         Dr. Jeffrey Zeig is a prominent American psychotherapist, author, and teacher, renowned for his significant contributions
         to the field of psychotherapy and hypnotherapy.
@@ -159,7 +159,7 @@ display_table:
       id: "dr_michael_yapko"
       title: "Dr. Michael Yapko (1948 - Present)"
       caption: "Dr. Michael Yapko (1948 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_michael_yapko.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_michael_yapko.avif"
       content: |
         Dr. Michael Yapko, a renowned clinical psychologist, author, and lecturer, is a leading expert in the field of hypnosis
         and psychotherapy.
@@ -168,7 +168,7 @@ display_table:
       id: "dr_stephen_lankton"
       title: "Dr. Stephen Lankton (1940 - Present)"
       caption: "Dr. Stephen Lankton (1940 - Present)" 
-      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_stephen_lankton.png"
+      image: "/img/articles/hypnosis/evolution_of_hypnosis/dr_stephen_lankton.avif"
       content: |
         Dr. Stephen Lankton is a highly regarded figure in the field of psychotherapy and hypnotherapy.
         As a licensed marriage and family therapist, clinical psychologist, and educator, he has made substantial contributions to the practice

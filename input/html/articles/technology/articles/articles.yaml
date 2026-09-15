@@ -8,21 +8,21 @@ display_table:
   technology_articles:
     -
       id: "radio_shack"
-      image: "/img/articles/technology/radio_shack/radio_shack.png"
+      image: "/img/articles/technology/radio_shack/radio_shack.avif"
       link: "/articles/technology/radio_shack.html#technology"
       title: "Everything is Radio Shack Now: How Big Tech Is Like RadioShack Asking for Your Name and Address to Buy Batteries"
       content: >
           How Big Tech mirrors the classic RadioShack trope by forcing users to create accounts, submit data, and trade privacy for simple everyday tasks.
     -
       id: "agency"
-      image: "/img/articles/technology/agency/preacherbot.png"
+      image: "/img/articles/technology/agency/preacherbot.avif"
       link: "/articles/technology/agency.html#technology"
       title: "Outsourcing Your Agency: The Platform wants to be Your Higher Power"
       content: >
          An examination of how modern technological systems, restrictive platforms, and automated algorithms demand the surrender of personal judgment and independence.
     -
       id: "family_systems"
-      image: "/img/articles/technology/family_systems/ai_scapegoat.png"
+      image: "/img/articles/technology/family_systems/ai_scapegoat.avif"
       link: "/articles/technology/family_systems.html#technology"
       title: "When the Machine Becomes the Scapegoat: Applying the Family Systems Model to Corporate America"
       content: >

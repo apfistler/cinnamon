@@ -8,20 +8,20 @@ display_table:
   addiction_articles:
     -
       id: "neurochemistry"
-      image: "/img/articles/addiction/neurochemistry/neurochemistry.png"
+      image: "/img/articles/addiction/neurochemistry/neurochemistry.avif"
       link: "/articles/addiction/neurochemistry.html#addiction"
       title: "Neurotransmitters and Neurochemistry in Addiction"
       content: >
         Addiction involves a complex interaction among neurotransmitters, brain circuits, stress, and learning, far beyond dopamine alone. This article explores how systems like GABA, glutamate, serotonin, endorphins, and endocannabinoids shape motivation, pain, and emotional regulation. Understanding the biological adaptations of tolerance, physical dependence, and withdrawal helps shift the focus from moral failure to science-based recovery, neuroplasticity, and effective treatment.
     -
       id: "endorphins"
-      image: "/img/articles/addiction/endorphins/endorphins.png"
+      image: "/img/articles/addiction/endorphins/endorphins.avif"
       link: "/articles/addiction/endorphins.html#addiction"
       title: "Endorphins, Pain, Mood, and Addiction: Understanding the Endogenous Opioid System"
       content: >
         Endorphins play a critical role in pain regulation, stress, mood, and reward, leading many to question whether an "endorphin deficiency" contributes to addiction, chronic pain, or mood disorders. While not an officially recognized medical diagnosis, examining the endogenous opioid system offers valuable insights into physical dependence, anhedonia, and withdrawal. Understanding the complex neurobiology of endorphins helps shift the narrative from shame to science, emphasizing holistic and evidence-based approaches to recovery.
     - id: 'addiction_legacy_code' 
-      image: '/img/articles/addiction/addiction_legacy_code/addiction_legacy_code.png'
+      image: '/img/articles/addiction/addiction_legacy_code/addiction_legacy_code.avif'
       link: '/articles/addiction/addiction_legacy_code.html#addiction'
       title: "Your Addiction Isn't Broken Code - It's Legacy Code"
       content: >
@@ -29,7 +29,7 @@ display_table:
         By treating these patterns as legacy software code rather than personal flaws, you can systematically
         map their dependencies, preserve underlying functions, and refactor your responses safely
     - id: societal-lockout
-      image: '/img/articles/addiction/lockout/lockout.png'
+      image: '/img/articles/addiction/lockout/lockout.avif'
       link: '/articles/addiction/lockout.html#addiction'
       title: "Societal Lockout: When Rebuilding a Life Becomes One Roadblock After Another"
       content: >
