@@ -55,8 +55,6 @@ def update_search_index_entry(relative_path, output_dir, db_filename="search.jso
     # 1. Derive the target HTML path based on your relative structure logic
     relative_stem = os.path.splitext(relative_path)[0]
     
-    # If your substack or compiled pages live in a specific subfolder or root:
-    # (Adjust path joining here if your output files are nested in 'substack/')
     html_path = os.path.join(output_dir, relative_stem + ".html")
 
     if not os.path.exists(html_path):
@@ -71,10 +69,14 @@ def update_search_index_entry(relative_path, output_dir, db_filename="search.jso
     parser.feed(html_content)
     title, description, body_text = parser.get_data()
 
-    # 3. Determine the clean public URL path
+    # 3. Determine the clean public URL path and flatten '/main/'
     web_url = '/' + relative_stem + '.html'
+    
+    if web_url.startswith('/main/'):
+        web_url = '/' + web_url[6:]
+        
     if web_url.endswith('/index.html'):
-        web_url = web_url[:-10] + '/'
+        web_url = web_url[:-10]
 
     db_path = os.path.join(output_dir, db_filename)
 

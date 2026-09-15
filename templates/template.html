@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/breadcrumb.css" />
     <link rel="stylesheet" type="text/css" href="/css/groups.css" />
     <link rel="stylesheet" type="text/css" href="/css/code_block.css" />
+    <link rel="stylesheet" type="text/css" href="/css/search.css" />
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Brush+Script" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" />
@@ -27,6 +28,7 @@
     <meta name="keywords" content="<!-- KEYWORDS -->">
     <meta robots="index, follow">
     <script src="/js/main.js" type="text/javascript"></script>
+    <script src="/js/search.js" type="text/javascript"></script>
     <script src="/js/structured_data.json" type="application/ld+json"></script>
   </head>
 
@@ -60,7 +62,15 @@
         </div>
       </header>
 
+      
       <div id="content">
+        <div class="site-search-container">
+          <div class="site-search-form">
+              <label>Search: </label> <input autocomplete="off" class="site-search-input" id="site-search-input" placeholder="Search site content..." type="text"/>
+          </div>
+          <div id="site-search-results" class="site-search-results" style="display: none;"></div>
+        </div>
+  
         <!-- CONTENT_DIV -->
         <br/>
         <br/>
@@ -86,5 +96,7 @@
 
     </main>
 
+    <script src="js/flexsearch.bundle.min.js"></script>
+    <script src="/js/search.js" type="text/javascript"></script>
   </body>
 </html>
