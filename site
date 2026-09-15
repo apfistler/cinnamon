@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ensure script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "[-] Error: This script must be run as root." >&2
+  exit 1
+fi
+
 PLACE="./place.py"
 
 find input -type f -name '*.html' -print0 |
@@ -41,8 +47,21 @@ if [ -d "output/main" ]; then
   shopt -u dotglob nullglob
 fi
 
-find /var/www/adamfistler.com/public_html -type f -exec chmod 644 {} +
-
 echo "Fixing Relative Paths"
 ./fix_paths.py
 
+find /var/www/adamfistler.com/public_html -type f -exec chmod 644 {} +
+
+# Set ownership of created files/folders to apfistler:user
+echo "Setting ownership to apfistler:user..."
+chown -R apfistler:user output/ /var/www/adamfistler.com/public_html
+
+# Fork off cache control generation and Apache restart into the background
+echo "Forking cache control and Apache restart..."
+(
+  ./cache_control_manifest.py
+  systemctl restart apache2
+) &
+disown
+
+echo "Deployment steps complete. Background cache/restart tasks initiated."
