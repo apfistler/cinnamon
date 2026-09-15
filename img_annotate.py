@@ -19,15 +19,15 @@ def print_help():
  ARTICLE ANNOTATION TOOL - HELP & USAGE GUIDE
 ====================================================================
 This script steps through each <h2> subheading of an article, lets you
-pick or reference an image, and inserts the appropriate HTML tag 
-(<div class="content-img"> or <figure>) directly into the file.
+pick or reference an image, converts it to AVIF, and inserts the 
+appropriate HTML tag (<div class="content-img"> or <figure>) directly.
 
 INTERACTIVE PROMPTS & ACTIONS:
 --------------------------------------------------------------------
-  s         - Skip the current subheading.
-  q         - Quit the script immediately.
-  h         - Display this help message.
-  <num>d    - Delete image #<num> from /tmp/articles (with confirmation).
+   s       - Skip the current subheading.
+   q       - Quit the script immediately.
+   h       - Display this help message.
+   <num>d    - Delete image #<num> from /tmp/articles (with confirmation).
 
 SHORTHAND SYNTAX FOR INSERTION:
 --------------------------------------------------------------------
@@ -46,19 +46,10 @@ QUOTED ARGUMENTS:
 
 EXAMPLES:
   1il "Close up of Cathy Green"
-     -> Uses image #1, <div> tag, left aligned, with alt text.
+     -> Uses image #1, <div> tag, left aligned, converted to AVIF.
 
   2fr "Adam at work" "Reflecting on system architecture"
-     -> Uses image #2, <figure> tag, right aligned, with alt 
-        text and a figure caption.
-
-  ori "A custom diagram" "/home/user/images/diagram.png"
-     -> Uses an external image path not in /tmp/articles, right 
-        aligned, with a <div> tag and alt text.
-
-  ocr "Custom figure" "Caption text" "/home/user/images/chart.png"
-     -> Uses an external image path, right aligned, <figure> tag,
-        alt text, and caption.
+     -> Uses image #2, <figure> tag, right aligned, converted to AVIF.
 ====================================================================
 """
     print(help_text)
@@ -172,7 +163,6 @@ def parse_shorthand(user_input, available_images, debug_mode=False):
     return parsed_result
 
 def main():
-    # Parse command line arguments manually to check for -d flag
     debug_mode = False
     args = []
     for arg in sys.argv[1:]:
@@ -209,7 +199,6 @@ def main():
         print(f"No <h2> subheadings found in {html_file_path}.")
         sys.exit(0)
 
-    # Compute relative path and strip out 'html' container folder segment
     raw_rel_path = os.path.relpath(resolved_input, INPUT_BASE_DIR)
     path_parts = [p for p in raw_rel_path.split(os.sep) if p != 'html']
     flattened_rel_path = os.path.join(*path_parts) if path_parts else ""
@@ -267,24 +256,38 @@ def main():
                         print("  Deleted successfully.")
                 continue
             elif parsed['action'] == 'insert':
-                if not parsed['source'] or not os.path.exists(parsed['source']):
+                source_path = parsed['source']
+                if not source_path or not os.path.exists(source_path):
                     print("  Error: Selected image source does not exist. Try again.")
                     continue
                 
-                final_img_filename = parsed['img_name']
+                # Derive final AVIF filename regardless of source extension (.png, .jpg, etc.)
+                base_stem = Path(parsed['img_name']).stem
+                final_img_filename = f"{base_stem}.avif"
                 dest_img_path = os.path.join(target_img_dir, final_img_filename)
 
-                # Ensure destination directory exists before copying
                 if not os.path.exists(target_img_dir):
                     debug_print(f"Destination directory '{target_img_dir}' does not exist. Creating it now...", debug_mode)
                     os.makedirs(target_img_dir, exist_ok=True)
                 else:
                     debug_print(f"Destination directory '{target_img_dir}' already exists.", debug_mode)
 
-                debug_print(f"Copying '{parsed['source']}' to '{dest_img_path}'", debug_mode)
-                shutil.copy2(parsed['source'], dest_img_path)
+                debug_print(f"Encoding '{source_path}' to AVIF at '{dest_img_path}'", debug_mode)
+                try:
+                    # Encode directly to AVIF using avifenc (-q 60 quality sweet spot)
+                    subprocess.run(
+                        ["avifenc", "-q", "60", source_path, dest_img_path],
+                        check=True,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL
+                    )
+                except subprocess.CalledProcessError as e:
+                    print(f"  -> Error: Failed to encode image to AVIF: {e}")
+                    continue
+                except FileNotFoundError:
+                    print("  -> Error: 'avifenc' tool not found. Make sure libavif-bin is installed.")
+                    continue
 
-                # Fix path calculation to avoid duplicating /img/
                 rel_subpath = os.path.relpath(dest_img_path, IMG_DIR).replace(os.sep, '/')
                 rel_web_path = f"/img/{rel_subpath}"
                 
@@ -308,7 +311,7 @@ def main():
                 with open(html_file_path, 'w', encoding='utf-8') as f:
                     f.write(str(soup))
 
-                print(f"  Successfully inserted annotation and copied image to {target_img_dir}")
+                print(f"  Successfully encoded AVIF and inserted tag pointing to {rel_web_path}")
                 break
 
     print(f"\nAnnotation complete for {html_file_path}!")
